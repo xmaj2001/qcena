@@ -10,7 +10,9 @@
 [![Mobile](https://img.shields.io/badge/mobile-React%20Native%20%2B%20Expo-blue?style=flat-square&logo=expo)](.)
 [![Backend](https://img.shields.io/badge/backend-NestJS%20%2B%20DDD-red?style=flat-square&logo=nestjs)](.)
 [![Infra](https://img.shields.io/badge/infra-Docker-2496ED?style=flat-square&logo=docker)](.)
+[![NGINX](https://img.shields.io/badge/proxy-NGINX-009639?style=flat-square&logo=nginx)](.)
 [![42](https://img.shields.io/badge/42-Luanda-000000?style=flat-square)](.)
+[![Architecture](https://img.shields.io/badge/deploy-Blue--Green-blueviolet?style=flat-square)](.)
 
 </div>
 
@@ -34,7 +36,8 @@ O objetivo não é só fazer funcionar. É fazer *bem feito*, como se fosse para
 | 📱 Mobile | ⏳ A seguir | Implementação em React Native + Expo |
 | ⚙️ Backend | 🔄 Em curso | NestJS com DDD e Ports & Adapters |
 | 🐳 Infraestrutura | ✅ Base pronta | Docker + Make + Healthchecks |
-| 🚀 Deploy | ⏳ Em breve | — |
+| 🔀 NGINX & Deploy | 🔄 Em curso | Load balancer + Blue-Green deployment |
+| 🚀 Produção | ⏳ Em breve | — |
 
 ---
 
@@ -69,10 +72,83 @@ src/
 
 ---
 
+## 📐 Frontend — Feature-Sliced Design (FSD)
+
+A estrutura do frontend segue a metodologia **FSD** — uma arquitetura escalável e orientada a features, pensada para projetos que crescem.
+
+```
+src/
+├── app/          # Providers, router, estilos globais
+├── pages/        # Composição de ecrãs completos
+├── widgets/      # Blocos de UI compostos e independentes
+├── features/     # Casos de uso do utilizador (reserva, pagamento, etc.)
+├── entities/     # Modelos de domínio (User, Service, Booking...)
+└── shared/       # UI kit, utils, hooks, config, API client
+```
+
+**Princípios:**
+- Cada camada só pode importar das camadas abaixo — nunca acima
+- Features são isoladas e substituíveis sem efeitos colaterais
+- Separação clara entre lógica de negócio (`features/`) e apresentação (`widgets/`, `pages/`)
+
+---
+
+## 🔀 NGINX — Proxy, Load Balancer & Blue-Green Deployment
+
+O NGINX não é só um servidor web aqui — é o **ponto de controlo de tráfego** de toda a plataforma.
+
+### Load Balancing
+Distribui o tráfego entre múltiplas instâncias da API e do frontend:
+
+```nginx
+upstream api_backend {
+    server api_blue:3000;
+    server api_green:3000;
+}
+
+upstream frontend {
+    server frontend_blue:8081;
+    server frontend_green:8081;
+}
+```
+
+### Blue-Green Deployment
+Zero downtime em cada deploy — a nova versão sobe em paralelo, o NGINX faz o switch, a versão antiga fica de standby:
+
+```
+                  ┌─────────────┐
+    Utilizador ──▶│    NGINX    │
+                  └──────┬──────┘
+                         │
+              ┌──────────▼──────────┐
+              │                     │
+        ┌─────▼─────┐         ┌─────▼─────┐
+        │  🟦 Blue  │         │  🟩 Green │
+        │  (ativo)  │         │ (standby) │
+        └───────────┘         └───────────┘
+```
+
+**Fluxo de deploy:**
+1. Nova versão sobe no slot inativo (ex: Green)
+2. Healthcheck confirma que está saudável
+3. NGINX faz reload e aponta para Green
+4. Blue fica em standby — rollback instantâneo se necessário
+
+```bash
+make deploy-blue    # Deploy no slot blue
+make deploy-green   # Deploy no slot green
+make switch-blue    # NGINX aponta para blue
+make switch-green   # NGINX aponta para green
+make rollback       # Reverte para o slot anterior
+```
+
+---
+
 ## 🛠️ Stack Técnica
 
-### Mobile
+### Mobile / Frontend
 - [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/)
+- Estrutura de pastas com **Feature-Sliced Design (FSD)**
 - Design em [Figma](https://figma.com/)
 
 ### Backend
@@ -85,6 +161,7 @@ src/
 
 ### Infraestrutura
 - [Docker](https://www.docker.com/) + Docker Compose
+- [NGINX](https://nginx.org/) — reverse proxy, load balancer e blue-green deployment
 - `Makefile` com comandos unificados
 
 ---
@@ -98,18 +175,24 @@ make up
 ```
 
 O compose inclui:
-- **API** (NestJS)
-- **Frontend / Mobile dev server**
+- **NGINX** — reverse proxy, load balancer e gestor de blue-green
+- **API Blue / Green** (NestJS)
+- **Frontend Blue / Green** (React Native / Expo)
 - **PostgreSQL** com healthcheck
 - **Redis** com healthcheck
 
 ```bash
 # Comandos disponíveis
-make up       # Sobe todos os serviços
-make down     # Para todos os serviços
-make logs     # Logs em tempo real
-make shell    # Entra no container da API
-make migrate  # Roda as migrations do Prisma
+make up             # Sobe todos os serviços
+make down           # Para todos os serviços
+make logs           # Logs em tempo real
+make shell          # Entra no container da API
+make migrate        # Roda as migrations do Prisma
+make deploy-blue    # Deploy no slot blue
+make deploy-green   # Deploy no slot green
+make switch-blue    # Aponta NGINX para blue
+make switch-green   # Aponta NGINX para green
+make rollback       # Reverte para o slot anterior
 ```
 
 ---
@@ -118,7 +201,7 @@ make migrate  # Roda as migrations do Prisma
 
 Porque é exatamente assim que se constroem sistemas em produção.
 
-Projetos pessoais são o lugar certo para aprender padrões difíceis — DDD, arquitetura hexagonal, filas assíncronas — sem o risco de quebrar nada com utilizadores reais. Quando chegar a altura de trabalhar em sistemas grandes, já sei como pensar.
+Projetos pessoais são o lugar certo para aprender padrões difíceis — DDD, arquitetura hexagonal, filas assíncronas, FSD, blue-green deployment — sem o risco de quebrar nada com utilizadores reais. Quando chegar a altura de trabalhar em sistemas grandes, já sei como pensar.
 
 ---
 
