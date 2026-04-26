@@ -1,0 +1,146 @@
+name: qcena
+
+services:
+
+  # ─────────────────────────────────────────
+  # NGINX — reverse proxy com SSL
+  # ─────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: qcena_nginx
+    restart: unless-stopped
+    ports:
+      - "5000:443"
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/tools/certs:/etc/nginx/certs:ro
+    depends_on:
+      web-client:
+        condition: service_healthy
+      web-backend:
+        condition: service_healthy
+    networks:
+      - qcena_network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ─────────────────────────────────────────
+  # NEXT.JS — frontend
+  # ─────────────────────────────────────────
+  web-client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: qcena_nextjs
+    restart: unless-stopped
+    env_file:
+      - ./frontend/.env.local
+    expose:
+      - "3000"
+    volumes:
+      - ./frontend:/app                        # espelha o código
+      - /app/node_modules                      # preserva o node_modules do container
+    depends_on:
+      web-backend:
+        condition: service_healthy
+    networks:
+      - qcena_network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ─────────────────────────────────────────
+  # NEST.JS — backend API
+  # ─────────────────────────────────────────
+  web-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: qcena_web-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env.local
+    expose:
+      - "5000"
+    volumes:
+      - ./backend:/app                         # espelha o código
+      - /app/node_modules                      # preserva o node_modules do container
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - qcena_network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  # ─────────────────────────────────────────
+  # POSTGRESQL
+  # ─────────────────────────────────────────
+  postgresql:
+    image: postgres:16-alpine
+    container_name: qcena_postgres
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env.local
+    environment:
+      POSTGRES_DB: ${DB_NAME:-qcena_db}
+      POSTGRES_USER: ${DB_USER:-qcena_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    networks:
+      - qcena_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-qcena_user} -d ${DB_NAME:-qcena_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ─────────────────────────────────────────
+  # REDIS
+  # ─────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: qcena_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    networks:
+      - qcena_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+# ─────────────────────────────────────────
+# VOLUMES & NETWORK
+# ─────────────────────────────────────────
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  qcena_network:
+    driver: bridge
