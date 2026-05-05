@@ -1,0 +1,450 @@
+/* ── Dashboard Styles ── */
+
+/* Sidebar */
+.dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  z-index: 30;
+}
+
+.dashboard-sidebar--expanded {
+  width: 240px;
+}
+
+.dashboard-sidebar--collapsed {
+  width: 68px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sidebar-nav-item:hover {
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  color: var(--foreground);
+}
+
+.sidebar-nav-item--active {
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--foreground);
+}
+
+.sidebar-nav-item__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-nav-item__label {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.dashboard-sidebar--collapsed .sidebar-nav-item__label {
+  opacity: 0;
+  transition-delay: 0s;
+  pointer-events: none;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.sidebar-profile__info {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+  white-space: nowrap;
+}
+
+.dashboard-sidebar--collapsed .sidebar-profile__info {
+  opacity: 0;
+  transition-delay: 0s;
+  pointer-events: none;
+}
+
+.sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--muted);
+  position: absolute;
+  right: -14px;
+  top: 24px;
+  z-index: 40;
+}
+
+.sidebar-collapse-btn:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--accent);
+}
+
+/* Dashboard main content */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.dashboard-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Top bar */
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dashboard-topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dashboard-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dashboard-topbar__greeting {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Charts grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bar chart */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 180px;
+  padding-top: 1rem;
+}
+
+.bar-chart__bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.bar-chart__bar-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar-chart__bar {
+  width: 70%;
+  max-width: 32px;
+  border-radius: 4px 4px 0 0;
+  background: var(--accent);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: bar-grow 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.bar-chart__bar:hover {
+  opacity: 0.8;
+  filter: brightness(1.15);
+}
+
+.bar-chart__label {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+@keyframes bar-grow {
+  from {
+    height: 0 !important;
+  }
+}
+
+/* Line chart SVG */
+.line-chart-svg {
+  width: 100%;
+  height: 180px;
+}
+
+.line-chart-path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: dash-in 1.5s ease-out both;
+}
+
+.line-chart-path--organic {
+  stroke: var(--accent);
+}
+
+.line-chart-path--paid {
+  stroke: oklch(0.7 0.15 230);
+}
+
+.line-chart-area {
+  opacity: 0.08;
+  animation: fade-in-chart 0.8s ease both;
+  animation-delay: 0.5s;
+}
+
+.line-chart-area--organic {
+  fill: var(--accent);
+}
+
+.line-chart-area--paid {
+  fill: oklch(0.7 0.15 230);
+}
+
+@keyframes dash-in {
+  from {
+    stroke-dashoffset: 2000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in-chart {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.08;
+  }
+}
+
+/* Action buttons in table */
+.table-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+}
+
+.table-action-btn:hover {
+  background: var(--surface-secondary);
+  color: var(--foreground);
+}
+
+.table-action-btn--danger:hover {
+  background: color-mix(in oklab, var(--danger) 15%, transparent);
+  color: var(--danger);
+}
+
+/* Stagger animation for cards */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+/* Chart y-axis */
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+  height: 180px;
+}
+
+.chart-y-axis__label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  min-width: 28px;
+}
+
+/* Table toolbar */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.table-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Theme switch wrapper */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Badge "New" in sidebar */
+.sidebar-badge-new {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 20%, transparent);
+  color: var(--accent);
+  font-weight: 600;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.dashboard-sidebar--collapsed .sidebar-badge-new {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+/* Responsive sidebar */
+@media (max-width: 768px) {
+  .dashboard-sidebar--expanded {
+    position: fixed;
+    z-index: 50;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+  }
+}
+
+/* Tab action bar */
+.tab-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Metric row inside chart cards */
+.metrics-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.metric-item__value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.metric-item__label {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Chart legend dots */
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot--organic {
+  background: var(--accent);
+}
+
+.legend-dot--paid {
+  background: oklch(0.7 0.15 230);
+}

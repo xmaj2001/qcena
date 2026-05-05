@@ -1,0 +1,180 @@
+/* ============================================
+   Qcena Theme — Dark (default) + Lime (alt)
+   Brand Gold/Orange as accent/primary
+   ============================================ */
+
+@layer base {
+  /* ─── Dark Theme (default) ─── */
+  [data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Primitive Colors */
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --snow: oklch(0.9911 0 0);
+    --eclipse: oklch(0.2103 0.0059 285.89);
+
+    /* Spacing & Layout */
+    --spacing: 0.25rem;
+    --border-width: 1px;
+    --field-border-width: 0px;
+    --disabled-opacity: 0.5;
+    --ring-offset-width: 2px;
+    --cursor-interactive: pointer;
+    --cursor-disabled: not-allowed;
+
+    /* Radius */
+    --radius: 0.75rem;
+    --field-radius: calc(var(--radius) * 1.5);
+
+    /* Base Colors — deep dark */
+    --background: oklch(0.12 0.005 260);
+    --foreground: oklch(0.95 0.005 90);
+
+    /* Surface */
+    --surface: oklch(0.17 0.008 260);
+    --surface-foreground: var(--foreground);
+
+    /* Secondary and Tertiary surfaces */
+    --surface-secondary: oklch(0.20 0.010 260);
+    --surface-secondary-foreground: var(--foreground);
+    --surface-tertiary: oklch(0.23 0.012 260);
+    --surface-tertiary-foreground: var(--foreground);
+
+    /* Overlay */
+    --overlay: oklch(0.19 0.008 260);
+    --overlay-foreground: var(--foreground);
+
+    --muted: oklch(0.55 0.015 260);
+    --scrollbar: oklch(0.35 0.01 260);
+
+    --default: oklch(0.24 0.008 260);
+    --default-foreground: var(--snow);
+
+    /* ★ Brand Gold/Orange — accent */
+    --accent: oklch(0.75 0.18 70);
+    --accent-foreground: oklch(0.13 0.02 70);
+
+    /* Form Field */
+    --field-background: var(--default);
+    --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
+    --field-border: transparent;
+
+    /* Status */
+    --success: oklch(0.72 0.19 150);
+    --success-foreground: var(--eclipse);
+
+    --warning: oklch(0.82 0.14 76);
+    --warning-foreground: var(--eclipse);
+
+    --danger: oklch(0.59 0.20 25);
+    --danger-foreground: var(--snow);
+
+    /* Component */
+    --segment: oklch(0.28 0.01 260);
+    --segment-foreground: var(--foreground);
+
+    /* Misc */
+    --border: oklch(0.26 0.008 260);
+    --separator: oklch(0.22 0.006 260);
+    --focus: var(--accent);
+    --link: var(--accent);
+    --backdrop: oklch(0% 0 0 / 60%);
+
+    /* Shadows */
+    --surface-shadow: 0 0 0 0 transparent inset;
+    --overlay-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
+    --field-shadow: 0 0 0 0 transparent inset;
+
+    /* Skeleton */
+    --skeleton-animation: shimmer;
+  }
+
+  /* ─── Lime Theme ─── */
+  [data-theme="lime"] {
+    color-scheme: dark;
+
+    /* Primitive Colors */
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --snow: oklch(0.9911 0 0);
+    --eclipse: oklch(0.2103 0.0059 285.89);
+
+    /* Spacing & Layout */
+    --spacing: 0.25rem;
+    --border-width: 1px;
+    --field-border-width: 0px;
+    --disabled-opacity: 0.5;
+    --ring-offset-width: 2px;
+    --cursor-interactive: pointer;
+    --cursor-disabled: not-allowed;
+
+    /* Radius */
+    --radius: 0.75rem;
+    --field-radius: calc(var(--radius) * 1.5);
+
+    /* Base Colors — deep dark with green tint */
+    --background: oklch(0.11 0.015 145);
+    --foreground: oklch(0.95 0.02 130);
+
+    /* Surface */
+    --surface: oklch(0.16 0.02 145);
+    --surface-foreground: var(--foreground);
+
+    /* Secondary and Tertiary surfaces */
+    --surface-secondary: oklch(0.19 0.025 145);
+    --surface-secondary-foreground: var(--foreground);
+    --surface-tertiary: oklch(0.22 0.03 145);
+    --surface-tertiary-foreground: var(--foreground);
+
+    /* Overlay */
+    --overlay: oklch(0.18 0.02 145);
+    --overlay-foreground: var(--foreground);
+
+    --muted: oklch(0.55 0.04 145);
+    --scrollbar: oklch(0.35 0.02 145);
+
+    --default: oklch(0.22 0.025 145);
+    --default-foreground: var(--snow);
+
+    /* ★ Lime Green — accent */
+    --accent: oklch(0.82 0.22 130);
+    --accent-foreground: oklch(0.13 0.04 145);
+
+    /* Form Field */
+    --field-background: var(--default);
+    --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
+    --field-border: transparent;
+
+    /* Status */
+    --success: oklch(0.72 0.19 150);
+    --success-foreground: var(--eclipse);
+
+    --warning: oklch(0.82 0.14 76);
+    --warning-foreground: var(--eclipse);
+
+    --danger: oklch(0.59 0.20 25);
+    --danger-foreground: var(--snow);
+
+    /* Component */
+    --segment: oklch(0.26 0.03 145);
+    --segment-foreground: var(--foreground);
+
+    /* Misc */
+    --border: oklch(0.24 0.02 145);
+    --separator: oklch(0.20 0.015 145);
+    --focus: var(--accent);
+    --link: var(--accent);
+    --backdrop: oklch(0% 0 0 / 60%);
+
+    /* Shadows */
+    --surface-shadow: 0 0 0 0 transparent inset;
+    --overlay-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
+    --field-shadow: 0 0 0 0 transparent inset;
+
+    /* Skeleton */
+    --skeleton-animation: shimmer;
+  }
+}
