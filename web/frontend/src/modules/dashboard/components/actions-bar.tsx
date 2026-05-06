@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Tabs,
-} from "@heroui/react";
+import { Button, Dropdown, Tabs } from "@heroui/react";
 import { Calendar, RefreshCw, Download } from "lucide-react";
 import { useState } from "react";
 
@@ -30,7 +23,10 @@ export function ActionsBar() {
   return (
     <div className="p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <Tabs className="w-full max-w-md">
+        <Tabs
+          className="w-full max-w-md"
+          onSelectionChange={(key) => setSelectedView(key as View)}
+        >
           <Tabs.ListContainer>
             <Tabs.List aria-label="Options">
               <Tabs.Tab id={View.Overview.toString()}>
@@ -65,7 +61,6 @@ export function ActionsBar() {
               <Dropdown.Menu
                 aria-label="period"
                 selectionMode="single"
-                selectedKeys={new Set([selectedPeriod])}
                 onAction={(key) => setSelectedPeriod(key as Period)}
               >
                 <Dropdown.Item aria-label="daily" id={Period.Daily.toString()}>

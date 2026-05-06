@@ -1,5 +1,6 @@
 import { ActionsBar } from "@/modules/dashboard/components/actions-bar";
 import { SalesPerformanceChart } from "@/modules/dashboard/components/SalesPerformanceChart";
+import TopBar from "@/modules/dashboard/components/TopBar";
 import { TrafficSourceChart } from "@/modules/dashboard/components/TrafficSourceChart";
 import { TableServices } from "@/modules/services/components/table-services";
 import {
@@ -38,6 +39,7 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-6">
       {/* Header */}
+      <TopBar />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>

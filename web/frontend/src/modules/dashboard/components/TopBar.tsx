@@ -1,84 +1,66 @@
 "use client";
+import {
+  Search,
+  Bell,
+  Sun,
+  Moon,
+  UserPlus,
+  Download,
+  RefreshCw,
+  ChevronDown,
+  PanelLeft,
+} from "lucide-react";
+import { Button } from "@heroui/react";
+import { motion } from "framer-motion";
+import { useTheme } from "@/shared/contexts/themes";
+import { useState } from "react";
 
-import { Button, Badge, Avatar, Dropdown, Label } from "@heroui/react";
-import { Search, Bell, UserPlus, PanelLeftClose, PanelLeft, Sun, Moon } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useSidebar } from "../contexts/SidebarContext";
+export default function TopBar() {
+  const { theme, toggleTheme } = useTheme();
+  const tabs = ["Overview", "Sales", "Expenses"];
+  const [activeTab, setActiveTab] = useState("Overview");
 
-export function TopBar() {
-  const { isCollapsed, toggleSidebar } = useSidebar();
-  const { theme, setTheme } = useTheme();
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
-  };
+  const handleToggleSidebar = () => {};
 
   return (
-    <header className="dashboard-topbar" id="dashboard-topbar">
-      <div className="dashboard-topbar__left">
-        <Button
-          variant="ghost"
-          isIconOnly
-          size="sm"
-          onPress={toggleSidebar}
-          aria-label="Toggle sidebar"
-        >
-          {isCollapsed ? <PanelLeft size={18} /> : <PanelLeftClose size={18} />}
-        </Button>
-        <h1 className="dashboard-topbar__greeting">{getGreeting()}, Kate</h1>
-      </div>
-
-      <div className="dashboard-topbar__right">
-        {/* Theme Toggle */}
-        <Dropdown>
-          <Button
-            variant="ghost"
-            isIconOnly
-            size="sm"
-            aria-label="Change theme"
-          >
-            {theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
+    <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border">
+      <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" onClick={handleToggleSidebar}>
+            <PanelLeft className="w-5 h-5" />
           </Button>
-          <Dropdown.Popover placement="bottom end">
-            <Dropdown.Menu
-              selectionMode="single"
-              selectedKeys={new Set([theme ?? "dark"])}
-              onSelectionChange={(keys) => {
-                const selected = Array.from(keys)[0];
-                if (selected) setTheme(String(selected));
-              }}
+          <h1 className="text-xl font-bold text-foreground">
+            Good morning, Kate
+          </h1>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="ghost">
+            <Search className="w-[18px] h-[18px]" />
+          </Button>
+          <Button onClick={toggleTheme} variant="ghost">
+            <motion.div
+              key={theme}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.2 }}
             >
-              <Dropdown.Item id="dark" textValue="Dark">
-                <Label>🌙 Dark</Label>
-              </Dropdown.Item>
-              <Dropdown.Item id="lime" textValue="Lime">
-                <Label>🍀 Lime</Label>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown.Popover>
-        </Dropdown>
-
-        {/* Search */}
-        <Button variant="ghost" isIconOnly size="sm" aria-label="Search">
-          <Search size={18} />
-        </Button>
-
-        {/* Notifications */}
-        <Badge.Anchor>
-          <Button variant="ghost" isIconOnly size="sm" aria-label="Notifications">
-            <Bell size={18} />
+              {theme === "dark" ? (
+                <Sun className="w-[18px] h-[18px]" />
+              ) : (
+                <Moon className="w-[18px] h-[18px]" />
+              )}
+            </motion.div>
           </Button>
-          <Badge color="danger" size="sm" />
-        </Badge.Anchor>
-
-        {/* Invite Button */}
-        <Button variant="primary" size="sm">
-          <UserPlus size={16} />
-          Invite
-        </Button>
+          <Button variant="ghost" className="relative">
+            <Bell className="w-[18px] h-[18px]" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full" />
+          </Button>
+          <Button variant="ghost" size="sm" className="">
+            <UserPlus className="w-4 h-4" />
+            Invite
+          </Button>
+        </div>
       </div>
     </header>
   );
