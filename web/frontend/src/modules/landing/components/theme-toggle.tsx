@@ -22,7 +22,7 @@ const SunIcon = () => (
   </svg>
 );
 
-const LeafIcon = () => (
+const MoonIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -35,8 +35,7 @@ const LeafIcon = () => (
     strokeLinejoin="round"
     aria-hidden="true"
   >
-    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
   </svg>
 );
 
@@ -64,28 +63,28 @@ export function ThemeToggle() {
       aria-label="Selecionar tema"
     >
       <Button
-        id="theme-toggle-dark"
-        variant={theme === "dark" ? "primary" : "ghost"}
+        id="theme-toggle-light"
+        variant={theme === "light" ? "primary" : "ghost"}
         size="sm"
         isIconOnly
-        onPress={() => setTheme("dark")}
-        aria-label="Tema escuro (Dourado)"
-        aria-pressed={theme === "dark"}
+        onPress={() => setTheme("light")}
+        aria-label="Tema claro"
+        aria-pressed={theme === "light"}
         className="w-8 h-8 min-w-8"
       >
         <SunIcon />
       </Button>
       <Button
-        id="theme-toggle-lime"
-        variant={theme === "lime" ? "primary" : "ghost"}
+        id="theme-toggle-dark"
+        variant={theme === "dark" ? "primary" : "ghost"}
         size="sm"
         isIconOnly
-        onPress={() => setTheme("lime")}
-        aria-label="Tema lima (Verde)"
-        aria-pressed={theme === "lime"}
+        onPress={() => setTheme("dark")}
+        aria-label="Tema escuro"
+        aria-pressed={theme === "dark"}
         className="w-8 h-8 min-w-8"
       >
-        <LeafIcon />
+        <MoonIcon />
       </Button>
     </div>
   );

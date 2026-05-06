@@ -8,10 +8,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Brand Gold/Orange available as Tailwind color */
-  --color-brand: oklch(0.75 0.18 70);
-  --color-brand-foreground: oklch(0.13 0.02 70);
-  --color-brand-lime: oklch(0.82 0.22 130);
+  /* Brand Orange available as Tailwind color (matches logo) */
+  --color-brand: oklch(0.72 0.19 55);
+  --color-brand-foreground: oklch(0.98 0.005 90);
 }
 
 body {

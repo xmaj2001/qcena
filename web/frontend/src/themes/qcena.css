@@ -1,6 +1,6 @@
 /* ============================================
-   Qcena Theme — Dark (default) + Lime (alt)
-   Brand Gold/Orange as accent/primary
+   Qcena Theme — Dark (default) + Light
+   Brand Orange as accent/primary (from logo)
    ============================================ */
 
 @layer base {
@@ -51,9 +51,9 @@
     --default: oklch(0.24 0.008 260);
     --default-foreground: var(--snow);
 
-    /* ★ Brand Gold/Orange — accent */
-    --accent: oklch(0.75 0.18 70);
-    --accent-foreground: oklch(0.13 0.02 70);
+    /* ★ Brand Orange — accent/primary (matches logo) */
+    --accent: oklch(0.72 0.19 55);
+    --accent-foreground: oklch(0.98 0.005 90);
 
     /* Form Field */
     --field-background: var(--default);
@@ -91,9 +91,9 @@
     --skeleton-animation: shimmer;
   }
 
-  /* ─── Lime Theme ─── */
-  [data-theme="lime"] {
-    color-scheme: dark;
+  /* ─── Light Theme ─── */
+  [data-theme="light"] {
+    color-scheme: light;
 
     /* Primitive Colors */
     --white: oklch(100% 0 0);
@@ -104,7 +104,7 @@
     /* Spacing & Layout */
     --spacing: 0.25rem;
     --border-width: 1px;
-    --field-border-width: 0px;
+    --field-border-width: 1px;
     --disabled-opacity: 0.5;
     --ring-offset-width: 2px;
     --cursor-interactive: pointer;
@@ -114,65 +114,65 @@
     --radius: 0.75rem;
     --field-radius: calc(var(--radius) * 1.5);
 
-    /* Base Colors — deep dark with green tint */
-    --background: oklch(0.11 0.015 145);
-    --foreground: oklch(0.95 0.02 130);
+    /* Base Colors — warm light */
+    --background: oklch(0.98 0.003 90);
+    --foreground: oklch(0.18 0.02 260);
 
     /* Surface */
-    --surface: oklch(0.16 0.02 145);
+    --surface: oklch(0.96 0.004 90);
     --surface-foreground: var(--foreground);
 
     /* Secondary and Tertiary surfaces */
-    --surface-secondary: oklch(0.19 0.025 145);
+    --surface-secondary: oklch(0.93 0.005 90);
     --surface-secondary-foreground: var(--foreground);
-    --surface-tertiary: oklch(0.22 0.03 145);
+    --surface-tertiary: oklch(0.90 0.006 90);
     --surface-tertiary-foreground: var(--foreground);
 
     /* Overlay */
-    --overlay: oklch(0.18 0.02 145);
+    --overlay: oklch(1.00 0 0);
     --overlay-foreground: var(--foreground);
 
-    --muted: oklch(0.55 0.04 145);
-    --scrollbar: oklch(0.35 0.02 145);
+    --muted: oklch(0.55 0.015 260);
+    --scrollbar: oklch(0.75 0.008 260);
 
-    --default: oklch(0.22 0.025 145);
-    --default-foreground: var(--snow);
+    --default: oklch(0.92 0.005 260);
+    --default-foreground: var(--eclipse);
 
-    /* ★ Lime Green — accent */
-    --accent: oklch(0.82 0.22 130);
-    --accent-foreground: oklch(0.13 0.04 145);
+    /* ★ Brand Orange — accent/primary (matches logo) */
+    --accent: oklch(0.68 0.20 50);
+    --accent-foreground: oklch(0.98 0.005 90);
 
     /* Form Field */
-    --field-background: var(--default);
+    --field-background: var(--white);
     --field-foreground: var(--foreground);
     --field-placeholder: var(--muted);
-    --field-border: transparent;
+    --field-border: oklch(0.87 0.005 260);
 
     /* Status */
-    --success: oklch(0.72 0.19 150);
-    --success-foreground: var(--eclipse);
+    --success: oklch(0.62 0.19 150);
+    --success-foreground: var(--white);
 
-    --warning: oklch(0.82 0.14 76);
+    --warning: oklch(0.78 0.16 76);
     --warning-foreground: var(--eclipse);
 
-    --danger: oklch(0.59 0.20 25);
-    --danger-foreground: var(--snow);
+    --danger: oklch(0.55 0.22 25);
+    --danger-foreground: var(--white);
 
     /* Component */
-    --segment: oklch(0.26 0.03 145);
+    --segment: oklch(0.94 0.005 260);
     --segment-foreground: var(--foreground);
 
     /* Misc */
-    --border: oklch(0.24 0.02 145);
-    --separator: oklch(0.20 0.015 145);
+    --border: oklch(0.88 0.006 260);
+    --separator: oklch(0.91 0.004 260);
     --focus: var(--accent);
     --link: var(--accent);
-    --backdrop: oklch(0% 0 0 / 60%);
+    --backdrop: oklch(0% 0 0 / 30%);
 
     /* Shadows */
-    --surface-shadow: 0 0 0 0 transparent inset;
-    --overlay-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
-    --field-shadow: 0 0 0 0 transparent inset;
+    --surface-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) inset;
+    --overlay-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+    --field-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04) inset;
 
     /* Skeleton */
     --skeleton-animation: shimmer;
