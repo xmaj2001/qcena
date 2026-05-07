@@ -107,7 +107,13 @@ export function TableServices() {
               )}
             </Table.Column>
             <Table.Column id="provider">Provider</Table.Column>
-            <Table.Column id="client">Client</Table.Column>
+            <Table.Column allowsSorting id="totalReservations">
+              {({ sortDirection }) => (
+                <SortableColumnHeader sortDirection={sortDirection}>
+                  Reservations
+                </SortableColumnHeader>
+              )}
+            </Table.Column>
             <Table.Column allowsSorting id="price">
               {({ sortDirection }) => (
                 <SortableColumnHeader sortDirection={sortDirection}>
@@ -183,13 +189,8 @@ export function TableServices() {
                     <span className="text-xs">{service.provider.name}</span>
                   </div>
                 </Table.Cell>
-                <Table.Cell>
-                  <div className="flex items-center gap-2">
-                    <Avatar size="sm">
-                      <Avatar.Image src={service.client.image} />
-                    </Avatar>
-                    <span className="text-xs">{service.client.name}</span>
-                  </div>
+                <Table.Cell className="font-semibold text-center">
+                  {service.totalReservations}
                 </Table.Cell>
                 <Table.Cell className="font-semibold">
                   €{service.price.toFixed(2)}

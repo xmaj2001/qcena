@@ -8,18 +8,22 @@ export const generateMockService = (): ApiService => ({
   name: faker.commerce.productName(),
   description: faker.commerce.productDescription(),
   price: parseFloat(faker.commerce.price()),
+  totalReservations: faker.number.int({ min: 0, max: 100 }),
+  totalFavorites: faker.number.int({ min: 0, max: 100 }),
+  topClients: Array.from({ length: 3 }).map(() => ({
+    id: faker.string.uuid(),
+    name: faker.person.fullName(),
+    image: faker.image.avatar(),
+    totalReservations: faker.number.int({ min: 0, max: 100 }),
+  })),
   provider: {
     id: faker.string.uuid(),
     name: faker.person.fullName(),
     image: faker.image.avatar(),
   },
   category: faker.commerce.department(),
-  client: {
-    id: faker.string.uuid(),
-    name: faker.person.fullName(),
-    image: faker.image.avatar(),
-  },
   state: faker.helpers.enumValue(ServiceState),
+  totalEarnings: parseFloat(faker.commerce.price()),
 });
 
 export const generateMockServices = (count: number = 10): ApiService[] => {
