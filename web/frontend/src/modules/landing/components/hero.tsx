@@ -1,5 +1,3 @@
-
-
 const stats = [
   { value: "DDD", label: "Domain-Driven Design" },
   { value: "CI/CD", label: "Blue-Green Deploy" },
@@ -15,8 +13,14 @@ export function Hero() {
       aria-label="Secção principal"
     >
       {/* Background effects */}
-      <div className="absolute inset-0 hero-glow pointer-events-none" aria-hidden="true" />
-      <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" aria-hidden="true" />
+      <div
+        className="absolute inset-0 hero-glow pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 grid-pattern opacity-30 pointer-events-none"
+        aria-hidden="true"
+      />
 
       {/* Floating orbs */}
       <div
@@ -50,8 +54,8 @@ export function Hero() {
 
         {/* Subheading */}
         <p className="animate-fade-up animate-fade-up-delay-2 text-lg sm:text-xl text-muted leading-relaxed max-w-2xl mb-4">
-          Construída com intenção, pensada para produção. Não é só fazer funcionar —
-          é{" "}
+          Construída com intenção, pensada para produção. Não é só fazer
+          funcionar — é{" "}
           <em className="text-foreground not-italic font-medium">
             fazer bem feito
           </em>
@@ -88,16 +92,25 @@ export function Hero() {
               key={stat.value}
               className="bg-surface flex flex-col items-center justify-center py-5 px-4 gap-1"
             >
-              <span className="text-xl font-bold text-accent">{stat.value}</span>
-              <span className="text-xs text-muted text-center leading-tight">{stat.label}</span>
+              <span className="text-xl font-bold text-accent">
+                {stat.value}
+              </span>
+              <span className="text-xs text-muted text-center leading-tight">
+                {stat.label}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40" aria-hidden="true">
-        <span className="text-xs text-muted tracking-widest uppercase">scroll</span>
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40"
+        aria-hidden="true"
+      >
+        <span className="text-xs text-muted tracking-widest uppercase">
+          scroll
+        </span>
         <div className="w-px h-8 bg-linear-to-b from-muted to-transparent" />
       </div>
     </section>

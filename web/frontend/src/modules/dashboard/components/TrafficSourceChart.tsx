@@ -22,7 +22,8 @@ export function TrafficSourceChart() {
   const maxVal = Math.max(...allValues);
   const yTicks = [0, 5000, 10000, 15000, 20000];
 
-  const getX = (i: number) => padding.left + (i / (traffic.length - 1)) * chartW;
+  const getX = (i: number) =>
+    padding.left + (i / (traffic.length - 1)) * chartW;
   const getY = (val: number) => padding.top + chartH - (val / maxVal) * chartH;
 
   const buildPath = (key: "organic" | "paidAds") => {
@@ -49,10 +50,15 @@ export function TrafficSourceChart() {
     <Card className="animate-fade-up stagger-3">
       <Card.Header className="flex-row items-start justify-between">
         <div>
-          <Card.Title className="text-base font-semibold">Traffic Source</Card.Title>
+          <Card.Title className="text-base font-semibold">
+            Traffic Source
+          </Card.Title>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-4 text-xs" style={{ color: "var(--muted)" }}>
+          <div
+            className="flex items-center gap-4 text-xs"
+            style={{ color: "var(--muted)" }}
+          >
             <span className="flex items-center gap-1.5">
               <span className="legend-dot legend-dot--organic" /> Organic
             </span>
@@ -60,7 +66,11 @@ export function TrafficSourceChart() {
               <span className="legend-dot legend-dot--paid" /> Paid Ads
             </span>
           </div>
-          <button type="button" className="table-action-btn" aria-label="More options">
+          <button
+            type="button"
+            className="table-action-btn"
+            aria-label="More options"
+          >
             <MoreVertical size={16} />
           </button>
         </div>
@@ -68,10 +78,15 @@ export function TrafficSourceChart() {
 
       <Card.Content className="flex flex-col gap-2">
         <div>
-          <p className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>
+          <p
+            className="text-2xl font-bold"
+            style={{ color: "var(--foreground)" }}
+          >
             {formatSessions(totalSessions)}
           </p>
-          <p className="text-xs" style={{ color: "var(--muted)" }}>Sessions</p>
+          <p className="text-xs" style={{ color: "var(--muted)" }}>
+            Sessions
+          </p>
         </div>
 
         {/* SVG Line Chart */}
@@ -119,8 +134,14 @@ export function TrafficSourceChart() {
           ))}
 
           {/* Area fills */}
-          <path className="line-chart-area line-chart-area--organic" d={organicArea} />
-          <path className="line-chart-area line-chart-area--paid" d={paidArea} />
+          <path
+            className="line-chart-area line-chart-area--organic"
+            d={organicArea}
+          />
+          <path
+            className="line-chart-area line-chart-area--paid"
+            d={paidArea}
+          />
 
           {/* Lines */}
           <path

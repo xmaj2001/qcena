@@ -10,10 +10,31 @@ export interface KpiData {
 }
 
 export const kpiData: KpiData[] = [
-  { id: "revenue", label: "Revenue", value: 228441, prefix: "", suffix: " US$", change: 3.3 },
-  { id: "expenses", label: "Expenses", value: 25108, prefix: "", suffix: " US$", change: -3.3 },
+  {
+    id: "revenue",
+    label: "Revenue",
+    value: 228441,
+    prefix: "",
+    suffix: " US$",
+    change: 3.3,
+  },
+  {
+    id: "expenses",
+    label: "Expenses",
+    value: 25108,
+    prefix: "",
+    suffix: " US$",
+    change: -3.3,
+  },
   { id: "sales", label: "Sales", value: 458, change: 3.3 },
-  { id: "profit", label: "Profit", value: 203133, prefix: "", suffix: " US$", change: 4.1 },
+  {
+    id: "profit",
+    label: "Profit",
+    value: 203133,
+    prefix: "",
+    suffix: " US$",
+    change: 4.1,
+  },
 ];
 
 export interface SalesMetric {

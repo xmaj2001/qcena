@@ -17,7 +17,8 @@ const layers: LayerCardProps[] = [
   {
     icon: "⚙️",
     title: "Backend",
-    description: "Arquitectura robusta com separação clara de responsabilidades",
+    description:
+      "Arquitectura robusta com separação clara de responsabilidades",
     color: "oklch(0.65 0.18 260)",
     items: [
       { tech: "NestJS", use: "Framework principal" },
@@ -31,7 +32,8 @@ const layers: LayerCardProps[] = [
   {
     icon: "🌐",
     title: "Frontend",
-    description: "Interface moderna, tipada, com foco em experiência de utilizador",
+    description:
+      "Interface moderna, tipada, com foco em experiência de utilizador",
     color: "oklch(0.65 0.18 200)",
     items: [
       { tech: "Next.js 16", use: "Framework web" },
@@ -104,7 +106,10 @@ function LayerCard({ icon, title, description, color, items }: LayerCardProps) {
       <Card.Content>
         <ul className="flex flex-col gap-2" role="list">
           {items.map((item) => (
-            <li key={item.tech} className="flex items-center justify-between gap-3">
+            <li
+              key={item.tech}
+              className="flex items-center justify-between gap-3"
+            >
               <span className="stack-pill text-xs">{item.tech}</span>
               <span className="text-xs text-muted text-right">{item.use}</span>
             </li>
@@ -132,12 +137,12 @@ export function Features() {
             id="features-heading"
             className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
           >
-            Construído para{" "}
-            <span className="text-gradient">produção real</span>
+            Construído para <span className="text-gradient">produção real</span>
           </h2>
           <p className="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
-            Cada camada escolhida com propósito. Tecnologias que escalam, padrões
-            que facilitam manutenção e uma arquitectura que comunica intenção.
+            Cada camada escolhida com propósito. Tecnologias que escalam,
+            padrões que facilitam manutenção e uma arquitectura que comunica
+            intenção.
           </p>
         </div>
 
@@ -173,8 +178,12 @@ export function Features() {
                 },
               ].map((p) => (
                 <div key={p.title} className="flex flex-col gap-2">
-                  <div className="text-2xl" aria-hidden="true">{p.icon}</div>
-                  <h4 className="font-semibold text-sm text-foreground">{p.title}</h4>
+                  <div className="text-2xl" aria-hidden="true">
+                    {p.icon}
+                  </div>
+                  <h4 className="font-semibold text-sm text-foreground">
+                    {p.title}
+                  </h4>
                   <p className="text-xs text-muted leading-relaxed">{p.desc}</p>
                 </div>
               ))}

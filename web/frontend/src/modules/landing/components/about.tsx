@@ -68,9 +68,9 @@ export function About() {
               </h2>
               <div className="flex flex-col gap-4 text-muted leading-relaxed">
                 <p>
-                  A <strong className="text-foreground">Qcena</strong> nasceu como
-                  projecto pessoal para aplicar, de forma prática e honesta, tudo o
-                  que foi aprendido na{" "}
+                  A <strong className="text-foreground">Qcena</strong> nasceu
+                  como projecto pessoal para aplicar, de forma prática e
+                  honesta, tudo o que foi aprendido na{" "}
                   <a
                     href="https://42luanda.com"
                     target="_blank"
@@ -86,14 +86,17 @@ export function About() {
                   <em className="text-foreground not-italic font-semibold">
                     bem feito
                   </em>
-                  , como se fosse para produção real — sem a pressão de utilizadores
-                  reais a descobrir os problemas.
+                  , como se fosse para produção real — sem a pressão de
+                  utilizadores reais a descobrir os problemas.
                 </p>
                 <p>
-                  Cada decisão técnica é tomada com intenção. Cada padrão aplicado
-                  tem um porquê. Porque o melhor momento para aprender a fazer bem é{" "}
-                  <em className="text-foreground not-italic font-medium">agora</em>,
-                  não quando há clientes a depender disso.
+                  Cada decisão técnica é tomada com intenção. Cada padrão
+                  aplicado tem um porquê. Porque o melhor momento para aprender
+                  a fazer bem é{" "}
+                  <em className="text-foreground not-italic font-medium">
+                    agora
+                  </em>
+                  , não quando há clientes a depender disso.
                 </p>
               </div>
 
@@ -122,10 +125,21 @@ export function About() {
                 <div className="rounded-2xl bg-surface p-6 font-mono text-sm">
                   {/* Terminal header */}
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="w-3 h-3 rounded-full bg-danger/60" aria-hidden="true" />
-                    <div className="w-3 h-3 rounded-full bg-warning/60" aria-hidden="true" />
-                    <div className="w-3 h-3 rounded-full bg-success/60" aria-hidden="true" />
-                    <span className="ml-2 text-xs text-muted">qcena — filosofia.md</span>
+                    <div
+                      className="w-3 h-3 rounded-full bg-danger/60"
+                      aria-hidden="true"
+                    />
+                    <div
+                      className="w-3 h-3 rounded-full bg-warning/60"
+                      aria-hidden="true"
+                    />
+                    <div
+                      className="w-3 h-3 rounded-full bg-success/60"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-2 text-xs text-muted">
+                      qcena — filosofia.md
+                    </span>
                   </div>
                   {/* Fake code */}
                   <div className="flex flex-col gap-1 text-xs leading-6">
@@ -134,23 +148,30 @@ export function About() {
                     <span>
                       <span className="text-accent">domain</span>
                       <span className="text-muted"> → </span>
-                      <span className="text-foreground">Entities + Value Objects</span>
+                      <span className="text-foreground">
+                        Entities + Value Objects
+                      </span>
                     </span>
                     <span>
                       <span className="text-accent">app</span>
-                      <span className="text-muted">    → </span>
+                      <span className="text-muted"> → </span>
                       <span className="text-foreground">Use Cases + DTOs</span>
                     </span>
                     <span>
                       <span className="text-accent">infra</span>
-                      <span className="text-muted">  → </span>
-                      <span className="text-foreground">Prisma + Repositories</span>
+                      <span className="text-muted"> → </span>
+                      <span className="text-foreground">
+                        Prisma + Repositories
+                      </span>
                     </span>
                     <span className="text-foreground/70"> </span>
                     <span className="text-muted"># Stack</span>
                     <span>
                       <span className="text-success">backend</span>
-                      <span className="text-muted">  → NestJS + DDD + PostgreSQL</span>
+                      <span className="text-muted">
+                        {" "}
+                        → NestJS + DDD + PostgreSQL
+                      </span>
                     </span>
                     <span>
                       <span className="text-success">frontend</span>
@@ -158,11 +179,14 @@ export function About() {
                     </span>
                     <span>
                       <span className="text-success">mobile</span>
-                      <span className="text-muted">   → React Native + Expo</span>
+                      <span className="text-muted"> → React Native + Expo</span>
                     </span>
                     <span>
                       <span className="text-success">infra</span>
-                      <span className="text-muted">    → Docker + NGINX + Make</span>
+                      <span className="text-muted">
+                        {" "}
+                        → Docker + NGINX + Make
+                      </span>
                     </span>
                     <span className="text-foreground/70"> </span>
                     <span className="text-muted"># Princípio</span>
@@ -246,7 +270,9 @@ export function About() {
                           {item.label}
                         </span>
                       </div>
-                      <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
+                      <p className="text-sm text-muted leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
                   </div>
                 </li>

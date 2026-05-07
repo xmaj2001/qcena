@@ -9,13 +9,16 @@ function formatNumber(value: number): string {
 }
 
 export function SalesPerformanceChart() {
-  const { salesMetricsData, salesBars, dateRange, setDateRange } = useDashboard();
+  const { salesMetricsData, salesBars, dateRange, setDateRange } =
+    useDashboard();
   const maxValue = Math.max(...salesBars.map((d) => d.value));
 
   return (
     <Card className="animate-fade-up stagger-2">
       <Card.Header className="flex-row items-start justify-between gap-4">
-        <Card.Title className="text-base font-semibold">Sales Performance</Card.Title>
+        <Card.Title className="text-base font-semibold">
+          Sales Performance
+        </Card.Title>
         <Dropdown>
           <Button variant="outline" size="sm">
             <Calendar size={14} />
@@ -51,7 +54,8 @@ export function SalesPerformanceChart() {
             <div key={metric.label} className="metric-item">
               <div className="flex items-center gap-2">
                 <span className="metric-item__value">
-                  {formatNumber(metric.value)}{metric.suffix ?? ""}
+                  {formatNumber(metric.value)}
+                  {metric.suffix ?? ""}
                 </span>
                 <Chip size="sm" color="success" variant="soft">
                   <span className="flex items-center gap-0.5 text-xs">
@@ -70,7 +74,9 @@ export function SalesPerformanceChart() {
           {/* Y-axis */}
           <div className="chart-y-axis">
             {[60, 40, 20, 0].map((val) => (
-              <span key={val} className="chart-y-axis__label">{val}</span>
+              <span key={val} className="chart-y-axis__label">
+                {val}
+              </span>
             ))}
           </div>
 

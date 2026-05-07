@@ -36,7 +36,7 @@
     --surface-foreground: var(--foreground);
 
     /* Secondary and Tertiary surfaces */
-    --surface-secondary: oklch(0.20 0.010 260);
+    --surface-secondary: oklch(0.2 0.01 260);
     --surface-secondary-foreground: var(--foreground);
     --surface-tertiary: oklch(0.23 0.012 260);
     --surface-tertiary-foreground: var(--foreground);
@@ -70,7 +70,7 @@
     --warning: oklch(0.82 0.14 76);
     --warning-foreground: var(--eclipse);
 
-    --danger: oklch(0.59 0.20 25);
+    --danger: oklch(0.59 0.2 25);
     --danger-foreground: var(--snow);
 
     /* Component */
@@ -127,11 +127,11 @@
     /* Secondary and Tertiary surfaces */
     --surface-secondary: oklch(0.93 0.005 90);
     --surface-secondary-foreground: var(--foreground);
-    --surface-tertiary: oklch(0.90 0.006 90);
+    --surface-tertiary: oklch(0.9 0.006 90);
     --surface-tertiary-foreground: var(--foreground);
 
     /* Overlay */
-    --overlay: oklch(1.00 0 0);
+    --overlay: oklch(1 0 0);
     --overlay-foreground: var(--foreground);
 
     --muted: oklch(0.55 0.015 260);
@@ -141,7 +141,7 @@
     --default-foreground: var(--eclipse);
 
     /* ★ Brand Gold/Orange — accent/primary (matches logo) */
-    --accent: oklch(0.70 0.18 70);
+    --accent: oklch(70.247% 0.16005 63.096);
     --accent-foreground: oklch(0.13 0.02 70);
     --primary: var(--accent);
     --primary-foreground: var(--accent-foreground);

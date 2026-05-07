@@ -2,16 +2,16 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      className="relative border-t border-border bg-surface/40 py-12 px-6"
-    >
+    <footer className="relative border-t border-border bg-surface/40 py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                <span className="text-accent-foreground font-bold text-sm leading-none">Q</span>
+                <span className="text-accent-foreground font-bold text-sm leading-none">
+                  Q
+                </span>
               </div>
               <span className="font-bold text-lg tracking-tight">Qcena</span>
             </div>

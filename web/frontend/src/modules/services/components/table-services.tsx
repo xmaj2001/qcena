@@ -5,69 +5,15 @@ import type { Selection, SortDescriptor } from "@heroui/react";
 import { Avatar, Button, Checkbox, Chip, Table, cn } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useMemo, useState } from "react";
+import { Service, ServiceState } from "../types/service.type";
+import { generateMockServices } from "../mocks/service.mock";
 
-interface User {
-  id: number;
-  name: string;
-  image_url: string;
-  role: string;
-  status: "Active" | "Inactive" | "On Leave";
-  email: string;
-}
-
-const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
-  Active: "success",
-  Inactive: "danger",
-  "On Leave": "warning",
+const stateColorMap: Record<ServiceState, "success" | "danger"> = {
+  [ServiceState.ENABLE]: "success",
+  [ServiceState.DISABLE]: "danger",
 };
 
-const users: User[] = [
-  {
-    email: "kate@acme.com",
-    id: 4586932,
-    image_url:
-      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
-    name: "Kate Moore",
-    role: "Chief Executive Officer",
-    status: "Active",
-  },
-  {
-    email: "john@acme.com",
-    id: 5273849,
-    image_url:
-      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
-    name: "John Smith",
-    role: "Chief Technology Officer",
-    status: "Active",
-  },
-  {
-    email: "sara@acme.com",
-    id: 7492836,
-    image_url:
-      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg",
-    name: "Sara Johnson",
-    role: "Chief Marketing Officer",
-    status: "On Leave",
-  },
-  {
-    email: "michael@acme.com",
-    id: 8293746,
-    image_url:
-      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
-    name: "Michael Brown",
-    role: "Chief Financial Officer",
-    status: "Active",
-  },
-  {
-    email: "emily@acme.com",
-    id: 1234567,
-    image_url:
-      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
-    name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
-  },
-];
+const services: Service[] = generateMockServices(10);
 
 function SortableColumnHeader({
   children,
@@ -99,11 +45,11 @@ export function TableServices() {
     direction: "ascending",
   });
 
-  const sortedUsers = useMemo(() => {
-    return [...users].sort((a, b) => {
-      const col = sortDescriptor.column as keyof User;
-      const first = String(a[col]);
-      const second = String(b[col]);
+  const sortedServices = useMemo(() => {
+    return [...services].sort((a, b) => {
+      const col = sortDescriptor.column as keyof Service;
+      const first = String(a[col] ?? "");
+      const second = String(b[col] ?? "");
       let cmp = first.localeCompare(second);
 
       if (sortDescriptor.direction === "descending") {
@@ -118,8 +64,8 @@ export function TableServices() {
     <Table>
       <Table.ScrollContainer>
         <Table.Content
-          aria-label="Table with custom cells"
-          className="min-w-[800px]"
+          aria-label="Services table"
+          className="min-w-[1000px]"
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           sortDescriptor={sortDescriptor}
@@ -142,25 +88,34 @@ export function TableServices() {
             >
               {({ sortDirection }) => (
                 <SortableColumnHeader sortDirection={sortDirection}>
-                  Worker ID
+                  Service ID
                 </SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="name">
               {({ sortDirection }) => (
                 <SortableColumnHeader sortDirection={sortDirection}>
-                  Member
+                  Service
                 </SortableColumnHeader>
               )}
             </Table.Column>
-            <Table.Column allowsSorting id="role">
+            <Table.Column allowsSorting id="category">
               {({ sortDirection }) => (
                 <SortableColumnHeader sortDirection={sortDirection}>
-                  Role
+                  Category
                 </SortableColumnHeader>
               )}
             </Table.Column>
-            <Table.Column allowsSorting id="status">
+            <Table.Column id="provider">Provider</Table.Column>
+            <Table.Column id="client">Client</Table.Column>
+            <Table.Column allowsSorting id="price">
+              {({ sortDirection }) => (
+                <SortableColumnHeader sortDirection={sortDirection}>
+                  Price
+                </SortableColumnHeader>
+              )}
+            </Table.Column>
+            <Table.Column allowsSorting id="state">
               {({ sortDirection }) => (
                 <SortableColumnHeader sortDirection={sortDirection}>
                   Status
@@ -170,11 +125,11 @@ export function TableServices() {
             <Table.Column className="text-end">Actions</Table.Column>
           </Table.Header>
           <Table.Body>
-            {sortedUsers.map((user) => (
-              <Table.Row key={user.id} id={user.id}>
+            {sortedServices.map((service) => (
+              <Table.Row key={service.id} id={service.id}>
                 <Table.Cell className="pr-0">
                   <Checkbox
-                    aria-label={`Select ${user.name}`}
+                    aria-label={`Select ${service.name}`}
                     slot="selection"
                     variant="secondary"
                   >
@@ -185,7 +140,7 @@ export function TableServices() {
                 </Table.Cell>
                 <Table.Cell className="font-medium">
                   <div className="flex items-center gap-2">
-                    #{user.id.toString()}{" "}
+                    #{service.id.slice(0, 8)}
                     <Button isIconOnly size="sm" variant="ghost">
                       <Icon
                         className="size-4 text-muted"
@@ -197,32 +152,59 @@ export function TableServices() {
                 <Table.Cell>
                   <div className="flex items-center gap-3">
                     <Avatar size="sm">
-                      <Avatar.Image src={user.image_url} />
+                      <Avatar.Image src={service.image} />
                       <Avatar.Fallback>
-                        {user.name
+                        {service.name
                           .split(" ")
                           .map((n) => n[0])
                           .join("")}
                       </Avatar.Fallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <span className="text-xs">{user.name}</span>
-                      <span className="text-xs text-muted">{user.email}</span>
+                      <span className="text-xs font-semibold">
+                        {service.name}
+                      </span>
+                      <span className="text-xs text-muted truncate max-w-[150px]">
+                        {service.description}
+                      </span>
                     </div>
                   </div>
                 </Table.Cell>
-                <Table.Cell className="min-w-52">{user.role}</Table.Cell>
-                <Table.Cell className="min-w-25">
-                  <Chip
-                    color={statusColorMap[user.status]}
-                    size="sm"
-                    variant="soft"
-                  >
-                    {user.status}
+                <Table.Cell>
+                  <Chip size="sm" variant="soft">
+                    {service.category}
                   </Chip>
                 </Table.Cell>
                 <Table.Cell>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
+                    <Avatar size="sm">
+                      <Avatar.Image src={service.provider.image} />
+                    </Avatar>
+                    <span className="text-xs">{service.provider.name}</span>
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div className="flex items-center gap-2">
+                    <Avatar size="sm">
+                      <Avatar.Image src={service.client.image} />
+                    </Avatar>
+                    <span className="text-xs">{service.client.name}</span>
+                  </div>
+                </Table.Cell>
+                <Table.Cell className="font-semibold">
+                  €{service.price.toFixed(2)}
+                </Table.Cell>
+                <Table.Cell>
+                  <Chip
+                    color={stateColorMap[service.state]}
+                    size="sm"
+                    variant="soft"
+                  >
+                    {service.state}
+                  </Chip>
+                </Table.Cell>
+                <Table.Cell>
+                  <div className="flex items-center gap-1 justify-end">
                     <Button isIconOnly size="sm" variant="tertiary">
                       <Icon className="size-4" icon="gravity-ui:eye" />
                     </Button>

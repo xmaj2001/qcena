@@ -1,24 +1,11 @@
 "use client";
-import {
-  Search,
-  Bell,
-  Sun,
-  Moon,
-  UserPlus,
-  Download,
-  RefreshCw,
-  ChevronDown,
-  PanelLeft,
-} from "lucide-react";
+import { Bell, Moon, PanelLeft, Search, Sun, UserPlus } from "lucide-react";
 import { Button } from "@heroui/react";
 import { motion } from "framer-motion";
-import { useTheme } from "@/shared/contexts/themes";
-import { useState } from "react";
+import { useAppTheme } from "@/shared/hooks/use-theme";
 
 export default function TopBar() {
-  const { theme, toggleTheme } = useTheme();
-  const tabs = ["Overview", "Sales", "Expenses"];
-  const [activeTab, setActiveTab] = useState("Overview");
+  const { theme, toggle } = useAppTheme();
 
   const handleToggleSidebar = () => {};
 
@@ -38,7 +25,7 @@ export default function TopBar() {
           <Button variant="ghost">
             <Search className="w-[18px] h-[18px]" />
           </Button>
-          <Button onClick={toggleTheme} variant="ghost">
+          <Button onClick={toggle} variant="ghost">
             <motion.div
               key={theme}
               initial={{ rotate: -90, opacity: 0 }}
