@@ -52,7 +52,7 @@
     --default-foreground: var(--snow);
 
     /* ★ Brand Gold/Orange — accent/primary (matches logo) */
-    --accent: oklch(0.75 0.18 70);
+    --accent: #f49500;
     --accent-foreground: oklch(0.13 0.02 70);
     --primary: var(--accent);
     --primary-foreground: var(--accent-foreground);

@@ -1,4 +1,4 @@
-import { ApiResponseError, ErrorResponse } from "./api.types";
+import type { ApiResponseError, ErrorResponse } from "./api.types";
 
 export class ApiRequestError extends Error {
   private readonly _code: number;
