@@ -1,4 +1,3 @@
-import { PlaceView } from "@/modules/places/components/place-view";
 import Grid from "@/modules/services/components/grid";
 import ServiceGridItems from "@/modules/services/components/grid/service-grid-items";
 import { getServices } from "@/modules/services/features/get-services.feat";
@@ -19,6 +18,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  // TODO: Implementar filtro de serviços por busca.
+  // const services = await getServices({ sortKey, reverse, query: searchValue });
   const services = await getServices();
   const resultsText = services.length > 1 ? "resultados" : "resultado";
 
