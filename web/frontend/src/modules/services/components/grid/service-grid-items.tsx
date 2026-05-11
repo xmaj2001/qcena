@@ -1,7 +1,7 @@
-import type { ApiService } from "@/modules/services/types/service.type";
+import Grid from ".";
+import { GridTileImage } from "./tile";
 import Link from "next/link";
-import { GridTileImage } from "./grid/tile";
-import Grid from "./grid";
+import type { ApiService } from "@/modules/services/types/service.type";
 
 export default function ServiceGridItems({
   services,
@@ -18,13 +18,13 @@ export default function ServiceGridItems({
             prefetch={true}
           >
             <GridTileImage
-              alt={service.name}
+              alt={service.images[0].altText}
               label={{
                 title: service.name,
                 amount: service.price.toLocaleString(),
                 currencyCode: "AOA",
               }}
-              src={service.image}
+              src={service.images[0].src}
               fill
               sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             />

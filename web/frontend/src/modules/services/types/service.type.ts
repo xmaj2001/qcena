@@ -3,9 +3,14 @@ export enum ServiceState {
   DISABLE = "DISABLE",
 }
 
+export type ImageService = {
+  src: string;
+  altText: string;
+};
+
 export type ApiService = {
   id: string;
-  image: string;
+  images: ImageService[];
   name: string;
   description?: string;
   price: number;
@@ -24,7 +29,14 @@ export type ApiService = {
     image?: string;
   };
   category: string;
+  tags: string[];
   state: ServiceState;
 };
 
 export type Service = ApiService;
+
+export type ServiceCollection = {
+  id: string;
+  title: string;
+  slug: string;
+};

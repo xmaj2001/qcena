@@ -17,10 +17,10 @@ export function ServiceCard({ service }: ServiceCardProps) {
       <Card className="relative col-span-12 h-[250px] border-2 hover:border-[#A35700] bg-black/50 sm:h-[300px] md:col-span-8 md:h-[300px] rounded-md">
         {/* Background image */}
         <Image
-          alt={service.name}
+          alt={service.images[0].altText}
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover"
-          src={service.image}
+          src={service.images[0].src}
           width={200}
           height={200}
         />

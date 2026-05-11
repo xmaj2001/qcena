@@ -1,7 +1,6 @@
 "use client";
 
 import type { ApiService } from "@/modules/services/types/service.type";
-import { ServiceCard } from "./service-card";
 import { ServiceTile } from "./service-tile";
 
 interface ServiceGridProps {
@@ -29,8 +28,8 @@ export function ServiceGrid({ services }: ServiceGridProps) {
         // <ServiceCard key={service.id} service={service} />
         <ServiceTile
           key={service.id}
-          src={service.image}
-          alt={service.name}
+          src={service.images[0].src}
+          alt={service.images[0].altText}
           width={200}
           height={200}
           isInteractive={true}
