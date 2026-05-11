@@ -47,7 +47,7 @@ export function SearchNavbar() {
             <span
               className={`font-display tracking-tight transition-all duration-500 ${isScrolled ? "text-xl text-foreground" : "text-2xl text-white"}`}
             >
-              Cena
+              cena
             </span>
           </a>
 

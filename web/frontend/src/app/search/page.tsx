@@ -5,8 +5,8 @@ import { getServices } from "@/modules/services/features/get-services.feat";
 import { defaultSort, sorting } from "@/shared/lib/constants";
 
 export const metadata = {
-  title: "Search",
-  description: "Search for products in the store.",
+  title: "Qcena - Pesquisar",
+  description: "Pesquise por serviços na Qcena.",
 };
 
 interface SearchPageProps {
