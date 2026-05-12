@@ -2,9 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Allow all images for now
   reactCompiler: true,
   images: {
-    domains: ["picsum.photos"],
+    unoptimized: true,
+    domains: ["*"],
   },
 };
 

@@ -12,7 +12,7 @@ clean:
 	docker compose -f $(COMPOSE_FILE) down
 
 mata:
-	docker compose -f $(COMPOSE_FILE) down
+	docker compose -f $(COMPOSE_FILE) down -v
 
 fclean:
 	docker compose -f $(COMPOSE_FILE) down -v --rmi all --remove-orphans

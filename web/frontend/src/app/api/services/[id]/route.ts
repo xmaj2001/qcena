@@ -1,8 +1,8 @@
-import { generateMockServices } from "@/modules/services/mocks/service.mock";
 import { NextRequest, NextResponse } from "next/server";
+import { generateMockServices } from "@/server/services/mocks/service.mock";
 
 export async function GET(
-  eq: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;

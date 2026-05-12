@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/shared/components/theme-provider";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +14,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Qcena",
-  description: "All the services in one place.",
+  title: {
+    default: "Qcena — Plataforma de Reservas de Serviços",
+    template: "%s | Qcena",
+  },
+  description:
+    "Qcena é uma plataforma de reservas de serviços construída com intenção, pensada para produção. NestJS, Next.js, DDD, Docker, e muito mais — desenvolvida na 42 Luanda.",
+  keywords: [
+    "Qcena",
+    "reservas",
+    "serviços",
+    "NestJS",
+    "Next.js",
+    "42 Luanda",
+    "DDD",
+    "Docker",
+    "plataforma",
+    "booking",
+    "Angola",
+  ],
+  authors: [{ name: "42 Luanda", url: "https://42luanda.com" }],
+  creator: "42 Luanda",
+  metadataBase: new URL("https://qcena.app"),
+  openGraph: {
+    type: "website",
+    locale: "pt_AO",
+    url: "https://qcena.app",
+    siteName: "Qcena",
+    title: "Qcena — Plataforma de Reservas de Serviços",
+    description:
+      "Plataforma de reservas de serviços construída com intenção e pensada para produção. Desenvolvida na 42 Luanda.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Qcena — Plataforma de Reservas de Serviços",
+    description:
+      "Plataforma de reservas de serviços construída com intenção e pensada para produção.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -25,19 +64,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-accent dark:selection:text-white">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
