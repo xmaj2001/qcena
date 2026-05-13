@@ -1,19 +1,39 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { bearer } from 'better-auth/plugins';
 import { PrismaClient } from 'src/shared/prisma/generated/prisma/client';
+import { SendEmailPort } from 'src/shared/transports/sendEmail/send-email-port';
+import {
+  onExistingUserSignUp,
+  onPasswordReset,
+  sendResetPassword,
+  sendVerificationEmail,
+} from './emails';
 
-const prisma = new PrismaClient({
-  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
-});
+export function createBetterAuth(emailPort: SendEmailPort) {
+  const prisma = new PrismaClient({
+    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+  });
 
-export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: 'postgresql', // or "mysql", "postgresql", ...etc
-  }),
-  emailAndPassword: {
-    enabled: true,
-  },
+  return betterAuth({
+    database: prismaAdapter(prisma, { provider: 'postgresql' }),
 
-  // outros plugins...
-});
+    plugins: [bearer()],
+
+    emailAndPassword: {
+      enabled: true,
+      requireEmailVerification: true,
+      revokeSessionsOnPasswordReset: true,
+      sendResetPassword: sendResetPassword(emailPort),
+      onExistingUserSignUp: onExistingUserSignUp(emailPort),
+      onPasswordReset: onPasswordReset(),
+    },
+
+    emailVerification: {
+      sendVerificationEmail: sendVerificationEmail(emailPort),
+    },
+  });
+}
+
+export type BetterAuthInstance = ReturnType<typeof createBetterAuth>;

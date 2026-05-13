@@ -1,3 +1,4 @@
+import { emailEnv } from './env/email.env';
 import { jwtEnv } from './env/jwt.env';
 import { redisEnv } from './env/redis.env';
 
@@ -15,17 +16,7 @@ export const appConfig = () => ({
   },
   jwt: jwtEnv(),
   redis: redisEnv(),
-  email: {
-    provider: process.env.EMAIL_PROVIDER ?? 'resend',
-    from: process.env.EMAIL_FROM ?? 'noreply@transcender.app',
-    resendApiKey: process.env.RESEND_API_KEY ?? '',
-    smtp: {
-      host: process.env.SMTP_HOST ?? '',
-      port: parseInt(process.env.SMTP_PORT ?? '587', 10),
-      user: process.env.SMTP_USER ?? '',
-      pass: process.env.SMTP_PASS ?? '',
-    },
-  },
+  email: emailEnv(),
   otp: {
     expiresSeconds: parseInt(process.env.OTP_EXPIRES_SECONDS ?? '300', 10),
   },

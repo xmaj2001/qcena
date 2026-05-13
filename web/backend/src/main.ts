@@ -6,17 +6,23 @@ import { AppValidationPipe } from './shared/pipes/validation.pipe';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 import { setupSwaggerScalar } from './shared/config/swagger-scalar.config';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    rawBody: true, // necessário para WebhookSignatureGuard
+    rawBody: true,
     bufferLogs: true,
+    bodyParser: false,
   });
 
   const config = app.get(ConfigService);
   const port = config.get<number>('app.port') ?? 5000;
   const name = config.get<string>('app.name') ?? 'Backend';
   const isProd = config.get<boolean>('app.isProd') ?? false;
+
+  // ── Cookie Parser ───────────────────────────────────────────────────────────
+  app.use(cookieParser());
+
   // ── Global Pipes / Filters / Interceptors ───────────────────────────────────
   app.useGlobalPipes(AppValidationPipe);
   // app.useWebSocketAdapter(new IoAdapter(app));

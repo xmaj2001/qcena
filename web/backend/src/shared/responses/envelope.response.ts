@@ -1,9 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Expose, Type } from "class-transformer";
+import { ApiProperty } from '@nestjs/swagger';
+
+// ─── SUCCESS ─────────────────────────────────────────────────────────────────
 
 export function SuccessResponse<T>(DataClass: new () => T) {
-  const className = `${DataClass.name}Envelope`;
-
   class SuccessEnvelope {
     @ApiProperty({ example: true })
     success: boolean;
@@ -11,16 +10,13 @@ export function SuccessResponse<T>(DataClass: new () => T) {
     @ApiProperty({ type: () => DataClass })
     data: T;
 
-    @ApiProperty({ example: "2026-03-17T10:00:00.000Z" })
+    @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
     ts: string;
   }
-  Object.defineProperty(SuccessEnvelope, "name", { value: className });
   return SuccessEnvelope;
 }
 
 export function SuccessArrayResponse<T>(DataClass: new () => T) {
-  const className = `${DataClass.name}ArrayEnvelope`;
-
   class SuccessArrayEnvelope {
     @ApiProperty({ example: true })
     success: boolean;
@@ -28,50 +24,128 @@ export function SuccessArrayResponse<T>(DataClass: new () => T) {
     @ApiProperty({ type: () => [DataClass] })
     data: T[];
 
-    @ApiProperty({ example: "2026-03-17T10:00:00.000Z" })
+    @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
     ts: string;
   }
-  Object.defineProperty(SuccessArrayEnvelope, "name", { value: className });
   return SuccessArrayEnvelope;
 }
 
-export class ErrorDetailResponse {
+export function PaginatedResponse<T>(DataClass: new () => T) {
+  class PaginatedEnvelope {
+    @ApiProperty({ example: true })
+    success: boolean;
+
+    @ApiProperty({ type: () => [DataClass] })
+    data: T[];
+
+    @ApiProperty({
+      example: { total: 100, page: 1, limit: 10, totalPages: 10 },
+    })
+    meta: {
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    };
+
+    @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
+    ts: string;
+  }
+  return PaginatedEnvelope;
+}
+
+// ─── ERROR DETAIL ─────────────────────────────────────────────────────────────
+
+export class ErrorDetailDto {
   @ApiProperty({ example: 404 })
   code: number;
 
-  @ApiProperty({ example: "Recurso não encontrado" })
+  @ApiProperty({ example: 'Recurso não encontrado' })
   message: string;
 }
+
+// ─── ERRORS ──────────────────────────────────────────────────────────────────
 
 export class ErrorResponse {
   @ApiProperty({ example: false })
   success: boolean;
 
-  @ApiProperty({ type: () => ErrorDetailResponse })
-  error: ErrorDetailResponse;
+  @ApiProperty({ type: () => ErrorDetailDto })
+  data: ErrorDetailDto;
 
-  @ApiProperty({ example: "2026-03-17T10:00:00.000Z" })
+  @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
   ts: string;
 
-  @ApiProperty({ example: "/wallet/me" })
+  @ApiProperty({ example: '/auth/sign-up' })
   path: string;
 }
 
-export class RateLimitResponse {
-  @ApiProperty({ example: false })
-  success: boolean;
+export class BadRequestResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 400, message: 'Pedido inválido' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
 
+export class UnauthorizedResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 401, message: 'Não autorizado' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
+
+export class ForbiddenResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 403, message: 'Sem permissão para esta ação' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
+
+export class NotFoundResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 404, message: 'Recurso não encontrado' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
+
+export class ValidationErrorResponse extends ErrorResponse {
+  @ApiProperty({
+    example: {
+      code: 422,
+      message: 'Erro de validação',
+    },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
+
+export class ConflictResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 409, message: 'Recurso já existe' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
+}
+
+export class RateLimitResponse extends ErrorResponse {
   @ApiProperty({
     example: {
       code: 429,
-      message: "Demasiadas tentativas, por favor tenta novamente mais tarde.",
+      message: 'Demasiadas tentativas, tenta novamente mais tarde',
     },
+    type: () => ErrorDetailDto,
   })
-  error: ErrorDetailResponse;
+  declare data: ErrorDetailDto;
+}
 
-  @ApiProperty({ example: "2026-03-17T10:00:00.000Z" })
-  ts: string;
-
-  @ApiProperty({ example: "/auth/sign-in/email" })
-  path: string;
+export class InternalErrorResponse extends ErrorResponse {
+  @ApiProperty({
+    example: { code: 500, message: 'Erro interno do servidor' },
+    type: () => ErrorDetailDto,
+  })
+  declare data: ErrorDetailDto;
 }
