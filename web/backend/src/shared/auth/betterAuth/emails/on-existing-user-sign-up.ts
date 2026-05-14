@@ -1,4 +1,4 @@
-import { SendEmailPort } from 'src/shared/transports/sendEmail/send-email-port';
+import { SendEmailPort } from 'src/shared/ports/send-email-port';
 
 export function onExistingUserSignUp(emailPort: SendEmailPort) {
   return async ({ user }: { user: { name: string; email: string } }) => {

@@ -1,4 +1,11 @@
-import { Controller, Get, HttpCode, HttpStatus, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { AuthClientService } from '../../app/services/auth-client.service';
 import { Body, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -12,8 +19,8 @@ import {
   SignUpInput,
 } from '../inputs';
 import type { Request } from 'express';
+import { VerifyEmailInput } from '../inputs/verify-email.input';
 
-@ApiBearerAuth()
 @AllowAnonymous()
 @Controller('auth')
 export class AuthController {
@@ -21,7 +28,11 @@ export class AuthController {
 
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Registar novo utilizador' })
+  @ApiOperation({
+    summary: 'Registar novo utilizador',
+    description:
+      'Regista um novo utilizador com email e senha. O email deve ser verificado após o registo.',
+  })
   @ApiResponse({ status: 201, description: 'Utilizador criado com sucesso' })
   @ApiResponse({ status: 400, description: 'Dados inválidos' })
   @ApiResponse({ status: 409, description: 'Email já existe' })
@@ -33,7 +44,11 @@ export class AuthController {
   @Post('sign-in')
   @AllowAnonymous()
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Entrar na conta' })
+  @ApiOperation({
+    summary: 'Entrar na conta',
+    description:
+      'Entra na conta do utilizador fornecendo email e senha. Retorna o token da sessão se as credenciais forem válidas.',
+  })
   @ApiResponse({
     status: 200,
     description: 'Login bem-sucedido, retorna token',
@@ -48,7 +63,11 @@ export class AuthController {
   @Post('sign-out')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('session-token')
-  @ApiOperation({ summary: 'Terminar sessão' })
+  @ApiOperation({
+    summary: 'Terminar sessão',
+    description:
+      'Termina a sessão atual do utilizador autenticado. Deve ser chamada com o token da sessão no header.',
+  })
   @ApiResponse({ status: 200, description: 'Sessão terminada com sucesso' })
   async signOut(@Req() req: Request) {
     return this.authClientService.signOut(fromNodeHeaders(req.headers));
@@ -57,8 +76,12 @@ export class AuthController {
   // ─── ME (sessão atual) ────────────────────────────────────────────────────
   @Get('me')
   @ApiBearerAuth('session-token')
-  @ApiOperation({ summary: 'Obter utilizador autenticado atual' })
-  @ApiResponse({ status: 200, description: 'Dados do utilizador atual' })
+  @ApiOperation({
+    summary: 'Obter sessão',
+    description:
+      'Obtém a sessão atual do utilizador autenticado. Deve ser chamada com o token da sessão no header.',
+  })
+  @ApiResponse({ status: 200, description: 'Dados da sessão atual' })
   @ApiResponse({ status: 401, description: 'Não autenticado' })
   async me(@Req() req: Request) {
     return this.authClientService.getSession(fromNodeHeaders(req.headers));
@@ -68,7 +91,11 @@ export class AuthController {
   @Post('forgot-password')
   @AllowAnonymous()
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Solicitar reset de senha por email' })
+  @ApiOperation({
+    summary: 'Esqueci-me da senha',
+    description:
+      'Envia um email com um link para redefinir a senha para o email fornecido.',
+  })
   @ApiResponse({
     status: 200,
     description: 'Email de reset enviado (se existir)',
@@ -81,7 +108,11 @@ export class AuthController {
   @Post('reset-password')
   @AllowAnonymous()
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Redefinir senha com token do email' })
+  @ApiOperation({
+    summary: 'Redefinir senha',
+    description:
+      'Redefine a senha do utilizador usando o token enviado via email (link de redefinição de senha).',
+  })
   @ApiResponse({ status: 200, description: 'Senha redefinida com sucesso' })
   @ApiResponse({ status: 400, description: 'Token inválido ou expirado' })
   async resetPassword(@Body() input: ResetPasswordInput) {
@@ -92,7 +123,11 @@ export class AuthController {
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('session-token')
-  @ApiOperation({ summary: 'Alterar senha (utilizador autenticado)' })
+  @ApiOperation({
+    summary: 'Alterar senha',
+    description:
+      'Altera a senha do utilizador autenticado. O utilizador deve estar autenticado.',
+  })
   @ApiResponse({ status: 200, description: 'Senha alterada com sucesso' })
   @ApiResponse({ status: 400, description: 'Senha atual incorreta' })
   async changePassword(
@@ -109,11 +144,29 @@ export class AuthController {
   @Post('verify-email/resend')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('session-token')
-  @ApiOperation({ summary: 'Reenviar email de verificação' })
+  @ApiOperation({
+    summary: 'Reenviar verificação de email',
+    description:
+      'Token do email enviado via email (link de verificação) para reenviar email de verificação',
+  })
   @ApiResponse({ status: 200, description: 'Email reenviado' })
   async resendVerification(@Req() req: Request) {
     return this.authClientService.resendVerification(
       fromNodeHeaders(req.headers),
     );
+  }
+
+  // ─── VERIFY EMAIL (com token do link) ────────────────────────────────────
+  @Get('verify-email')
+  @AllowAnonymous()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Verificar email',
+    description: 'Token do email enviado via email (link de verificação)',
+  })
+  @ApiResponse({ status: 200, description: 'Email verificado com sucesso' })
+  @ApiResponse({ status: 400, description: 'Token inválido ou expirado' })
+  async verifyEmail(@Query() input: VerifyEmailInput) {
+    return this.authClientService.verifyEmail(input.token);
   }
 }

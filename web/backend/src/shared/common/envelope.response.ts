@@ -36,7 +36,7 @@ export function PaginatedResponse<T>(DataClass: new () => T) {
     success: boolean;
 
     @ApiProperty({ type: () => [DataClass] })
-    data: T[];
+    items: T[];
 
     @ApiProperty({
       example: { total: 100, page: 1, limit: 10, totalPages: 10 },

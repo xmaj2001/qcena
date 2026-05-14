@@ -1,8 +1,8 @@
 import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
 import { UserEntity } from 'src/modules/accounts/domain/entites/user.entity';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/shared/prisma/prisma.service';
-import { User } from 'src/shared/prisma/generated/prisma/client';
+import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
+import { User } from 'src/shared/infra/prisma/generated/prisma/client';
 import { UserGenderEnum } from '../../domain/entites/enums/user.gender.enum';
 
 @Injectable()
@@ -54,8 +54,8 @@ export class UserPrismaRepo implements IUserRepository {
           { email: { contains: filter.search } },
         ],
       },
-      skip: (filter.page - 1) * filter.limit,
-      take: filter.limit,
+      skip: (filter.page - 1) * filter.limit, //TODO: Não usar skip pois se tiver muito dado ele fica lento, mas quando tiver pouco é mais rápido
+      take: filter.limit, //TODO: Não usar take pois se tiver muito dado ele fica lento, mas quando tiver pouco é mais rápido
     });
     const total = await this.prisma.user.count({
       where: {

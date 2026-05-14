@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AppValidationPipe } from './shared/pipes/validation.pipe';
-import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
-import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
+import { AppValidationPipe } from './shared/common/pipes/validation.pipe';
+import { HttpExceptionFilter } from './shared/common/filters/http-exception.filter';
+import { ResponseInterceptor } from './shared/common/interceptors/response.interceptor';
 import { setupSwaggerScalar } from './shared/config/swagger-scalar.config';
 import cookieParser from 'cookie-parser';
 

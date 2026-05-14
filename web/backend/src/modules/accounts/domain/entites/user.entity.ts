@@ -1,4 +1,4 @@
-import { BaseDomain } from 'src/shared/base/base-domain.base';
+import { BaseDomain } from 'src/shared/domain/base-domain.base';
 import {
   UserCreatedEvent,
   UserEmailVerifiedEvent,

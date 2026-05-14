@@ -18,6 +18,15 @@ export class SignUpUseCase {
       },
     });
     this.logger.log(`User signed up successfully`);
+    const isRequireEmailVerification =
+      this.authService.instance.options.emailAndPassword
+        ?.requireEmailVerification;
+    if (isRequireEmailVerification) {
+      this.logger.log(`Email verification required`);
+      return {
+        message: `Conta criada com sucesso! Foi enviado um email:${input.email} de verificação para o seu email. Clique no link para verificar a sua conta.`,
+      };
+    }
     return data;
   }
 }

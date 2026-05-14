@@ -2,8 +2,8 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { bearer } from 'better-auth/plugins';
-import { PrismaClient } from 'src/shared/prisma/generated/prisma/client';
-import { SendEmailPort } from 'src/shared/transports/sendEmail/send-email-port';
+import { PrismaClient } from 'src/shared/infra/prisma/generated/prisma/client';
+import { SendEmailPort } from 'src/shared/ports/send-email-port';
 import {
   onExistingUserSignUp,
   onPasswordReset,

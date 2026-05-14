@@ -13,7 +13,6 @@ export const setupSwaggerScalar = (
       .setDescription('Backend API Transcender')
       .setVersion('1.0.0')
       .addBearerAuth()
-      // .addCookieAuth('better-auth.session_token')
       .build();
     const document = SwaggerModule.createDocument(app, swaggerCfg);
 

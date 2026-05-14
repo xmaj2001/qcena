@@ -9,7 +9,7 @@ import {
 import { AccountsController } from './presentation/controllers/accounts.controller';
 import { IUserRepository } from './domain/repo/user.repo';
 import { UserPrismaRepo } from './infra/repo/user-prisma.repo';
-import { PrismaService } from 'src/shared/prisma/prisma.service';
+import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 
 const useCases = [
   ListAccountsUseCase,

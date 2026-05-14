@@ -15,6 +15,7 @@ import {
   ResendVerificationUseCase,
   SignInUseCase,
   SignOutUseCase,
+  VerifyEmailUseCase,
 } from '../use-cases';
 
 @Injectable()
@@ -29,6 +30,7 @@ export class AuthClientService {
     private readonly resetPasswordUseCase: ResetPasswordUseCase,
     private readonly changePasswordUseCase: ChangePasswordUseCase,
     private readonly resendVerificationUseCase: ResendVerificationUseCase,
+    private readonly verifyEmailUseCase: VerifyEmailUseCase,
   ) {}
 
   async signUp(input: SignUpInput) {
@@ -61,5 +63,9 @@ export class AuthClientService {
 
   async resendVerification(headers: Headers) {
     return this.resendVerificationUseCase.execute(headers);
+  }
+
+  async verifyEmail(token: string) {
+    return this.verifyEmailUseCase.execute(token);
   }
 }

@@ -1,14 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { IUserRepository } from '../../domain/repo/user.repo';
 import { ListAccountsQuery } from '../../presentation/inputs/list-accounts.input';
-import { SendEmailPort } from 'src/shared/transports/sendEmail/send-email-port';
 
 @Injectable()
 export class ListAccountsUseCase {
-  constructor(
-    private readonly userRepository: IUserRepository,
-    private readonly sendEmailPort: SendEmailPort,
-  ) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(filter: ListAccountsQuery) {
     const page = filter.page ?? 1;
@@ -19,14 +15,8 @@ export class ListAccountsUseCase {
       limit,
       search: filter.search,
     });
-    // teste email
-    await this.sendEmailPort.send({
-      to: 'xmaj2001@gmail.com',
-      subject: 'teste',
-      html: '<p>teste</p>',
-    });
     return {
-      data: data.map((user) => user.toPublicData()),
+      items: data.map((user) => user.toPublicData()),
       meta: {
         total,
         page,

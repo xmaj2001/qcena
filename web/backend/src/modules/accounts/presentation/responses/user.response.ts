@@ -3,7 +3,7 @@ import { UserGenderEnum } from '../../domain/entites/enums/user.gender.enum';
 import {
   PaginatedResponse,
   SuccessArrayResponse,
-} from 'src/shared/responses/envelope.response';
+} from 'src/shared/common/envelope.response';
 
 export class UserResponse {
   @ApiProperty({ example: 'cm9x1a2b3c4d5e6f7g8h9i0j' })

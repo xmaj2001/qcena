@@ -23,7 +23,7 @@ import {
   SuccessResponse,
   UnauthorizedResponse,
   ValidationErrorResponse,
-} from 'src/shared/responses/envelope.response';
+} from 'src/shared/common/envelope.response';
 import { Session } from '@thallesp/nestjs-better-auth';
 import type { UserSession } from '@thallesp/nestjs-better-auth';
 import {
@@ -31,6 +31,9 @@ import {
   SuccessUsersResponse,
 } from '../responses/user.response';
 
+// ──────────────────────────────────────────────────────────────────────────
+
+@ApiBearerAuth('Authorization')
 @ApiTags('accounts')
 @Controller('accounts')
 export class AccountsController {

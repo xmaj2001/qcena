@@ -10,6 +10,7 @@ import {
   ResendVerificationUseCase,
   SignInUseCase,
   SignOutUseCase,
+  VerifyEmailUseCase,
 } from './app/use-cases';
 import { AuthService } from '@thallesp/nestjs-better-auth';
 
@@ -22,6 +23,7 @@ const useCases = [
   ResetPasswordUseCase,
   ChangePasswordUseCase,
   ResendVerificationUseCase,
+  VerifyEmailUseCase,
 ];
 @Module({
   imports: [],

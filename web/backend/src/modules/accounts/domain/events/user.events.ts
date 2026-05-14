@@ -1,4 +1,4 @@
-import { BaseEvent } from 'src/shared/base/domain-event.base';
+import { BaseEvent } from 'src/shared/domain/domain-event.base';
 
 export class UserCreatedEvent extends BaseEvent {
   constructor(

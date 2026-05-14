@@ -1,6 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import type { Transporter } from 'nodemailer';
-import { SendEmailOptions, SendEmailPort } from '../send-email-port';
+import {
+  SendEmailOptions,
+  SendEmailPort,
+} from '../../../ports/send-email-port';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 
