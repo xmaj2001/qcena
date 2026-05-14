@@ -2,8 +2,8 @@ import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
 import { UserEntity } from 'src/modules/accounts/domain/entites/user.entity';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
-import { User } from 'src/shared/infra/prisma/generated/prisma/client';
 import { UserGenderEnum } from '../../domain/entites/enums/user.gender.enum';
+import { User } from 'src/shared/infra/prisma/generated/prisma/client';
 
 @Injectable()
 export class UserPrismaRepo implements IUserRepository {
@@ -76,7 +76,7 @@ export class UserPrismaRepo implements IUserRepository {
       emailVerified: data.emailVerified,
       image: data.image,
       gender: data.gender as UserGenderEnum,
-      birthDate: data.birthDate as Date | null,
+      birthDate: data.birthDate,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
     });

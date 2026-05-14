@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { AccountClientService } from './app/services/account-client.service';
 import {
   ListAccountsUseCase,
@@ -18,6 +18,7 @@ const useCases = [
   DeleteMeUseCase,
 ];
 
+@Global()
 @Module({
   controllers: [AccountsController],
   providers: [
@@ -29,6 +30,6 @@ const useCases = [
       useClass: UserPrismaRepo,
     },
   ],
-  exports: [AccountClientService],
+  exports: [IUserRepository],
 })
 export class AccountModule {}

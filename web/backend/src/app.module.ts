@@ -7,6 +7,8 @@ import { AppController } from './modules/app/app.controller';
 import { AppService } from './modules/app/app.service';
 import { AuthModules } from './modules/auth/auth.module';
 import { AccountModule } from './modules/accounts/account.module';
+import { ServiceModule } from './modules/services/service.module';
+import { BookingModule } from './modules/bookings/booking.module';
 import { EmailModule } from './shared/infra/email/email.module';
 import { appConfig } from './shared/config/app.config';
 import { SendEmailPort } from './shared/ports/send-email-port';
@@ -36,6 +38,8 @@ import { bullRedisConfig } from './shared/config/bull.config';
     }),
     AuthModules,
     AccountModule,
+    ServiceModule,
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

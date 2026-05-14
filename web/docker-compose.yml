@@ -100,8 +100,8 @@ services:
       - "5432"
     ports:
       - 5432:5432
-    networks:
-      - keymura
+    # networks:
+    #   - keymura
     healthcheck:
       test:
         [
@@ -126,8 +126,8 @@ services:
       - "6379"
     ports:
       - 6380:6379
-    networks:
-      - keymura
+    # networks:
+    #   - keymura
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s

@@ -1,0 +1,11 @@
+export enum ServiceCategory {
+  BELEZA = 'BELEZA',
+  EDUCAÇÃO = 'EDUCAÇÃO',
+  FINANÇAS = 'FINANÇAS',
+  SAÚDE = 'SAÚDE',
+  REFORMAS = 'REFORMAS',
+  TECNOLOGIA = 'TECNOLOGIA',
+  TRANSPORTE = 'TRANSPORTE',
+  TURISMO = 'TURISMO',
+  OUTROS = 'OUTROS',
+}

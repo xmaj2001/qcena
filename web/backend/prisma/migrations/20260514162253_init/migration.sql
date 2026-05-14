@@ -1,3 +1,9 @@
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE');
+
+-- CreateEnum
+CREATE TYPE "ServiceStatus" AS ENUM ('ENABLED', 'DISABLED');
+
 -- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
@@ -5,6 +11,8 @@ CREATE TABLE "user" (
     "email" TEXT NOT NULL,
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
     "image" TEXT,
+    "gender" "Gender" DEFAULT 'MALE',
+    "birthDate" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -56,6 +64,23 @@ CREATE TABLE "verification" (
     CONSTRAINT "verification_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "services" (
+    "id" TEXT NOT NULL,
+    "providerId" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "category" TEXT NOT NULL,
+    "tags" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "status" "ServiceStatus" NOT NULL DEFAULT 'ENABLED',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "services_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
@@ -71,8 +96,17 @@ CREATE INDEX "account_userId_idx" ON "account"("userId");
 -- CreateIndex
 CREATE INDEX "verification_identifier_idx" ON "verification"("identifier");
 
+-- CreateIndex
+CREATE INDEX "services_providerId_idx" ON "services"("providerId");
+
+-- CreateIndex
+CREATE INDEX "services_status_name_category_price_id_idx" ON "services"("status", "name", "category", "price", "id");
+
 -- AddForeignKey
 ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "services" ADD CONSTRAINT "services_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;

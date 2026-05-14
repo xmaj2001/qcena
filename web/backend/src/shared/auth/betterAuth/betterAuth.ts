@@ -23,7 +23,7 @@ export function createBetterAuth(emailPort: SendEmailPort) {
 
     emailAndPassword: {
       enabled: true,
-      requireEmailVerification: true,
+      // requireEmailVerification: true,
       revokeSessionsOnPasswordReset: true,
       sendResetPassword: sendResetPassword(emailPort),
       onExistingUserSignUp: onExistingUserSignUp(emailPort),

@@ -15,3 +15,21 @@ export const Gender = {
 } as const
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const ServiceStatus = {
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED'
+} as const
+
+export type ServiceStatus = (typeof ServiceStatus)[keyof typeof ServiceStatus]
+
+
+export const BookingStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELED: 'CANCELED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]

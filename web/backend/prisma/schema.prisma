@@ -5,7 +5,7 @@
 
 generator client {
   provider     = "prisma-client"
-  output       = "../src/shared/prisma/generated/prisma"
+  output       = "../src/shared/infra/prisma/generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -33,6 +33,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   services      Service[]
+  bookings      Booking[] @relation("ClientBookings")
 
   @@unique([email])
   @@map("user")
@@ -101,15 +102,51 @@ model Service {
   name        String
   description String?
   category    String
-  tags        String[]
-  price       Decimal(10, 2) @default(0)
-  images      String[]
+  tags        String[]      @default([])
+  price       Int           @default(0)
+  images      String[]      @default([])
   status      ServiceStatus @default(ENABLED)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
-  provider User @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  provider User      @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  bookings Booking[]
 
   @@index([providerId])
-  @@map("service")
+  @@index([status, name, category, price, id])
+  @@map("services")
+}
+
+// =============================================================================
+// MODULE: BOOKING
+// =============================================================================
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
+  COMPLETED
+}
+
+model Booking {
+  id        String @id @default(uuid())
+  serviceId String
+  clientId  String // O usuário que está a contratar o serviço
+
+  // Detalhes da Reserva
+  scheduledAt DateTime // Data e hora em que o serviço será prestado
+  totalPrice  Int // Preço no momento da reserva (pode mudar no futuro no model Service)
+  status      BookingStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  client  User    @relation("ClientBookings", fields: [clientId], references: [id])
+
+  @@index([serviceId])
+  @@index([clientId])
+  @@index([status, scheduledAt]) // Importante para o prestador ver a agenda
+  @@map("bookings")
 }
