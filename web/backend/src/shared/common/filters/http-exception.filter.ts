@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   ExceptionFilter,
   Catch,
@@ -7,10 +9,13 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { ERROR_MESSAGES } from './message-error';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
+
+  constructor(private readonly isDev: boolean) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
@@ -18,34 +23,35 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const res = ctx.getResponse<Response>();
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
-    let message = 'Erro interno do servidor';
-    let details: any;
+    let message = ERROR_MESSAGES.INTERNAL_ERROR;
+    let details: string[] | undefined;
+    let fields: { field: string; messages: string[] }[] | undefined;
+    let stack: string | undefined;
 
     if (this.isBetterAuthError(exception)) {
-      // Better Auth — usa statusCode (número) e body.message
       status = (exception as any).statusCode ?? HttpStatus.BAD_REQUEST;
-      message = (exception as any).body?.message ?? 'Erro de autenticação';
+      message =
+        (exception as any).body?.message ?? ERROR_MESSAGES.AUTHENTICATION;
     } else if (exception instanceof HttpException) {
-      // NestJS — ValidationPipe, guards, erros manuais
       status = exception.getStatus();
-      const raw = exception.getResponse();
+      const raw = exception.getResponse() as any;
+
       if (typeof raw === 'string') {
         message = raw;
       } else {
-        const body = raw as any;
-        if (Array.isArray(body.message)) {
-          message = 'Erro de validação';
-          details = body.message;
-        } else {
-          message = body.message ?? message;
-          if (body.details) details = body.details;
-        }
+        message = raw.message ?? message;
+        if (raw.fields) fields = raw.fields;
+        if (raw.details) details = raw.details;
       }
     } else if (exception instanceof Error) {
-      // Erro inesperado — não expõe detalhes ao cliente
       this.logger.error(`Unhandled: ${exception.message}`, exception.stack);
+      if (this.isDev) {
+        message = exception.message;
+        stack = exception.stack;
+      }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (status >= 500) {
       this.logger.error(
         `[${req.method}] ${req.url} → ${status}`,
@@ -55,13 +61,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       this.logger.warn(`[${req.method}] ${req.url} → ${status} — ${message}`);
     }
 
+    const extra: Record<string, unknown> = {};
+    if (fields) extra.fields = fields;
+    if (details) extra.details = details;
+    if (!this.isDev && stack) extra.stack = stack; // nunca — stack só em dev
+
     res.status(status).json({
       success: false,
-      data: {
-        code: status,
-        message,
-        ...(details ? { details } : {}),
-      },
+      data: { code: status, message, ...extra },
       ts: new Date().toISOString(),
       path: req.url,
     });

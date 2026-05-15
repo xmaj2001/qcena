@@ -24,9 +24,9 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // ── Global Pipes / Filters / Interceptors ───────────────────────────────────
-  app.useGlobalPipes(AppValidationPipe);
+  app.useGlobalPipes(new AppValidationPipe({}, true));
   // app.useWebSocketAdapter(new IoAdapter(app));
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter(isProd));
   app.useGlobalInterceptors(new ResponseInterceptor());
   // ── Swagger ─────────────────────────────────────────────────────────────────
   setupSwaggerScalar(app, name, isProd);

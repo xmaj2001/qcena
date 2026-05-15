@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { IServiceRepository } from '../../domain/repo/service.repo';
 import { ServiceEntity } from '../../domain/entities/service.entity';
 import { CreateServiceInput } from '../../presentation/inputs';
-import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
+import { IUserRepository } from 'src/modules/users/domain/repo/user.repo';
 
 @Injectable()
 export class CreateServiceUseCase {

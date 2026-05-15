@@ -1,12 +1,12 @@
 import { Global, Module } from '@nestjs/common';
-import { AccountClientService } from './app/services/account-client.service';
+import { UserClientService } from './app/services/user-client.service';
 import {
   ListAccountsUseCase,
   FindUserByIdUseCase,
   UpdateMeUseCase,
   DeleteMeUseCase,
 } from './app/use-case';
-import { AccountsController } from './presentation/controllers/accounts.controller';
+import { UsersController } from './presentation/controllers/user.controller';
 import { IUserRepository } from './domain/repo/user.repo';
 import { UserPrismaRepo } from './infra/repo/user-prisma.repo';
 import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
@@ -20,9 +20,9 @@ const useCases = [
 
 @Global()
 @Module({
-  controllers: [AccountsController],
+  controllers: [UsersController],
   providers: [
-    AccountClientService,
+    UserClientService,
     PrismaService,
     ...useCases,
     {
@@ -32,4 +32,4 @@ const useCases = [
   ],
   exports: [IUserRepository],
 })
-export class AccountModule {}
+export class UsersModule {}

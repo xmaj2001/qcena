@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { IServiceRepository } from '../../domain/repo/service.repo';
 import { ServiceStatus } from '../../domain/entities/enums/service-status.enum';
-import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
+import { IUserRepository } from 'src/modules/users/domain/repo/user.repo';
 
 interface UpdateServiceInput {
   id: string;

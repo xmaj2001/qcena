@@ -1,7 +1,7 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { bearer } from 'better-auth/plugins';
+import { bearer, mcp } from 'better-auth/plugins';
 import { PrismaClient } from 'src/shared/infra/prisma/generated/prisma/client';
 import { SendEmailPort } from 'src/shared/ports/send-email-port';
 import {
@@ -11,6 +11,9 @@ import {
   sendVerificationEmail,
 } from './emails';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const plugins: any[] = [bearer(), mcp({ loginPage: '/sign-in' })];
+
 export function createBetterAuth(emailPort: SendEmailPort) {
   const prisma = new PrismaClient({
     adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
@@ -19,7 +22,7 @@ export function createBetterAuth(emailPort: SendEmailPort) {
   return betterAuth({
     database: prismaAdapter(prisma, { provider: 'postgresql' }),
 
-    plugins: [bearer()],
+    plugins,
 
     emailAndPassword: {
       enabled: true,
@@ -37,3 +40,20 @@ export function createBetterAuth(emailPort: SendEmailPort) {
 }
 
 export type BetterAuthInstance = ReturnType<typeof createBetterAuth>;
+
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+});
+
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, { provider: 'postgresql' }),
+
+  emailAndPassword: {
+    enabled: true,
+    // requireEmailVerification: true,
+    revokeSessionsOnPasswordReset: true,
+    // sendResetPassword: sendResetPassword(emailPort),
+    // onExistingUserSignUp: onExistingUserSignUp(emailPort),
+    onPasswordReset: onPasswordReset(),
+  },
+});

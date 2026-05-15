@@ -15,7 +15,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AccountClientService } from '../../app/services/account-client.service';
 import { ListAccountsQuery, UpdateAccountInput } from '../inputs';
 import {
   InternalErrorResponse,
@@ -30,14 +29,15 @@ import {
   PaginatedUsersResponse,
   SuccessUsersResponse,
 } from '../responses/user.response';
+import { UserClientService } from '../../app/services/user-client.service';
 
 // ──────────────────────────────────────────────────────────────────────────
 
 @ApiBearerAuth('Authorization')
-@ApiTags('accounts')
-@Controller('accounts')
-export class AccountsController {
-  constructor(private readonly accountClientService: AccountClientService) {}
+@ApiTags('users')
+@Controller('users')
+export class UsersController {
+  constructor(private readonly userClientService: UserClientService) {}
 
   // ── GET / ──────────────────────────────────────────────────────────────────
   @Get()
@@ -46,7 +46,7 @@ export class AccountsController {
   @ApiResponse({ status: 401, type: UnauthorizedResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async findAll(@Query() query: ListAccountsQuery) {
-    return this.accountClientService.listAccounts(query);
+    return this.userClientService.listAccounts(query);
   }
 
   @Get('me')
@@ -55,7 +55,7 @@ export class AccountsController {
   @ApiResponse({ status: 401, type: UnauthorizedResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async findMyAccount(@Session() session: UserSession) {
-    return this.accountClientService.findById(session.user.id);
+    return this.userClientService.findById(session.user.id);
   }
 
   // ── PATCH /me ──────────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ export class AccountsController {
     @Session() session: UserSession,
     @Body() input: UpdateAccountInput,
   ) {
-    return this.accountClientService.updateMe(session.user.id, input);
+    return this.userClientService.updateMe(session.user.id, input);
   }
 
   // ── DELETE /me ─────────────────────────────────────────────────────────────
@@ -81,7 +81,7 @@ export class AccountsController {
   @ApiResponse({ status: 401, type: UnauthorizedResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async deleteMe(@Session() session: UserSession) {
-    return this.accountClientService.deleteMe(session.user.id);
+    return this.userClientService.deleteMe(session.user.id);
   }
 
   // ── GET /:id ───────────────────────────────────────────────────────────────
@@ -92,6 +92,6 @@ export class AccountsController {
   @ApiResponse({ status: 404, type: NotFoundResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async findOne(@Param('id') id: string) {
-    return this.accountClientService.findById(id);
+    return this.userClientService.findById(id);
   }
 }

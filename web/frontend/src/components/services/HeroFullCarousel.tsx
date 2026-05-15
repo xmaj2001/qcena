@@ -243,15 +243,6 @@ export function HeroFullCarousel({
           />
         ))}
       </div>
-
-      {/* Favorite floating */}
-      <Button
-        type="button"
-        aria-label="Favoritar"
-        className="absolute right-6 top-24 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:scale-110 hover:bg-white hover:text-primary lg:right-12"
-      >
-        <Heart className="h-5 w-5" />
-      </Button>
     </section>
   );
 }

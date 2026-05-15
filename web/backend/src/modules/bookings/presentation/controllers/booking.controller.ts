@@ -49,30 +49,14 @@ export class BookingController {
     @Session() session: UserSession,
     @Body() input: CreateBookingInput,
   ) {
-    return this.bookingClient.create(
-      { ...input, scheduledAt: new Date(input.scheduledAt) },
-      session.user.id,
-    );
+    return this.bookingClient.create(input, session.user.id);
   }
 
-  @Get('client')
-  @ApiOperation({ summary: 'Listar minhas reservas (como cliente)' })
+  @Get()
+  @ApiOperation({ summary: 'Listar minhas reservas' })
   @ApiResponse({ status: 200, type: PaginatedBookingsResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
-  async listAsClient(
-    @Session() session: UserSession,
-    @Query() query: ListBookingsInput,
-  ) {
-    return this.bookingClient.listAsClient(session.user.id, query);
-  }
-
-  @Get('provider')
-  @ApiOperation({
-    summary: 'Listar reservas dos meus serviços (como prestador)',
-  })
-  @ApiResponse({ status: 200, type: PaginatedBookingsResponse })
-  @ApiResponse({ status: 500, type: InternalErrorResponse })
-  async listAsProvider(
+  async list(
     @Session() session: UserSession,
     @Query() query: ListBookingsInput,
   ) {
@@ -96,7 +80,7 @@ export class BookingController {
   async updateStatus(
     @Session() session: UserSession,
     @Param('id') id: string,
-    @Body() input: UpdateBookingInput,
+    @Query() input: UpdateBookingInput,
   ) {
     return this.bookingClient.updateStatus(id, input, session.user.id);
   }

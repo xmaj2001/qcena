@@ -16,7 +16,6 @@ export class BookingPrismaRepo implements IBookingRepository {
         id: booking.id,
         serviceId: booking.serviceId,
         clientId: booking.clientId,
-        scheduledAt: booking.scheduledAt,
         totalPrice: booking.totalPrice,
         status: booking.status,
       },
@@ -27,7 +26,6 @@ export class BookingPrismaRepo implements IBookingRepository {
     await this.prisma.booking.update({
       where: { id: booking.id },
       data: {
-        scheduledAt: booking.scheduledAt,
         totalPrice: booking.totalPrice,
         status: booking.status,
       },
@@ -60,7 +58,7 @@ export class BookingPrismaRepo implements IBookingRepository {
         where,
         skip: (page - 1) * limit,
         take: limit,
-        orderBy: { scheduledAt: 'desc' },
+        orderBy: { createdAt: 'desc' },
       }),
       this.prisma.booking.count({ where }),
     ]);
@@ -88,7 +86,7 @@ export class BookingPrismaRepo implements IBookingRepository {
         where,
         skip: (page - 1) * limit,
         take: limit,
-        orderBy: { scheduledAt: 'desc' },
+        orderBy: { createdAt: 'desc' },
       }),
       this.prisma.booking.count({ where }),
     ]);
@@ -104,7 +102,6 @@ export class BookingPrismaRepo implements IBookingRepository {
       id: data.id,
       serviceId: data.serviceId,
       clientId: data.clientId,
-      scheduledAt: data.scheduledAt,
       totalPrice: data.totalPrice,
       status: data.status as BookingStatus,
       createdAt: data.createdAt,

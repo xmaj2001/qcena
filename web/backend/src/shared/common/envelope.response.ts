@@ -13,6 +13,12 @@ export function SuccessResponse<T>(DataClass: new () => T) {
     @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
     ts: string;
   }
+
+  // nome único por tipo → "ServiceResponse", "UserResponse", etc.
+  Object.defineProperty(SuccessEnvelope, 'name', {
+    value: `${DataClass.name}Response`,
+  });
+
   return SuccessEnvelope;
 }
 
@@ -27,6 +33,11 @@ export function SuccessArrayResponse<T>(DataClass: new () => T) {
     @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
     ts: string;
   }
+
+  Object.defineProperty(SuccessArrayEnvelope, 'name', {
+    value: `${DataClass.name}ArrayResponse`,
+  });
+
   return SuccessArrayEnvelope;
 }
 
@@ -51,17 +62,27 @@ export function PaginatedResponse<T>(DataClass: new () => T) {
     @ApiProperty({ example: '2026-03-17T10:00:00.000Z' })
     ts: string;
   }
+
+  Object.defineProperty(PaginatedEnvelope, 'name', {
+    value: `${DataClass.name}PaginatedResponse`,
+  });
+
   return PaginatedEnvelope;
 }
 
 // ─── ERROR DETAIL ─────────────────────────────────────────────────────────────
 
 export class ErrorDetailDto {
-  @ApiProperty({ example: 404 })
+  @ApiProperty({ example: 422 })
   code: number;
 
-  @ApiProperty({ example: 'Recurso não encontrado' })
+  @ApiProperty({ example: 'Erro de validação' })
   message: string;
+
+  @ApiProperty({
+    example: ['Email inválido', 'Senha fraca', 'Telefone inválido'],
+  })
+  detail: string[];
 }
 
 // ─── ERRORS ──────────────────────────────────────────────────────────────────

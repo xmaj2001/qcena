@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { IServiceRepository } from '../../domain/repo/service.repo';
-import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
+import { IUserRepository } from 'src/modules/users/domain/repo/user.repo';
 
 @Injectable()
 export class DeleteServiceUseCase {

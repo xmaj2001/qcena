@@ -43,20 +43,21 @@ export class UpdateBookingUseCase {
       );
     }
 
-    // Business rules for status transitions
     if (isClient && input.status !== BookingStatus.CANCELED) {
       this.logger.warn(
         `Cliente ${userId} nao tem permissao para atualizar agendamento ${id}`,
       );
-      throw new UnauthorizedException('Clients can only cancel their bookings');
+      throw new UnauthorizedException(
+        'Clientes só podem cancelar suas reservas',
+      );
     }
 
-    if (isProvider && input.status === BookingStatus.CANCELED) {
-      this.logger.warn(
-        `Provider ${userId} nao tem permissao para atualizar agendamento ${id}`,
-      );
-      // For now let's allow it or restrict it.
-    }
+    // if (isProvider && input.status === BookingStatus.CANCELED) {
+    //   this.logger.warn(
+    //     `Provider ${userId} nao tem permissao para atualizar agendamento ${id}`,
+    //   );
+    //   // For now let's allow it or restrict it.
+    // }
 
     booking.updateStatus(input.status);
     await this.bookingRepo.update(booking);

@@ -3,9 +3,9 @@ import { CreateBookingUseCase } from '../use-case/create-booking.use-case';
 import { UpdateBookingUseCase } from '../use-case/update-booking.use-case';
 import { DeleteBookingUseCase } from '../use-case/delete-booking.use-case';
 import { GetBookingUseCase } from '../use-case/get-booking.use-case';
-import { ListClientBookingsUseCase } from '../use-case/list-client-bookings.use-case';
 import { ListProviderBookingsUseCase } from '../use-case/list-provider-bookings.use-case';
 import {
+  CreateBookingInput,
   ListBookingsInput,
   UpdateBookingInput,
 } from '../../presentation/inputs';
@@ -17,14 +17,10 @@ export class BookingClient {
     private readonly updateBookingUseCase: UpdateBookingUseCase,
     private readonly deleteBookingUseCase: DeleteBookingUseCase,
     private readonly getBookingUseCase: GetBookingUseCase,
-    private readonly listClientBookingsUseCase: ListClientBookingsUseCase,
     private readonly listProviderBookingsUseCase: ListProviderBookingsUseCase,
   ) {}
 
-  async create(
-    input: { serviceId: string; scheduledAt: Date },
-    clientId: string,
-  ) {
+  async create(input: CreateBookingInput, clientId: string) {
     return this.createBookingUseCase.execute(input, clientId);
   }
 
@@ -38,10 +34,6 @@ export class BookingClient {
 
   async getById(id: string, userId: string) {
     return this.getBookingUseCase.execute(id, userId);
-  }
-
-  async listAsClient(clientId: string, filter: ListBookingsInput) {
-    return this.listClientBookingsUseCase.execute(clientId, filter);
   }
 
   async listAsProvider(providerId: string, filter: ListBookingsInput) {

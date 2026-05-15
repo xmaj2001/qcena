@@ -1,5 +1,5 @@
-import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
-import { UserEntity } from 'src/modules/accounts/domain/entites/user.entity';
+import { IUserRepository } from 'src/modules/users/domain/repo/user.repo';
+import { UserEntity } from 'src/modules/users/domain/entites/user.entity';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 import { UserGenderEnum } from '../../domain/entites/enums/user.gender.enum';

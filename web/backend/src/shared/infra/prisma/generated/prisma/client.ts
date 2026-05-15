@@ -69,3 +69,18 @@ export type Service = Prisma.ServiceModel
  * 
  */
 export type Booking = Prisma.BookingModel
+/**
+ * Model OauthApplication
+ * 
+ */
+export type OauthApplication = Prisma.OauthApplicationModel
+/**
+ * Model OauthAccessToken
+ * 
+ */
+export type OauthAccessToken = Prisma.OauthAccessTokenModel
+/**
+ * Model OauthConsent
+ * 
+ */
+export type OauthConsent = Prisma.OauthConsentModel

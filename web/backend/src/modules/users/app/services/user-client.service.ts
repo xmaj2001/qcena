@@ -9,7 +9,7 @@ import { ListAccountsQuery } from '../../presentation/inputs/list-accounts.input
 import { UpdateAccountInput } from '../../presentation/inputs/update-account.input';
 
 @Injectable()
-export class AccountClientService {
+export class UserClientService {
   constructor(
     private readonly listAccountsUseCase: ListAccountsUseCase,
     private readonly findUserByIdUseCase: FindUserByIdUseCase,

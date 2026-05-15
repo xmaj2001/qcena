@@ -7,6 +7,7 @@ import { Button, CloseButton, Menu } from "@heroui/react";
 
 const navLinks = [
   { name: "Serviços", href: "/services" },
+  { name: "Buscar Serviços", href: "/search" },
   { name: "Sobre", href: "/about" },
   { name: "Contacto", href: "/contact" },
 ];

@@ -5,7 +5,6 @@ import { BadRequestException } from '@nestjs/common';
 interface BookingProps {
   serviceId: string;
   clientId: string;
-  scheduledAt: Date;
   totalPrice: number;
   status: BookingStatus;
 }
@@ -26,22 +25,18 @@ export class BookingEntity extends BaseDomain {
   static create(input: {
     serviceId: string;
     clientId: string;
-    scheduledAt: Date;
     totalPrice: number;
     status?: BookingStatus;
   }): BookingEntity {
     if (!input.serviceId)
       throw new BadRequestException('Service ID is required');
     if (!input.clientId) throw new BadRequestException('Client ID is required');
-    if (!input.scheduledAt)
-      throw new BadRequestException('Scheduled date is required');
     if (input.totalPrice < 0)
       throw new BadRequestException('Price cannot be negative');
 
     return new BookingEntity({
       serviceId: input.serviceId,
       clientId: input.clientId,
-      scheduledAt: input.scheduledAt,
       totalPrice: input.totalPrice,
       status: input.status ?? BookingStatus.PENDING,
     });
@@ -65,9 +60,6 @@ export class BookingEntity extends BaseDomain {
   get clientId() {
     return this.props.clientId;
   }
-  get scheduledAt() {
-    return this.props.scheduledAt;
-  }
   get totalPrice() {
     return this.props.totalPrice;
   }
@@ -81,20 +73,11 @@ export class BookingEntity extends BaseDomain {
     this.touch();
   }
 
-  updateSchedule(scheduledAt: Date): void {
-    if (scheduledAt < new Date()) {
-      throw new BadRequestException('Cannot schedule in the past');
-    }
-    this.props.scheduledAt = scheduledAt;
-    this.touch();
-  }
-
   toPersistence() {
     return {
       id: this.id,
       serviceId: this.props.serviceId,
       clientId: this.props.clientId,
-      scheduledAt: this.props.scheduledAt,
       totalPrice: this.props.totalPrice,
       status: this.props.status,
       createdAt: this.createdAt,

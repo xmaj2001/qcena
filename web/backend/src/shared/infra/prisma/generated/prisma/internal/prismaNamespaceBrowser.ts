@@ -56,7 +56,10 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Service: 'Service',
-  Booking: 'Booking'
+  Booking: 'Booking',
+  OauthApplication: 'OauthApplication',
+  OauthAccessToken: 'OauthAccessToken',
+  OauthConsent: 'OauthConsent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -156,7 +159,6 @@ export const BookingScalarFieldEnum = {
   id: 'id',
   serviceId: 'serviceId',
   clientId: 'clientId',
-  scheduledAt: 'scheduledAt',
   totalPrice: 'totalPrice',
   status: 'status',
   createdAt: 'createdAt',
@@ -164,6 +166,53 @@ export const BookingScalarFieldEnum = {
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const OauthApplicationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  metadata: 'metadata',
+  clientId: 'clientId',
+  clientSecret: 'clientSecret',
+  redirectUrls: 'redirectUrls',
+  type: 'type',
+  disabled: 'disabled',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OauthApplicationScalarFieldEnum = (typeof OauthApplicationScalarFieldEnum)[keyof typeof OauthApplicationScalarFieldEnum]
+
+
+export const OauthAccessTokenScalarFieldEnum = {
+  id: 'id',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  clientId: 'clientId',
+  userId: 'userId',
+  scopes: 'scopes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OauthAccessTokenScalarFieldEnum = (typeof OauthAccessTokenScalarFieldEnum)[keyof typeof OauthAccessTokenScalarFieldEnum]
+
+
+export const OauthConsentScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  userId: 'userId',
+  scopes: 'scopes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  consentGiven: 'consentGiven'
+} as const
+
+export type OauthConsentScalarFieldEnum = (typeof OauthConsentScalarFieldEnum)[keyof typeof OauthConsentScalarFieldEnum]
 
 
 export const SortOrder = {

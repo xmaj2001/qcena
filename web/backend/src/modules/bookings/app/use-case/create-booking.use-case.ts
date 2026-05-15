@@ -7,7 +7,7 @@ import {
 import { IBookingRepository } from '../../domain/repo/booking.repo';
 import { BookingEntity } from '../../domain/entities/booking.entity';
 import { IServiceRepository } from 'src/modules/services/domain/repo/service.repo';
-import { IUserRepository } from 'src/modules/accounts/domain/repo/user.repo';
+import { IUserRepository } from 'src/modules/users/domain/repo/user.repo';
 import { CreateBookingInput } from '../../presentation/inputs';
 
 @Injectable()
@@ -49,7 +49,6 @@ export class CreateBookingUseCase {
     const booking = BookingEntity.create({
       serviceId: input.serviceId,
       clientId: clientId,
-      scheduledAt: input.scheduledAt,
       totalPrice: service.price,
     });
 
