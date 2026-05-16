@@ -39,6 +39,7 @@
     "@nestjs/swagger": "^11.4.2",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@rekog/mcp-nest": "^1.9.9",
     "@scalar/nestjs-api-reference": "^1.1.14",
     "@thallesp/nestjs-better-auth": "^2.6.0",
     "bullmq": "^5.76.8",
