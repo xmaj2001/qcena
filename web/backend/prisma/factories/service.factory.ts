@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Prisma, ServiceStatus } from '../generated/prisma/client';
+import { ServiceCategory } from 'src/modules/services/domain/entities/enums/service-category.enum';
 
 const SERVICE_CATEGORIES = [
   'Beleza & Estética',
@@ -94,7 +95,7 @@ export function createServiceData(
   providerId: string,
   overrides: Partial<Prisma.ServiceUncheckedCreateInput> = {},
 ): Prisma.ServiceUncheckedCreateInput {
-  const category = faker.helpers.arrayElement(SERVICE_CATEGORIES);
+  const category = faker.helpers.arrayElement(Object.values(ServiceCategory));
   const names = SERVICE_NAMES_BY_CATEGORY[category] ?? ['Serviço geral'];
   const name = faker.helpers.arrayElement(names);
 

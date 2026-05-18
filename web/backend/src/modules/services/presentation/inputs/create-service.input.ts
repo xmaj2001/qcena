@@ -29,7 +29,7 @@ export class CreateServiceInput {
   description?: string;
 
   @ApiProperty({
-    example: ServiceCategory.BELEZA,
+    example: ServiceCategory.TECNOLOGIA,
     description: 'Categoria do serviço',
     enum: ServiceCategory,
   })

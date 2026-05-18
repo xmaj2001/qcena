@@ -13,6 +13,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import type { ApiService } from "@/server/services/types/service.type";
 import { Badge } from "@heroui/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type Props = {
   services: ApiService[];
@@ -25,6 +26,7 @@ export function HeroFullCarousel({
   autoPlayMs = 7000,
   onReserve,
 }: Props) {
+  const router = useRouter();
   const [index, setIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
 
@@ -48,6 +50,9 @@ export function HeroFullCarousel({
     setIndex((i) => (i - 1 + services.length) % services.length);
   const next = () => setIndex((i) => (i + 1) % services.length);
 
+  const handleViewService = () => {
+    router.push(`/service/${current.id}`);
+  };
   return (
     <section className="relative h-screen min-h-[640px] w-full overflow-hidden bg-background">
       {/* Background images */}
@@ -141,6 +146,7 @@ export function HeroFullCarousel({
                 <Calendar className="mr-2 h-5 w-5" /> Reservar agora
               </Button>
               <Button
+                onClick={handleViewService}
                 size="lg"
                 variant="outline"
                 className="h-12 border-white/40 bg-white/5 px-6 text-base text-white backdrop-blur hover:bg-white hover:text-foreground"

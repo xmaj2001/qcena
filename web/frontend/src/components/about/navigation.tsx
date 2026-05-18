@@ -6,9 +6,10 @@ import { useState, useEffect } from "react";
 import { Button, CloseButton, Menu } from "@heroui/react";
 
 const navLinks = [
-  { name: "Serviços", href: "/services" },
+  { name: "Home", href: "/" },
   { name: "Buscar Serviços", href: "/search" },
   { name: "Sobre", href: "/about" },
+  { name: "Baixe o App", href: "/app" },
   { name: "Contacto", href: "/contact" },
 ];
 

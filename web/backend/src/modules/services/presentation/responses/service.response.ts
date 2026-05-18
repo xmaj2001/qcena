@@ -25,7 +25,7 @@ export class ServiceResponse {
   description: string | null;
 
   @ApiProperty({
-    example: ServiceCategory.BELEZA,
+    example: ServiceCategory.BELEZA_E_ESTÉTICA,
     enum: ServiceCategory,
   })
   category: ServiceCategory;

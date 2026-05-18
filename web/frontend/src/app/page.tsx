@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/about/navigation";
+import { Footer } from "@/components/footer";
 import { HeroFullCarousel } from "@/components/services/HeroFullCarousel";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 import { getFavoritesServices } from "@/server/services/features/get-favorites.feat";
@@ -26,6 +27,7 @@ export default async function Home() {
           images={images}
         />
       </main>
+      <Footer />
     </div>
   );
 }
