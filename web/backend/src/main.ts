@@ -31,6 +31,7 @@ async function bootstrap() {
   // ── Swagger ─────────────────────────────────────────────────────────────────
   setupSwaggerScalar(app, name, isProd);
 
+  app.enableCors(config.get('app.cors'));
   await app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
