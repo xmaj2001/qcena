@@ -60,8 +60,8 @@ export function HeroFullCarousel({
           )}
         >
           <Image
-            src={img.src}
-            alt={img.altText}
+            src={img}
+            alt={current.name}
             className="h-full w-full object-cover"
             height={500}
             width={500}
@@ -75,22 +75,6 @@ export function HeroFullCarousel({
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-10 lg:px-12 lg:py-16">
-        {/* Top bar */}
-        <div className="flex items-center justify-between text-white pt-24">
-          {/* <Badge className="bg-primary text-primary-foreground hover:bg-primary px-3 py-1 text-xs uppercase tracking-widest">
-            {current.category}
-          </Badge> */}
-          {/* <div className="hidden items-center gap-2 text-sm text-white/80 md:flex">
-            <span className="font-mono">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="h-px w-10 bg-white/40" />
-            <span className="font-mono">
-              {String(services.length).padStart(2, "0")}
-            </span>
-          </div> */}
-        </div>
-
         {/* Main copy */}
         <div className="max-w-3xl space-y-6 text-white">
           <div className="flex items-center gap-3">
@@ -186,8 +170,8 @@ export function HeroFullCarousel({
                   aria-label={`Imagem ${i + 1}`}
                 >
                   <Image
-                    src={img.src}
-                    alt={img.altText}
+                    src={img}
+                    alt={current.name}
                     className="h-full w-full object-cover"
                     width={500}
                     height={500}

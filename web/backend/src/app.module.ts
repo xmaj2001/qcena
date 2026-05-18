@@ -15,7 +15,7 @@ import { appConfig } from './shared/config/app.config';
 import { SendEmailPort } from './shared/ports/send-email-port';
 import { BullModule } from '@nestjs/bullmq';
 import { bullRedisConfig } from './shared/config/bull.config';
-import { McpModules } from './modules/mcp/mcp.module';
+import { ToolsModule } from './modules/tools/tools.module';
 
 @Module({
   imports: [
@@ -43,7 +43,7 @@ import { McpModules } from './modules/mcp/mcp.module';
     ServiceModule,
     BookingModule,
     ClientModule,
-    McpModules,
+    ToolsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

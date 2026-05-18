@@ -18,13 +18,13 @@ export default function ServiceGridItems({
             prefetch={true}
           >
             <GridTileImage
-              alt={service.images[0].altText}
+              alt={service.name}
               label={{
                 title: service.name,
                 amount: service.price.toLocaleString(),
                 currencyCode: "AOA",
               }}
-              src={service.images[0].src}
+              src={service.images[0]}
               fill
               sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             />

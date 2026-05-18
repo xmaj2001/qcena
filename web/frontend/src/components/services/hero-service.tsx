@@ -41,8 +41,8 @@ export function HeroService({ service, onReserve }: Props) {
         {images.map((img, i) => (
           <img
             key={i}
-            src={img.src}
-            alt={img.altText}
+            src={img}
+            alt={current.name}
             className={cn(
               "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
               i === imageIndex ? "opacity-100" : "opacity-0",
@@ -68,8 +68,8 @@ export function HeroService({ service, onReserve }: Props) {
                 aria-label={`Imagem ${i + 1}`}
               >
                 <img
-                  src={img.src}
-                  alt={img.altText}
+                  src={img}
+                  alt={current.name}
                   className="h-full w-full object-cover"
                 />
               </button>

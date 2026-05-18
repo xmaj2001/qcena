@@ -4,7 +4,10 @@ import { ServiceCategory } from '../../domain/entities/enums/service-category.en
 import {
   PaginatedResponse,
   SuccessResponse,
+  SuccessArrayResponse,
 } from 'src/shared/common/envelope.response';
+
+// ─── Resposta de listagem (simples) ──────────────────────────────────────────
 
 export class ServiceResponse {
   @ApiProperty({ example: 'cm9x1a2b3c4d5e6f7g8h9i0j' })
@@ -49,5 +52,86 @@ export class ServiceResponse {
   updatedAt: Date;
 }
 
+// ─── Sub-DTOs do detalhe ──────────────────────────────────────────────────────
+
+export class ServiceTopClientResponse {
+  @ApiProperty({ example: 'usr_abc123' })
+  id: string;
+
+  @ApiProperty({ example: 'Ana Silva' })
+  name: string;
+
+  @ApiPropertyOptional({ example: 'https://cdn.qcena.com/avatar.png' })
+  image: string | null;
+
+  @ApiProperty({ example: 5 })
+  totalReservations: number;
+}
+
+export class ServiceProviderResponse {
+  @ApiProperty({ example: 'usr_xyz789' })
+  id: string;
+
+  @ApiProperty({ example: 'João Prestador' })
+  name: string;
+
+  @ApiPropertyOptional({ example: 'https://cdn.qcena.com/avatar.png' })
+  image: string | null;
+}
+
+// ─── Resposta de detalhe (GET /services/:id e GET /services/featured) ────────
+
+export class ServiceDetailResponse {
+  @ApiProperty({ example: 'cm9x1a2b3c4d5e6f7g8h9i0j' })
+  id: string;
+
+  @ApiProperty({ example: 'Limpeza Residencial' })
+  name: string;
+
+  @ApiPropertyOptional({
+    example: 'Serviço completo de limpeza para sua casa.',
+  })
+  description: string | null;
+
+  @ApiProperty({ example: ['https://cdn.qcena.com/service1.png'] })
+  images: string[];
+
+  @ApiProperty({ example: 15000 })
+  price: number;
+
+  @ApiProperty({ example: 'BELEZA' })
+  category: string;
+
+  @ApiProperty({ example: ['limpeza', 'casa'] })
+  tags: string[];
+
+  @ApiProperty({
+    example: ServiceStatus.ENABLED,
+    enum: ServiceStatus,
+  })
+  state: ServiceStatus;
+
+  @ApiProperty({ example: 42 })
+  totalReservations: number;
+
+  @ApiProperty({ example: 7 })
+  totalFavorites: number;
+
+  @ApiProperty({ example: 630000 })
+  totalEarnings: number;
+
+  @ApiProperty({ type: () => [ServiceTopClientResponse] })
+  topClients: ServiceTopClientResponse[];
+
+  @ApiProperty({ type: () => ServiceProviderResponse })
+  provider: ServiceProviderResponse;
+}
+
+// ─── Envelopes Swagger ────────────────────────────────────────────────────────
+
 export const PaginatedServicesResponse = PaginatedResponse(ServiceResponse);
-export const SingleServiceResponse = SuccessResponse(ServiceResponse);
+export const SingleServiceResponse = SuccessResponse(ServiceDetailResponse);
+export const RelatedServicesResponse = SuccessResponse(ServiceResponse);
+export const FeaturedServicesResponse = SuccessArrayResponse(
+  ServiceDetailResponse,
+);

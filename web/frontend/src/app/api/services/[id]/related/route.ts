@@ -6,10 +6,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const data = generateMockServices(100);
-  return NextResponse.json({
-    success: true,
-    data: data,
-    ts: new Date().toISOString(),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/services/${id}/related`,
+  );
+  const data = await res.json();
+  return NextResponse.json(data);
 }

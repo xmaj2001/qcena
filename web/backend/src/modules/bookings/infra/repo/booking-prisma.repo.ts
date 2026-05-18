@@ -3,7 +3,7 @@ import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 import { IBookingRepository } from '../../domain/repo/booking.repo';
 import { BookingEntity } from '../../domain/entities/booking.entity';
 import { BookingStatus } from '../../domain/entities/enums/booking-status.enum';
-import { Booking } from 'src/shared/infra/prisma/generated/prisma/client';
+import { Booking } from 'prisma/generated/prisma/client';
 import { ListBookingsInput } from '../../presentation/inputs';
 
 @Injectable()

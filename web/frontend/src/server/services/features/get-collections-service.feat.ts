@@ -1,30 +1,31 @@
 import { apiFetch } from "@/server/apiFetch";
 import type { ApiEnvelope } from "@/types/api.types";
-import type { ServiceCollection } from "../types/service.type";
 
 export async function getCollectionsServices(): Promise<
   ServiceCollectionFilter[]
 > {
-  const response = await apiFetch<ApiEnvelope<ServiceCollection[]>>(
+  const response = await apiFetch<ApiEnvelope<string[]>>(
     `/api/services/collections`,
   );
 
   return generateCollections(response.data ?? []);
 }
 
-export type ServiceCollectionFilter = Pick<ServiceCollection, "title"> & {
+export type ServiceCollectionFilter = {
+  title: string;
   slug: string;
   path: string;
 };
 
-function generateCollections(collections: ServiceCollection[]) {
+function generateCollections(collections: string[]) {
   const baseFilters: ServiceCollectionFilter[] = [
     { title: "Todos", slug: "all", path: "/search" },
   ];
 
-  const collectionFilters = collections.map((c) => ({
-    ...c,
-    path: `/search/${c.slug}`,
+  const collectionFilters: ServiceCollectionFilter[] = collections.map((c) => ({
+    title: c,
+    slug: c,
+    path: `/search/${c}`,
   }));
 
   return [...baseFilters, ...collectionFilters];

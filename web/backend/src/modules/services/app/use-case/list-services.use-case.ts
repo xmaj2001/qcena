@@ -11,7 +11,7 @@ export class ListServicesUseCase {
   async execute(filter: ListServicesFilter) {
     const result = await this.serviceRepository.findAll(filter);
     return {
-      data: result.data.map((s) => s.toPersistence()),
+      items: result.data.map((s) => s.toPersistence()),
       nextCursor: result.nextCursor,
     };
   }

@@ -6,7 +6,7 @@ export type SortFilterItem = {
 };
 
 export const defaultSort: SortFilterItem = {
-  title: "Relevance",
+  title: "Mais relevantes",
   slug: null,
   sortKey: "RELEVANCE",
   reverse: false,
@@ -15,25 +15,13 @@ export const defaultSort: SortFilterItem = {
 export const sorting: SortFilterItem[] = [
   defaultSort,
   {
-    title: "Trending",
-    slug: "trending-desc",
-    sortKey: "BEST_SELLING",
-    reverse: false,
-  }, // asc
-  {
-    title: "Latest arrivals",
-    slug: "latest-desc",
-    sortKey: "CREATED_AT",
-    reverse: true,
-  },
-  {
-    title: "Price: Low to high",
+    title: "Preço: Baixo para alto",
     slug: "price-asc",
     sortKey: "PRICE",
     reverse: false,
   }, // asc
   {
-    title: "Price: High to low",
+    title: "Preço: Alto para baixo",
     slug: "price-desc",
     sortKey: "PRICE",
     reverse: true,

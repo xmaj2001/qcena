@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ListServicesUseCase } from '../use-case';
+import { ListServicesUseCase } from '../../services/app/use-case';
 import { Tool } from '@rekog/mcp-nest';
-import type { ListServicesToolInput } from '../../presentation/inputs/tools/list-services-tool.input';
+import type { ListServicesToolInput } from '../../services/presentation/inputs/tools/list-services-tool.input';
 
-import { ListServicesToolInputSchema } from '../../presentation/inputs/tools/list-services-tool.input';
+import { ListServicesToolInputSchema } from '../../services/presentation/inputs/tools/list-services-tool.input';
 
 @Injectable()
 export class ListServiceTool {

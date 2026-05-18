@@ -11,6 +11,7 @@ import {
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -30,6 +31,7 @@ import {
 import {
   PaginatedServicesResponse,
   SingleServiceResponse,
+  RelatedServicesResponse,
 } from '../responses/service.response';
 
 @ApiBearerAuth()
@@ -52,20 +54,49 @@ export class ServiceController {
 
   @Get()
   @AllowAnonymous()
-  @ApiOperation({ summary: 'Listar serviços com paginação e filtros' })
+  @ApiOperation({ summary: 'Listar serviços' })
   @ApiResponse({ status: 200, type: PaginatedServicesResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async findAll(@Query() query: ListServicesInput) {
     return this.service.listServices(query);
   }
 
+  @Get('categories')
+  @AllowAnonymous()
+  @ApiOperation({ summary: 'Listar categorias de serviços' })
+  @ApiResponse({ status: 200, type: [String] })
+  @ApiResponse({ status: 500, type: InternalErrorResponse })
+  findCategories() {
+    return this.service.listServicesCategory();
+  }
+
+  @Get('favorites')
+  @AllowAnonymous()
+  @ApiOperation({ summary: 'Listar serviços favoritos' })
+  @ApiResponse({ status: 200, type: PaginatedServicesResponse })
+  @ApiResponse({ status: 500, type: InternalErrorResponse })
+  async findFavorites() {
+    return this.service.getFeaturedServices();
+  }
+
   @Get(':id')
   @AllowAnonymous()
-  @ApiOperation({ summary: 'Obter detalhes de um serviço' })
+  @ApiOperation({ summary: 'Detalhes de um serviço' })
   @ApiResponse({ status: 200, type: SingleServiceResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async findOne(@Param('id') id: string) {
     return this.service.getService(id);
+  }
+
+  @Get(':id/related')
+  @AllowAnonymous()
+  @ApiOperation({ summary: 'Serviços relacionados' })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 8 })
+  @ApiResponse({ status: 200, type: RelatedServicesResponse })
+  @ApiResponse({ status: 500, type: InternalErrorResponse })
+  async findRelated(@Param('id') id: string, @Query('limit') limit?: string) {
+    const parsedLimit = limit ? parseInt(limit, 10) : 8;
+    return this.service.getRelatedServices(id, parsedLimit);
   }
 
   @Patch(':id')

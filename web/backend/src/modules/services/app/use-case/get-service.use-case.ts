@@ -1,15 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IServiceRepository } from '../../domain/repo/service.repo';
+import {
+  IServiceRepository,
+  ServiceDetailData,
+} from '../../domain/repo/service.repo';
 
 @Injectable()
 export class GetServiceUseCase {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
-  async execute(id: string) {
-    const service = await this.serviceRepository.findById(id);
-    if (!service) {
+  async execute(id: string): Promise<ServiceDetailData> {
+    const detail = await this.serviceRepository.findDetails(id);
+    if (!detail) {
       throw new NotFoundException('Serviço não encontrado');
     }
-    return service.toPersistence();
+    return detail;
   }
 }

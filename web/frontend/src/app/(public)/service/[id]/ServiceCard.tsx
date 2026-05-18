@@ -15,8 +15,8 @@ export function ServiceCard({ service }: { service: ApiService }) {
       <div className="relative aspect-[4/3] overflow-hidden">
         {cover && (
           <img
-            src={cover.src}
-            alt={cover.altText}
+            src={cover}
+            alt={service.name}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
           />
         )}

@@ -5,10 +5,13 @@ import {
   UpdateServiceUseCase,
   DeleteServiceUseCase,
   GetServiceUseCase,
+  GetRelatedServicesUseCase,
+  GetFeaturedServicesUseCase,
 } from '../use-case';
 import { CreateServiceInput } from '../../presentation/inputs/create-service.input';
 import { UpdateServiceInput } from '../../presentation/inputs/update-service.input';
 import { ListServicesInput } from '../../presentation/inputs';
+import { ListServicesCategoryUseCase } from '../use-case/list-services-category.use-case';
 
 @Injectable()
 export class ServiceClient {
@@ -18,6 +21,9 @@ export class ServiceClient {
     private readonly updateServiceUseCase: UpdateServiceUseCase,
     private readonly deleteServiceUseCase: DeleteServiceUseCase,
     private readonly getServiceUseCase: GetServiceUseCase,
+    private readonly getRelatedServicesUseCase: GetRelatedServicesUseCase,
+    private readonly getFeaturedServicesUseCase: GetFeaturedServicesUseCase,
+    private readonly listServicesCategoryUseCase: ListServicesCategoryUseCase,
   ) {}
 
   async createService(input: CreateServiceInput, accountId: string) {
@@ -43,5 +49,17 @@ export class ServiceClient {
 
   async getService(id: string) {
     return this.getServiceUseCase.execute(id);
+  }
+
+  async getRelatedServices(serviceId: string, limit?: number) {
+    return this.getRelatedServicesUseCase.execute(serviceId, limit);
+  }
+
+  async getFeaturedServices(limit?: number) {
+    return this.getFeaturedServicesUseCase.execute(limit);
+  }
+
+  listServicesCategory() {
+    return this.listServicesCategoryUseCase.execute();
   }
 }

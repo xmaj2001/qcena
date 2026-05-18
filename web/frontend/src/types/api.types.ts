@@ -4,6 +4,11 @@ export interface ApiEnvelope<T> {
   ts: string;
 }
 
+export interface ApiCursorEnvelope<T> {
+  items: T[];
+  nextCursor: string;
+}
+
 export interface ApiResponseError<T> {
   success: boolean;
   data: T;

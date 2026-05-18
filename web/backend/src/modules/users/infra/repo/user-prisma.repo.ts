@@ -3,7 +3,7 @@ import { UserEntity } from 'src/modules/users/domain/entites/user.entity';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 import { UserGenderEnum } from '../../domain/entites/enums/user.gender.enum';
-import { User } from 'src/shared/infra/prisma/generated/prisma/client';
+import { User } from 'prisma/generated/prisma/client';
 
 @Injectable()
 export class UserPrismaRepo implements IUserRepository {

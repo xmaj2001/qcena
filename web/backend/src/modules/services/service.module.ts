@@ -7,10 +7,12 @@ import {
   DeleteServiceUseCase,
   GetServiceUseCase,
   ListServicesUseCase,
+  GetRelatedServicesUseCase,
+  GetFeaturedServicesUseCase,
 } from './app/use-case';
 import { ServiceController } from './presentation/controllers/service.controller';
 import { ServiceClient } from './app/services/service-client.service';
-import { ListServiceTool } from './app/tools/list-service.tool';
+import { ListServicesCategoryUseCase } from './app/use-case/list-services-category.use-case';
 
 const useCases = [
   CreateServiceUseCase,
@@ -18,6 +20,9 @@ const useCases = [
   DeleteServiceUseCase,
   GetServiceUseCase,
   ListServicesUseCase,
+  ListServicesCategoryUseCase,
+  GetRelatedServicesUseCase,
+  GetFeaturedServicesUseCase,
 ];
 
 @Module({
@@ -29,7 +34,6 @@ const useCases = [
     },
     ...useCases,
     ServiceClient,
-    ListServiceTool,
   ],
   exports: [IServiceRepository, ...useCases, ServiceClient],
 })

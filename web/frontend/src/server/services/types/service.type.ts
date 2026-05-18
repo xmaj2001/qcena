@@ -3,14 +3,9 @@ export enum ServiceState {
   DISABLE = "DISABLE",
 }
 
-export type ImageService = {
-  src: string;
-  altText: string;
-};
-
 export type ApiService = {
   id: string;
-  images: ImageService[];
+  images: string[];
   name: string;
   description?: string;
   price: number;
@@ -35,11 +30,7 @@ export type ApiService = {
 
 export type Service = ApiService;
 
-export type ServiceCollection = {
-  id: string;
-  title: string;
-  slug: string;
-};
+export type ServiceCollection = string[];
 
 export type ServiceCategory = {
   label: string;

@@ -18,9 +18,7 @@ export function ServiceDescription({ service }: { service: ApiService }) {
           </div>
         </div>
       </div>
-      {/* <VariantSelector options={product.options} variants={product.variants} /> */}
-      {service.description ? <Prose service={service} /> : null}
-      {/* <AddToCart product={product} /> */}
+      <Prose service={service} />
     </>
   );
 }
