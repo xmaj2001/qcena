@@ -1,9 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { BookingStatus } from '../../domain/entities/enums/booking-status.enum';
-import {
-  PaginatedResponse,
-  SuccessResponse,
-} from 'src/shared/common/envelope.response';
+import { SuccessResponse } from 'src/shared/common/envelope.response';
+
+export class BookingServiceResponse {
+  @ApiProperty({ example: 'Limpeza de Pele' })
+  name: string;
+
+  @ApiProperty({ example: 'https://...', nullable: true })
+  image: string | null;
+}
 
 export class BookingResponse {
   @ApiProperty({ example: 'cm9x1a2b3c4d5e6f7g8h9i0j' })
@@ -27,6 +32,9 @@ export class BookingResponse {
   })
   status: BookingStatus;
 
+  @ApiPropertyOptional({ type: () => BookingServiceResponse })
+  service?: BookingServiceResponse;
+
   @ApiProperty({ example: '2026-01-01T10:00:00.000Z' })
   createdAt: Date;
 
@@ -34,5 +42,15 @@ export class BookingResponse {
   updatedAt: Date;
 }
 
-export const PaginatedBookingsResponse = PaginatedResponse(BookingResponse);
+export class CursorPaginatedBookings {
+  @ApiProperty({ type: () => [BookingResponse] })
+  items: BookingResponse[];
+
+  @ApiPropertyOptional({ example: 'cm9x1a2b3c4d5e6f7g8h9i0j', nullable: true })
+  nextCursor: string | null;
+}
+
+export const PaginatedBookingsResponse = SuccessResponse(
+  CursorPaginatedBookings,
+);
 export const SingleBookingResponse = SuccessResponse(BookingResponse);

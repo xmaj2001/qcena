@@ -3,12 +3,13 @@ import { CreateBookingUseCase } from '../use-case/create-booking.use-case';
 import { UpdateBookingUseCase } from '../use-case/update-booking.use-case';
 import { DeleteBookingUseCase } from '../use-case/delete-booking.use-case';
 import { GetBookingUseCase } from '../use-case/get-booking.use-case';
-import { ListProviderBookingsUseCase } from '../use-case/list-provider-bookings.use-case';
+import { GetBookingsUseCase } from '../use-case/get-bookings.use-case';
 import {
   CreateBookingInput,
   ListBookingsInput,
   UpdateBookingInput,
 } from '../../presentation/inputs';
+import { ListBookingsServiceClientUseCase } from '../use-case/list-bookings-service-client.use-case';
 
 @Injectable()
 export class BookingClient {
@@ -17,7 +18,8 @@ export class BookingClient {
     private readonly updateBookingUseCase: UpdateBookingUseCase,
     private readonly deleteBookingUseCase: DeleteBookingUseCase,
     private readonly getBookingUseCase: GetBookingUseCase,
-    private readonly listProviderBookingsUseCase: ListProviderBookingsUseCase,
+    private readonly getBookingsUseCase: GetBookingsUseCase,
+    private readonly listBookingsServiceClientUseCase: ListBookingsServiceClientUseCase,
   ) {}
 
   async create(input: CreateBookingInput, clientId: string) {
@@ -36,7 +38,15 @@ export class BookingClient {
     return this.getBookingUseCase.execute(id, userId);
   }
 
-  async listAsProvider(providerId: string, filter: ListBookingsInput) {
-    return this.listProviderBookingsUseCase.execute(providerId, filter);
+  async getBookings(clientId: string, filter: ListBookingsInput) {
+    return this.getBookingsUseCase.execute(clientId, filter);
+  }
+
+  async listAsClient(clientId: string, serviceId: string, limit?: number) {
+    return this.listBookingsServiceClientUseCase.execute(
+      clientId,
+      serviceId,
+      limit,
+    );
   }
 }

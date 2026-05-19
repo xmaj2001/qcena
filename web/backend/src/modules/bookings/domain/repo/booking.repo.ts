@@ -9,9 +9,10 @@ export abstract class IBookingRepository {
   abstract findManyByClient(
     clientId: string,
     filter: ListBookingsInput,
-  ): Promise<{ data: BookingEntity[]; total: number }>;
-  abstract findManyByProvider(
-    providerId: string,
-    filter: ListBookingsInput,
-  ): Promise<{ data: BookingEntity[]; total: number }>;
+  ): Promise<{ data: BookingEntity[]; nextCursor: string | null }>;
+  abstract findManyByClientAndService(
+    clientId: string,
+    serviceId: string,
+    limit?: number,
+  ): Promise<BookingEntity[]>;
 }

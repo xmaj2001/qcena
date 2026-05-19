@@ -8,14 +8,6 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     domains: ["*"],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/auth/:path*",
-        destination: `${process.env.API_URL}/api/auth/:path*`,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

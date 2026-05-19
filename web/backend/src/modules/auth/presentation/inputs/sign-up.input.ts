@@ -14,7 +14,7 @@ export class SignUpInput {
   @IsNotEmpty({ message: 'Nome é obrigatório' })
   name: string;
 
-  @ApiProperty({ example: 'xavier@qcena.com', description: 'Email' })
+  @ApiProperty({ example: 'user64@qcena.com', description: 'Email' })
   @IsEmail({}, { message: 'Email inválido' })
   @IsNotEmpty({ message: 'Email é obrigatório' })
   email: string;

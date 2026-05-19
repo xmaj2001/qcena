@@ -4,11 +4,13 @@ import { ServiceDescription } from "@/components/services/service-description";
 import { ServiceNavbar } from "@/components/services/service-navbar";
 import { getService } from "@/server/services/features/get-service.feat";
 import { Suspense } from "react";
-import type { ImageService } from "@/server/services/types/service.type";
 import { HeroService } from "@/components/services/hero-service";
-import { Avatar, Card, Chip, Separator } from "@heroui/react";
-import { UserCircleIcon } from "lucide-react";
-import { UserGroupIcon } from "@heroicons/react/24/outline";
+import { ServiceProvedor } from "../_components/ServiceProvedor";
+import { TopClientes } from "../_components/TopClientes";
+import { RecentBookings } from "../_components/RecentBookings";
+import { getServerSession } from "@/lib/auth/auth-session";
+import { ApiBooking } from "@/server/bookings/types/booking";
+import { getBookingsService } from "@/server/bookings/features/get-booking-service.feat";
 
 interface ServicePageProps {
   params: Promise<{ id: string }>;
@@ -16,9 +18,22 @@ interface ServicePageProps {
 
 export default async function ServicePage({ params }: ServicePageProps) {
   const { id } = await params;
-  const service = await getService(id);
+  const [service, session] = await Promise.all([
+    getService(id),
+    getServerSession(),
+  ]);
+
+  let isProvider: boolean = false;
+  let isClient: boolean = false;
+  let booking: ApiBooking[] = [];
 
   if (!service) return <div>Service not found</div>;
+
+  if (session?.success) {
+    isProvider = session.data?.user.id === service.provider.id;
+    isClient = !isProvider;
+    booking = (await getBookingsService(id)).data;
+  }
   return (
     <div className="min-h-screen text-white relative pt-20" id="place">
       <ServiceNavbar />
@@ -30,99 +45,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </Suspense>
 
             <div className="flex flex-col gap-4 px-4">
-              <Separator />
-
               {/* Provedor */}
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-2">
-                  <UserCircleIcon className="size-4 text-muted" />
-                  <h3 className="text-sm font-semibold text-foreground">
-                    Provedor
-                  </h3>
-                </div>
-                <Card
-                  variant="transparent"
-                  className="flex-row items-center gap-3 p-0"
-                >
-                  <Avatar size="md">
-                    {service.provider.image ? (
-                      <Avatar.Image
-                        alt={service.provider.name}
-                        src={service.provider.image}
-                      />
-                    ) : null}
-                    <Avatar.Fallback>
-                      {service.provider.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .slice(0, 2)
-                        .toUpperCase()}
-                    </Avatar.Fallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium text-foreground">
-                      {service.provider.name}
-                    </span>
-                    <span className="text-xs text-muted">
-                      Prestador de serviço
-                    </span>
-                  </div>
-                </Card>
-              </div>
+              <ServiceProvedor service={service} />
 
               {/* Top Clientes */}
-              {service.topClients.length > 0 && (
-                <>
-                  <Separator />
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <UserGroupIcon className="size-4 text-muted" />
-                      <h3 className="text-sm font-semibold text-foreground">
-                        Top Clientes
-                      </h3>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      {service.topClients.slice(0, 5).map((client, index) => (
-                        <Card
-                          key={client.id}
-                          variant="transparent"
-                          className="flex-row items-center justify-between gap-3 p-2 rounded-xl"
-                        >
-                          <div className="flex items-center gap-3">
-                            <span className="text-xs font-bold text-muted w-4 text-center">
-                              {index + 1}
-                            </span>
-                            <Avatar size="sm">
-                              {client.image ? (
-                                <Avatar.Image
-                                  alt={client.name}
-                                  src={client.image}
-                                />
-                              ) : null}
-                              <Avatar.Fallback>
-                                {client.name
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")
-                                  .slice(0, 2)
-                                  .toUpperCase()}
-                              </Avatar.Fallback>
-                            </Avatar>
-                            <span className="text-sm text-foreground">
-                              {client.name}
-                            </span>
-                          </div>
-                          <Chip size="sm" color="accent" variant="soft">
-                            <Chip.Label>
-                              {client.totalReservations} reservas
-                            </Chip.Label>
-                          </Chip>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                </>
+              {isProvider && service.topClients.length > 0 && (
+                <TopClientes service={service} />
+              )}
+              {/* Recent Bookings */}
+              {isClient && (
+                <Suspense fallback={null}>
+                  <RecentBookings data={booking} />
+                </Suspense>
               )}
             </div>
           </div>

@@ -3,7 +3,7 @@ import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 import { IBookingRepository } from '../../domain/repo/booking.repo';
 import { BookingEntity } from '../../domain/entities/booking.entity';
 import { BookingStatus } from '../../domain/entities/enums/booking-status.enum';
-import { Booking } from 'prisma/generated/prisma/client';
+import { Booking, Prisma } from 'prisma/generated/prisma/client';
 import { ListBookingsInput } from '../../presentation/inputs';
 
 @Injectable()
@@ -41,6 +41,14 @@ export class BookingPrismaRepo implements IBookingRepository {
   async findById(id: string): Promise<BookingEntity | null> {
     const booking = await this.prisma.booking.findUnique({
       where: { id },
+      include: {
+        service: {
+          select: {
+            name: true,
+            images: true,
+          },
+        },
+      },
     });
     return booking ? this.toEntity(booking) : null;
   }
@@ -48,56 +56,71 @@ export class BookingPrismaRepo implements IBookingRepository {
   async findManyByClient(
     clientId: string,
     filter: ListBookingsInput,
-  ): Promise<{ data: BookingEntity[]; total: number }> {
-    const { status, page = 1, limit = 10 } = filter;
-    const where: any = { clientId };
+  ): Promise<{ data: BookingEntity[]; nextCursor: string | null }> {
+    const { status, cursor, limit = 10, search } = filter;
+    const where: Prisma.BookingWhereInput = { clientId };
     if (status) where.status = status;
+    if (search) {
+      where.service = {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ],
+      };
+    }
 
-    const [bookings, total] = await Promise.all([
-      this.prisma.booking.findMany({
-        where,
-        skip: (page - 1) * limit,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-      }),
-      this.prisma.booking.count({ where }),
-    ]);
-
-    return {
-      data: bookings.map((b) => this.toEntity(b)),
-      total,
-    };
-  }
-
-  async findManyByProvider(
-    providerId: string,
-    filter: ListBookingsInput,
-  ): Promise<{ data: BookingEntity[]; total: number }> {
-    const { status, page = 1, limit = 10 } = filter;
-    const where: any = {
-      service: {
-        providerId: providerId,
+    const bookings = await this.prisma.booking.findMany({
+      where,
+      take: limit + 1,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      orderBy: { createdAt: 'desc' },
+      include: {
+        service: {
+          select: {
+            name: true,
+            images: true,
+          },
+        },
       },
-    };
-    if (status) where.status = status;
+    });
 
-    const [bookings, total] = await Promise.all([
-      this.prisma.booking.findMany({
-        where,
-        skip: (page - 1) * limit,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-      }),
-      this.prisma.booking.count({ where }),
-    ]);
+    let nextCursor: string | null = null;
+    if (bookings.length > limit) {
+      const nextItem = bookings.pop();
+      nextCursor = nextItem!.id;
+    }
 
     return {
       data: bookings.map((b) => this.toEntity(b)),
-      total,
+      nextCursor,
     };
   }
 
-  private toEntity(data: Booking): BookingEntity {
+  async findManyByClientAndService(
+    clientId: string,
+    serviceId: string,
+    limit?: number,
+  ): Promise<BookingEntity[]> {
+    console.log('clientId', clientId);
+    console.log('serviceId', serviceId);
+    console.log('limit', limit);
+    const bookings = await this.prisma.booking.findMany({
+      where: { clientId },
+      take: limit,
+      orderBy: { createdAt: 'desc' },
+    });
+    return bookings.map((b) => this.toEntity(b));
+  }
+
+  private toEntity(
+    data: Booking & {
+      service?: {
+        name: string;
+        images: string[];
+      } | null;
+    },
+  ): BookingEntity {
     return BookingEntity.reconstruct({
       id: data.id,
       serviceId: data.serviceId,
@@ -106,6 +129,12 @@ export class BookingPrismaRepo implements IBookingRepository {
       status: data.status as BookingStatus,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
+      service: data.service
+        ? {
+            name: data.service.name,
+            image: data.service.images[0] ?? null,
+          }
+        : undefined,
     });
   }
 }

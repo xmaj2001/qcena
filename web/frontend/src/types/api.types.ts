@@ -9,6 +9,12 @@ export interface ApiCursorEnvelope<T> {
   nextCursor: string;
 }
 
+export interface ApiPaginationEnvelope<T> {
+  items: T[];
+  page: number;
+  limit: number;
+  total: number;
+}
 export interface ApiResponseError<T> {
   success: boolean;
   data: T;

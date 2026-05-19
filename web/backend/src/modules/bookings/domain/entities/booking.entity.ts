@@ -7,6 +7,10 @@ interface BookingProps {
   clientId: string;
   totalPrice: number;
   status: BookingStatus;
+  service?: {
+    name: string;
+    image: string | null;
+  };
 }
 
 export class BookingEntity extends BaseDomain {
@@ -27,6 +31,10 @@ export class BookingEntity extends BaseDomain {
     clientId: string;
     totalPrice: number;
     status?: BookingStatus;
+    service?: {
+      name: string;
+      image: string | null;
+    };
   }): BookingEntity {
     if (!input.serviceId)
       throw new BadRequestException('Service ID is required');
@@ -39,6 +47,7 @@ export class BookingEntity extends BaseDomain {
       clientId: input.clientId,
       totalPrice: input.totalPrice,
       status: input.status ?? BookingStatus.PENDING,
+      service: input.service,
     });
   }
 
@@ -66,6 +75,9 @@ export class BookingEntity extends BaseDomain {
   get status() {
     return this.props.status;
   }
+  get service() {
+    return this.props.service;
+  }
 
   // Business Logic
   updateStatus(status: BookingStatus): void {
@@ -82,6 +94,7 @@ export class BookingEntity extends BaseDomain {
       status: this.props.status,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
+      service: this.props.service,
     };
   }
 }

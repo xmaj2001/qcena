@@ -54,7 +54,7 @@ export function HeroFullCarousel({
     router.push(`/service/${current.id}`);
   };
   return (
-    <section className="relative h-screen min-h-[640px] w-full overflow-hidden bg-background">
+    <section className="relative h-screen pt-20 min-h-[640px] w-full overflow-hidden bg-background">
       {/* Background images */}
       {images.map((img, i) => (
         <div

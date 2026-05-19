@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/about/navigation";
 import { Footer } from "@/components/footer";
+import { SearchNavbar } from "@/components/search/search-navbar";
 import { HeroFullCarousel } from "@/components/services/HeroFullCarousel";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 import { getFavoritesServices } from "@/server/services/features/get-favorites.feat";
@@ -10,7 +11,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col flex-1">
-      <Navigation />
+      <SearchNavbar />
       <main id="main-content" className="flex flex-col">
         <HeroFullCarousel services={data} />
         <AnimatedMarqueeHero

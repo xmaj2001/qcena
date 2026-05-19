@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { NavDocuments } from "@/components/nav-documents";
+import { NavClients } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
@@ -40,29 +40,29 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
+      title: "Visão Geral",
+      url: "/system",
       icon: <LayoutDashboardIcon />,
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      title: "Serviços",
+      url: "/system/services",
       icon: <ListIcon />,
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Reservas",
+      url: "/system/bookings",
+      icon: <UsersIcon />,
+    },
+    {
+      title: "Metas",
+      url: "/system/metas",
       icon: <ChartBarIcon />,
     },
     {
-      title: "Projects",
-      url: "#",
-      icon: <FolderIcon />,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: <UsersIcon />,
+      title: "Análises",
+      url: "/system/analise",
+      icon: <FileChartColumnIcon />,
     },
   ],
   navClouds: [
@@ -116,7 +116,7 @@ const data = {
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/system/settings",
       icon: <Settings2Icon />,
     },
     {
@@ -130,21 +130,21 @@ const data = {
       icon: <SearchIcon />,
     },
   ],
-  documents: [
+  clients: [
     {
-      name: "Data Library",
-      url: "#",
-      icon: <DatabaseIcon />,
+      name: "Listar Clientes",
+      url: "/system/clients",
+      icon: <UsersIcon />,
     },
     {
-      name: "Reports",
-      url: "#",
+      name: "Top N Clientes",
+      url: "/system/clients?tab=top",
       icon: <FileChartColumnIcon />,
     },
     {
-      name: "Word Assistant",
-      url: "#",
-      icon: <FileIcon />,
+      name: "Histórico Reservas",
+      url: "/system/clients?tab=reservas",
+      icon: <DatabaseIcon />,
     },
   ],
 };
@@ -169,7 +169,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        <NavClients items={data.clients} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

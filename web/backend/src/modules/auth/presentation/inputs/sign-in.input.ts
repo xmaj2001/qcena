@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 
 export class SignInInput {
-  @ApiProperty({ example: 'xavier@qcena.com' })
+  @ApiProperty({ example: 'user1@qcena.com' })
   @IsEmail({}, { message: 'Email inválido' })
   @IsNotEmpty({ message: 'Email é obrigatório' })
   email: string;

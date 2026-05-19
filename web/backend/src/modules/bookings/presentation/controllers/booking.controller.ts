@@ -33,6 +33,7 @@ import {
   ListBookingsInput,
   UpdateBookingInput,
 } from '../inputs';
+import { ListBookingsServiceClientInput } from '../inputs/list-bookings-service-client.input';
 
 @ApiBearerAuth('Authorization')
 @ApiTags('bookings')
@@ -41,7 +42,10 @@ export class BookingController {
   constructor(private readonly bookingClient: BookingClient) {}
 
   @Post()
-  @ApiOperation({ summary: 'Criar uma nova reserva' })
+  @ApiOperation({
+    summary: 'Criar reserva',
+    description: 'Cria uma nova reserva para um cliente.',
+  })
   @ApiResponse({ status: 201, type: SingleBookingResponse })
   @ApiResponse({ status: 401, type: UnauthorizedResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
@@ -53,18 +57,40 @@ export class BookingController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar minhas reservas' })
+  @ApiOperation({
+    summary: 'Listar reservas',
+    description: 'Lista todas as reservas do usuário logado.',
+  })
   @ApiResponse({ status: 200, type: PaginatedBookingsResponse })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
   async list(
     @Session() session: UserSession,
     @Query() query: ListBookingsInput,
   ) {
-    return this.bookingClient.listAsProvider(session.user.id, query);
+    return this.bookingClient.getBookings(session.user.id, query);
+  }
+
+  @Get('service/:id')
+  @ApiOperation({
+    summary: 'Reservas de um serviço',
+    description: 'Lista todas as reservas de um serviço específico.',
+  })
+  @ApiResponse({ status: 200, type: PaginatedBookingsResponse })
+  @ApiResponse({ status: 500, type: InternalErrorResponse })
+  async listByService(
+    @Session() session: UserSession,
+    @Param('id') id: string,
+    @Query() query: ListBookingsServiceClientInput,
+  ) {
+    const userId = query.clientId ? query.clientId : session.user.id;
+    return this.bookingClient.listAsClient(userId, id, query.limit);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obter detalhes de uma reserva' })
+  @ApiOperation({
+    summary: 'Detalhes de uma reserva',
+    description: 'Retorna os detalhes de uma reserva específica.',
+  })
   @ApiResponse({ status: 200, type: SingleBookingResponse })
   @ApiResponse({ status: 404, description: 'Reserva não encontrada' })
   @ApiResponse({ status: 500, type: InternalErrorResponse })
