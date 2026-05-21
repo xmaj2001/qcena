@@ -9,9 +9,9 @@ export async function GET(request: NextRequest) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
 
   const res = await services.json();
   return NextResponse.json(res);
 }
-

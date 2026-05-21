@@ -6,12 +6,16 @@ import Form from "next/form";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function Search() {
+interface SearchProps {
+  action?: string;
+}
+
+export default function Search({ action }: SearchProps) {
   const searchParams = useSearchParams();
   const [value, setValue] = useState(searchParams?.get("q") ?? "");
   return (
     <Form
-      action="/search"
+      action={action || "/search"}
       className="w-max-[550px] relative w-full lg:w-80 xl:w-full"
     >
       <SearchField

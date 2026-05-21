@@ -12,24 +12,27 @@ interface GetBookingsParams {
 export async function getBookings(
   params?: GetBookingsParams,
 ): Promise<ApiEnvelope<ApiCursorEnvelope<ApiBooking>>> {
-  const url = new URLSearchParams();
+  const queryParams = new URLSearchParams();
   if (params) {
-    if (params.cursor) {
-      url.set("cursor", params.cursor);
-    }
-    if (params.limit !== undefined) {
-      url.set("limit", params.limit.toString());
-    }
-    if (params.status) {
-      url.set("status", params.status);
-    }
+    // if (params.cursor) {
+    //   url.append("cursor", params.cursor);
+    // }
+    // if (params.limit !== undefined) {
+    //   url.append("limit", params.limit.toString());
+    // }
+    // if (params.status) {
+    //   url.append("status", params.status);
+    // }
     if (params.search) {
-      url.set("search", params.search);
+      queryParams.append("search", params.search);
     }
   }
-  const response = await apiFetch<ApiEnvelope<ApiCursorEnvelope<ApiBooking>>>(
-    `/api/bookings?${url.toString()}`,
-  );
+
+  const queryString = queryParams.toString();
+  const url = `/api/bookings${queryString ? `?${queryString}` : ""}`;
+  console.log(url);
+  const response =
+    await apiFetch<ApiEnvelope<ApiCursorEnvelope<ApiBooking>>>(url);
 
   return response;
 }

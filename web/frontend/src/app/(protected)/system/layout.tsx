@@ -21,10 +21,7 @@ export default function DashboardLayout({
         }
       >
         <AppSidebar variant="inset" />
-        <SidebarInset>
-          <SiteHeader />
-          {children}
-        </SidebarInset>
+        <SidebarInset>{children}</SidebarInset>
       </SidebarProvider>
     </TooltipProvider>
   );
