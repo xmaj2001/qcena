@@ -1,7 +1,7 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { bearer, mcp } from 'better-auth/plugins';
+import { bearer, mcp, oneTap } from 'better-auth/plugins';
 import { PrismaClient } from 'prisma/generated/prisma/client';
 import { SendEmailPort } from 'src/shared/ports/send-email-port';
 import {
@@ -12,7 +12,7 @@ import {
 } from './emails';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const plugins: any[] = [bearer(), mcp({ loginPage: '/sign-in' })];
+const plugins: any[] = [bearer(), oneTap(), mcp({ loginPage: '/sign-in' })];
 
 export function createBetterAuth(emailPort: SendEmailPort) {
   const prisma = new PrismaClient({
@@ -35,6 +35,16 @@ export function createBetterAuth(emailPort: SendEmailPort) {
 
     emailVerification: {
       sendVerificationEmail: sendVerificationEmail(emailPort),
+    },
+
+    trustedOrigins: [
+      'http://localhost:3000', // ← aceita pedidos do frontend
+    ],
+    socialProviders: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID as string,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      },
     },
   });
 }
