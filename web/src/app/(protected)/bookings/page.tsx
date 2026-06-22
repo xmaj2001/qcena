@@ -14,8 +14,7 @@ export const metadata = {
 };
 
 export default async function BookingsPage() {
-  const sessionEnvelope = await getServerSession();
-  const session = sessionEnvelope?.data;
+  const session = await getServerSession();
 
   // Initial fetch if user is logged in
   let initialBookings: ApiBooking[] = [];

@@ -2,10 +2,14 @@ import { InfiniteServicesGrid } from "@/components/search/infinite-services-grid
 import { defaultSort, sorting } from "@/lib/constants";
 import { getServices } from "@/server/services/features/get-services.feat";
 
+// Esta página lê cookies e searchParams por cada pedido — não pode ser estática.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Qcena - Pesquisar",
   description: "Pesquise por serviços na Qcena.",
 };
+
 
 interface SearchPageProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;

@@ -29,8 +29,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   if (!service) return <div>Service not found</div>;
 
-  if (session?.success) {
-    isProvider = session.data?.user.id === service.provider.id;
+  if (session?.user) {
+    isProvider = session.user.id === service.provider.id;
     isClient = !isProvider;
     booking = (await getBookingsService(id)).data;
   }
