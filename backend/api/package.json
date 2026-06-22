@@ -11,7 +11,7 @@
     "start": "nest start",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "auth:generate": "npx auth@latest generate --config ./src/shared/auth/betterAuth/betterAuth.ts",
     "auth:migrate": "npx auth@latest migrate --config ./src/shared/auth/betterAuth/betterAuth.ts",
     "auth:push": "npx auth@latest push --config ./src/shared/auth/betterAuth/betterAuth.ts",

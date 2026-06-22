@@ -2,8 +2,11 @@ COMPOSE_FILE=docker-compose.yml
 
 all: build up
 
-build: nginx-certs
+build:
 	docker compose -f $(COMPOSE_FILE) build
+
+infra:
+	docker compose -f $(COMPOSE_FILE) up -d redis
 
 up:
 	docker compose -f $(COMPOSE_FILE) up -d
@@ -16,21 +19,17 @@ mata:
 
 fclean:
 	docker compose -f $(COMPOSE_FILE) down -v --rmi all --remove-orphans
-	docker image prune -af
 
 logs:
-	docker compose -f $(COMPOSE_FILE) logs -f web-backend
+	docker compose -f $(COMPOSE_FILE) logs -f backend
 
-frontend-logs:
-	docker compose -f $(COMPOSE_FILE) logs -f web-client
-
-nginx-logs:
-	docker compose -f $(COMPOSE_FILE) logs -f nginx
+redis-logs:
+	docker compose -f $(COMPOSE_FILE) logs -f redis
 
 nginx-certs:
 	@bash ./nginx/tools/generate-certs.sh
 
-re: clean build
+re: clean build up
 
 database-studio:
-	docker compose -f $(COMPOSE_FILE) exec web-backend npx prisma studio
+	docker compose -f $(COMPOSE_FILE) exec backend npx prisma studio
