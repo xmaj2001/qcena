@@ -79,8 +79,8 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <OneTapProvider />
+      <body className="min-h-full flex flex-col bg-background text-foreground relative">
+        {/* <OneTapProvider /> */}
         <Providers>{children}</Providers>
       </body>
     </html>

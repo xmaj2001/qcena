@@ -13,16 +13,28 @@ interface SearchPageProps {
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
-  const { sort, q: searchValue, cursor } = (params ?? {}) as { [key: string]: string };
+  const {
+    sort,
+    q: searchValue,
+    cursor,
+  } = (params ?? {}) as { [key: string]: string };
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
   // Realiza a chamada à API do BFF para buscar o primeiro lote de serviços
-  const servicesResponse = await getServices({
-    search: searchValue,
-    cursor,
-    limit: 9, // Lote inicial
-  });
+  let servicesResponse: any = null;
+  try {
+    servicesResponse = await getServices({
+      search: searchValue,
+      cursor,
+      limit: 9, // Lote inicial
+    });
+  } catch (error) {
+    // console.error("Error fetching services:", error);
+    return (
+      <p className="py-3 text-lg">Ocorreu um erro ao buscar os serviços</p>
+    );
+  }
 
   if (!servicesResponse.success) {
     return <p className="py-3 text-lg">Nenhum serviço encontrado</p>;
@@ -51,5 +63,3 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     </>
   );
 }
-
-

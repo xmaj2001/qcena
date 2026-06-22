@@ -13,6 +13,7 @@ export const authClient = createAuthClient({
       promptOptions: {
         baseDelay: 3000,
         maxAttempts: 5,
+        fedCM: false, // ← desactiva FedCM, wy!
       },
     }),
   ],

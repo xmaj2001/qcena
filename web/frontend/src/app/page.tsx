@@ -4,10 +4,16 @@ import { SearchNavbar } from "@/components/search/search-navbar";
 import { HeroFullCarousel } from "@/components/services/HeroFullCarousel";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 import { getFavoritesServices } from "@/server/services/features/get-favorites.feat";
+import { ApiService } from "@/server/services/types/service.type";
 
 export default async function Home() {
-  const data = await getFavoritesServices();
-  const images = data.map((service) => service.images[0]);
+  let data: ApiService[] = [];
+  try {
+    data = await getFavoritesServices();
+  } catch (error) {
+    // console.error("Error fetching favorite services:", error);
+  }
+  const images = data? data.map((service) => service.images[0]) : [];
 
   return (
     <div className="flex flex-col flex-1">
