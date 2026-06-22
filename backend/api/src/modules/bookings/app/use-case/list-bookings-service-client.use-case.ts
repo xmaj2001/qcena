@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IBookingRepository } from '../../../bookings/domain/repo/booking.repo';
+import { IBookingRepository } from '../../domain/repo/booking.repo';
 
 @Injectable()
 export class ListBookingsServiceClientUseCase {

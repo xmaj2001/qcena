@@ -7,9 +7,9 @@ import { getFavoritesServices } from "@/server/services/features/get-favorites.f
 import { ApiService } from "@/server/services/types/service.type";
 
 export default async function Home() {
-  let data: ApiService[] = [];
+  // let data: ApiService[] = [];
+  const data = await getFavoritesServices();
   try {
-    data = await getFavoritesServices();
   } catch (error) {
     // console.error("Error fetching favorite services:", error);
   }

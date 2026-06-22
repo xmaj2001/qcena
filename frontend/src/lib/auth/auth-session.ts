@@ -1,5 +1,5 @@
 import { ApiUserSession } from "@/server/users/types/user";
-import { ApiEnvelope } from "./../../types/api.types";
+import { ApiEnvelope } from "../../types/api.types";
 import { headers } from "next/headers";
 
 export async function getServerSession() {
