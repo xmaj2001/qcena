@@ -1,26 +1,39 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+// proxy.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { match } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
 
-const PROTECTED_ROUTES = ["/dashboard"];
+let locales = ["pt", "en"];
+let defaultLocale = "pt";
 
-export async function proxy(request: NextRequest) {
+function getLocale(request: NextRequest) {
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+  // @ts-ignore
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+  return match(languages, locales, defaultLocale);
+}
+
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const shouldProtect = PROTECTED_ROUTES.some((prefix) =>
-    pathname.startsWith(prefix),
+  // Verifica se a URL já tem o idioma (ex: /pt/about)
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
-  if (!shouldProtect) return NextResponse.next();
+  if (pathnameHasLocale) return;
 
-  const sessionCookie = getSessionCookie(request);
+  // Se não tiver idioma na URL, detecta e redireciona
+  const locale = getLocale(request);
+  request.nextUrl.pathname = `/${locale}${pathname}`;
 
-  if (!sessionCookie) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
-  }
-
-  return NextResponse.next();
+  return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|api/auth).*)"],
+  // Executa o proxy em todas as rotas, exceto arquivos internos (_next, imagens, etc)
+  matcher: ["/((?!_next|api|favicon.ico|.*\\..*).*)"],
 };

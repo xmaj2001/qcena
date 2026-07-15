@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "title": "Qcena — Any Scene, Any Need",
+    "description": "We are an Angolan platform for showcasing and selling products, focused on bringing you good products at good prices, with direct and simple contact via WhatsApp."
+  },
+  "navbar": {
+    "explore": "Explore",
+    "categories": "Categories",
+    "deals": "Deals",
+    "order": "Order Now",
+    "login": "Login",
+    "change_language": "Change Language",
+    "search_placeholder": "Search products, brands…",
+    "marketplace_title": "Qcena Store",
+    "marketplace_desc": "Discover quality-selected products at great prices. Direct contact via WhatsApp.",
+    "browse_products": "Browse Products",
+    "browse_products_desc": "Navigate hundreds of verified products.",
+    "how_it_works": "How It Works",
+    "how_it_works_desc": "Choose, talk to us, and arrange delivery.",
+    "delivery_points": "Delivery Points",
+    "delivery_points_desc": "Safe delivery at an agreed location near you."
+  },
+  "nav_categories": {
+    "moda": {
+      "title": "Fashion",
+      "description": "Trending clothes, shoes, and accessories."
+    },
+    "beleza": {
+      "title": "Beauty",
+      "description": "Cosmetics, perfumes, and personal care."
+    },
+    "eletronicos": {
+      "title": "Electronics",
+      "description": "Smartphones, headphones, smartwatches, and gadgets."
+    },
+    "casa": {
+      "title": "Home & Living",
+      "description": "Utensils, décor, and home tools."
+    },
+    "desporto": {
+      "title": "Sports",
+      "description": "Sports equipment and athletic wear."
+    },
+    "acessorios": {
+      "title": "Accessories",
+      "description": "Watches, sunglasses, bags, and jewelry."
+    }
+  },
+  "sidebar": {
+    "menu": "Menu",
+    "novidades": "New Arrivals",
+    "ofertas_dia": "Daily Deals",
+    "mais_vendidos": "Best Sellers",
+    "como_encomendar": "How to Order",
+    "pontos_entrega": "Delivery Points",
+    "garantia": "Qcena Guarantee",
+    "promo_badge": "Deal",
+    "promo_title": "Order directly on WhatsApp",
+    "promo_desc": "No sign-ups. Talk to us and arrange delivery at a safe point.",
+    "promo_cta": "Chat Now",
+    "trust_title": "Safe Shopping",
+    "trust_desc": "Products tested and promoted by our team. Delivery at an agreed point."
+  },
+  "footer": {
+    "explore": "Explore",
+    "novidades": "New Arrivals",
+    "ofertas_dia": "Daily Deals",
+    "mais_vendidos": "Best Sellers",
+    "todas_categorias": "All Categories",
+    "empresa": "Company",
+    "sobre": "About Qcena",
+    "como_funciona": "How It Works",
+    "blog": "Blog",
+    "carreiras": "Careers",
+    "apoio": "Support",
+    "pontos_entrega": "Delivery Points",
+    "garantia": "Qcena Guarantee",
+    "privacidade": "Privacy Policy",
+    "termos": "Terms of Use",
+    "whatsapp_cta": "Chat on WhatsApp",
+    "copyright": "All rights reserved.",
+    "tagline": "Any Scene, Any Need."
+  },
+  "categories": {
+    "title": "Browse by Categories",
+    "subtitle": "Explore the best products curated for you",
+    "design": {
+      "title": "Design & Branding",
+      "description": "Visual identity, logos, and art for social media."
+    },
+    "dev": {
+      "title": "Development",
+      "description": "Building websites, mobile applications, e-commerce, and integrations."
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "SEO, paid traffic management, and content strategies."
+    },
+    "video": {
+      "title": "Video & Animation",
+      "description": "Video editing, motion graphics, and post-production."
+    },
+    "consultoria": {
+      "title": "Consulting",
+      "description": "Business mentoring, finance, and growth strategies."
+    },
+    "redacao": {
+      "title": "Writing & Translation",
+      "description": "Copywriting, article writing, proofreading, and translations."
+    }
+  },
+  "about": {
+    "title": "About Qcena",
+    "description": "Qcena — Any Scene, Any Need. We are an Angolan platform for the showcase and sale of products, focused on bringing you good products at good prices, with simple and direct contact via WhatsApp. We select, test, and showcase quality products — you only need to get in touch and arrange delivery at a secure location near you. Qcena: today it is selling products, tomorrow it could be anything.",
+    "short_bio": "Showcase and sale of products in Angola. Talk to us on WhatsApp and arrange your delivery at a secure location."
+  }
+}

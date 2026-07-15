@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "title": "Qcena — Qualquer Cena, Qualquer Necessidade",
+    "description": "Somos uma plataforma angolana de divulgação e venda de produtos, focada em trazer-te bons produtos a bons preços, com contacto directo e simples via WhatsApp."
+  },
+  "navbar": {
+    "explore": "Explorar",
+    "categories": "Categorias",
+    "deals": "Ofertas",
+    "order": "Encomendar",
+    "login": "Entrar",
+    "change_language": "Mudar Idioma",
+    "search_placeholder": "Buscar produtos, marcas…",
+    "marketplace_title": "Loja Qcena",
+    "marketplace_desc": "Descobre produtos selecionados com qualidade e bons preços. Contacto directo via WhatsApp.",
+    "browse_products": "Ver Produtos",
+    "browse_products_desc": "Navega por centenas de produtos verificados.",
+    "how_it_works": "Como Funciona",
+    "how_it_works_desc": "Escolhe, fala connosco e combina a entrega.",
+    "delivery_points": "Pontos de Entrega",
+    "delivery_points_desc": "Entrega segura num ponto combinado perto de ti."
+  },
+  "nav_categories": {
+    "moda": {
+      "title": "Moda",
+      "description": "Roupas, calçados e acessórios de tendência."
+    },
+    "beleza": {
+      "title": "Beleza",
+      "description": "Cosméticos, perfumes e cuidados pessoais."
+    },
+    "eletronicos": {
+      "title": "Electrónicos",
+      "description": "Smartphones, headphones, smartwatches e gadgets."
+    },
+    "casa": {
+      "title": "Casa & Vida",
+      "description": "Utensílios, decoração e ferramentas para o lar."
+    },
+    "desporto": {
+      "title": "Desporto",
+      "description": "Equipamentos e vestuário desportivo."
+    },
+    "acessorios": {
+      "title": "Acessórios",
+      "description": "Relógios, óculos, malas e bijuteria."
+    }
+  },
+  "sidebar": {
+    "menu": "Menu",
+    "novidades": "Novidades",
+    "ofertas_dia": "Ofertas do Dia",
+    "mais_vendidos": "Mais Vendidos",
+    "como_encomendar": "Como Encomendar",
+    "pontos_entrega": "Pontos de Entrega",
+    "garantia": "Garantia Qcena",
+    "promo_badge": "Oferta",
+    "promo_title": "Encomenda direto no WhatsApp",
+    "promo_desc": "Sem cadastros. Fala connosco e combina a entrega num ponto seguro.",
+    "promo_cta": "Falar Agora",
+    "trust_title": "Compra Segura",
+    "trust_desc": "Produtos testados e divulgados pela nossa equipa. Entrega em ponto combinado."
+  },
+  "footer": {
+    "explore": "Explorar",
+    "novidades": "Novidades",
+    "ofertas_dia": "Ofertas do Dia",
+    "mais_vendidos": "Mais Vendidos",
+    "todas_categorias": "Todas as Categorias",
+    "empresa": "Empresa",
+    "sobre": "Sobre a Qcena",
+    "como_funciona": "Como Funciona",
+    "blog": "Blog",
+    "carreiras": "Carreiras",
+    "apoio": "Apoio",
+    "pontos_entrega": "Pontos de Entrega",
+    "garantia": "Garantia Qcena",
+    "privacidade": "Política de Privacidade",
+    "termos": "Termos de Uso",
+    "whatsapp_cta": "Falar no WhatsApp",
+    "copyright": "Todos os direitos reservados.",
+    "tagline": "Qualquer Cena, Qualquer Necessidade."
+  },
+  "categories": {
+    "title": "Navega por Categorias",
+    "subtitle": "Explore os melhores produtos selecionados para si",
+    "design": {
+      "title": "Design & Branding",
+      "description": "Identidade visual, logótipos e artes para redes sociais."
+    },
+    "dev": {
+      "title": "Desenvolvimento",
+      "description": "Criação de sites, aplicações móveis, e-commerce e integrações."
+    },
+    "marketing": {
+      "title": "Marketing Digital",
+      "description": "SEO, gestão de tráfego pago e estratégias de conteúdo."
+    },
+    "video": {
+      "title": "Vídeo & Animação",
+      "description": "Edição de vídeo, motion graphics e pós-produção."
+    },
+    "consultoria": {
+      "title": "Consultoria",
+      "description": "Mentoria de negócios, finanças e estratégias de crescimento."
+    },
+    "redacao": {
+      "title": "Redação & Tradução",
+      "description": "Copywriting, criação de artigos, revisão e traduções."
+    }
+  },
+  "about": {
+    "title": "Sobre a Qcena",
+    "description": "Qcena — Qualquer Cena, Qualquer Necessidade. Somos uma plataforma angolana de divulgação e venda de produtos, focada em trazer-te bons produtos a bons preços, com contacto directo e simples via WhatsApp. Escolhemos, testamos e divulgamos produtos com qualidade — tu só precisas de entrar em contacto e combinar a entrega num ponto seguro perto de ti. Qcena: hoje é venda de produtos, amanhã pode ser qualquer coisa.",
+    "short_bio": "Divulgação e venda de produtos em Angola. Fala connosco no WhatsApp e combina a tua entrega num ponto seguro."
+  }
+}
