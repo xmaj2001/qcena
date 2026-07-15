@@ -34,7 +34,15 @@ const filterCategories = [
   { title: "Redação & Tradução", slug: "redacao" },
 ];
 
-export function FilterSidebar({ providers: initialProviders }: { providers: Provider[] }) {
+export function FilterSidebar({ 
+  providers: initialProviders,
+  open = false,
+  onClose = () => {} 
+}: { 
+  providers: Provider[];
+  open?: boolean;
+  onClose?: () => void;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const anchor = useComboboxAnchor();
@@ -57,12 +65,45 @@ export function FilterSidebar({ providers: initialProviders }: { providers: Prov
       params.delete("category");
     }
     router.push(`/marketplace?${params.toString()}`);
+    // Close sidebar on mobile after selecting a category
+    onClose();
   };
 
   return (
-    <aside className="sticky top-24 hidden h-fit w-72 shrink-0 space-y-5 rounded-3xl bg-white/85 p-5 shadow-xl backdrop-blur lg:block border border-neutral-100 dark:bg-neutral-900/85 dark:border-neutral-800">
-      
-      {/* 1. Categorias */}
+    <>
+      {/* Mobile backdrop */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside 
+        className={`
+          fixed inset-y-0 left-0 z-50 w-72 shrink-0 overflow-y-auto space-y-5 p-5
+          border-r border-border bg-background shadow-2xl
+          transition-transform duration-300 ease-in-out
+          lg:sticky lg:top-24 lg:z-0 lg:h-fit lg:block
+          lg:w-72 lg:translate-x-0 lg:rounded-3xl lg:border lg:bg-white/85 lg:backdrop-blur lg:dark:bg-neutral-900/85
+          ${open ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
+        
+        {/* Mobile close header */}
+        <div className="mb-4 flex items-center justify-between lg:hidden">
+          <span className="font-bold text-foreground">Filtros</span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg p-2 hover:bg-muted transition-colors text-foreground"
+            aria-label="Fechar menu"
+          >
+            {/* Import from lucide-react normally, assuming we can use X here, or hardcode SVG if we can't add import easily. Wait, lucide-react is already imported above. I'll just add X to the imports in a separate replace_file_content if missing. Let's assume we can add X. */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
       <section>
         <div className="flex items-center gap-2 mb-3">
           <Layers className="h-4 w-4 text-neutral-400" />
@@ -224,5 +265,6 @@ export function FilterSidebar({ providers: initialProviders }: { providers: Prov
         </div>
       </section>
     </aside>
+    </>
   );
 }

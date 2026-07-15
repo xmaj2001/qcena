@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { CategoryList } from "@/components/landing/CategoryList";
 import { PromoBanners } from "@/components/landing/PromoBanners";
 import { ProductGrid } from "@/components/landing/ProductGrid";
+import { WhatsAppButton } from "@/components/landing/WhatsAppButton";
 import { getDictionary, Locale } from "./dictionaries";
 
 interface HomeProps {
@@ -15,7 +16,7 @@ export default async function Home({ params }: HomeProps) {
   const dict = await getDictionary(lang as Locale);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <Navbar />
       <main>
         <Hero />
@@ -27,6 +28,7 @@ export default async function Home({ params }: HomeProps) {
         <ProductGrid lang={lang} />
       </main>
       <Footer dict={dict} />
+      <WhatsAppButton />
     </div>
   );
 }

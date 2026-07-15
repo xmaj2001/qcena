@@ -77,7 +77,7 @@ export function Footer({ dict }: FooterProps) {
               {/* Brand column */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
-                  <Image src="/logo.png" alt="Qcena Logo" width={44} height={44} className="rounded-xl" />
+                  <Image src="/logo-white.png" alt="Qcena Logo" width={44} height={44} className="rounded-xl" />
                   <span className="text-2xl font-extrabold tracking-tight text-white">Qcena</span>
                 </div>
                 <p className="text-sm leading-relaxed text-white/70 max-w-xs">

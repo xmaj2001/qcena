@@ -110,16 +110,14 @@ function NavbarContent() {
 
   return (
     <header
-      className={`fixed z-50 w-full transition-all duration-500 ${
-        isScrolled ? "top-4 px-4" : "top-0 px-0"
-      }`}
+      className={`fixed z-50 w-full transition-all duration-500 ${isScrolled ? "top-4 px-4" : "top-0 px-0"
+        }`}
     >
       <div
-        className={`mx-auto flex h-16 items-center justify-between px-6 transition-all duration-500 ${
-          isScrolled
-            ? "bg-background/80 backdrop-blur-xl rounded-full border border-border shadow-lg max-w-6xl"
-            : " max-w-7xl "
-        }`}
+        className={`mx-auto flex h-16 items-center justify-between px-6 transition-all duration-500 ${isScrolled
+          ? "bg-background/80 backdrop-blur-xl rounded-full border border-border shadow-lg max-w-6xl"
+          : " max-w-7xl "
+          }`}
       >
         {/* Lado Esquerdo: Logo e Barra de Busca */}
         <div className="flex items-center gap-6 flex-1 max-w-xl">
@@ -159,11 +157,15 @@ function NavbarContent() {
                         className="flex h-full w-full flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md transition-shadow select-none cursor-pointer"
                         style={{
                           background:
-                            "linear-gradient(160deg, var(--brand) 0%, #7a2e00 100%)",
+                            "linear-gradient(160deg, var(--brand) 0%, #c95812ff 100%)",
                           color: "white",
                         }}
                       >
-                        <Sparkles className="h-6 w-6" />
+                        <Image src={'/logo-white.png'}
+                          width={100}
+                          height={100}
+                          alt="Logo Qcena"
+                        />
                         <div className="mt-4 mb-2 text-base font-semibold">
                           Loja Qcena
                         </div>

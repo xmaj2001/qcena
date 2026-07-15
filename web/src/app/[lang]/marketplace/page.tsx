@@ -1,6 +1,4 @@
-import { FilterSidebar } from "./_components/FilterSidebar";
-import { InfiniteServiceFeed } from "./_components/InfiniteServiceFeed";
-import { AiSearchBar } from "./_components/AiSearchBar";
+import { MarketplaceClient } from "./_components/MarketplaceClient";
 import { generateMockProviders, generateMockServices } from "@/lib/mockData";
 
 export const metadata = {
@@ -33,16 +31,7 @@ export default async function MarketplacePage({ searchParams }: PageProps) {
         </p>
       </div>
 
-      <div className="flex items-start gap-6">
-        {/* Sidebar Otimizada com Categorias Inclusas */}
-        <FilterSidebar providers={providers} />
-
-        {/* Feed de Serviços */}
-        <InfiniteServiceFeed initialServices={initialServices} />
-      </div>
-
-      {/* Busca Inteligente por Linguagem Natural Flutuante */}
-      <AiSearchBar />
+      <MarketplaceClient initialServices={initialServices} providers={providers} />
     </div>
   );
 }

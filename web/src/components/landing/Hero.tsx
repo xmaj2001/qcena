@@ -11,6 +11,7 @@ import {
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   {
@@ -91,14 +92,21 @@ export function Hero() {
         </div>
 
         <div className="relative h-64 md:h-auto">
-          <img
-            src={'./logo.png'}
+          {/* <img
+            src={'./logo-transparent.png'}
             alt="Produtos Qcena"
             className="absolute inset-0 h-full w-full object-cover"
             width={1600}
             height={900}
+          /> */}
+          <Image
+            src={'./logo-transparent.png'}
+            alt="Produtos Qcena"
+            className="absolute inset-0 h-4/6 w-full object-contain m-auto"
+            width={1600}
+            height={500}
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background/80" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent " />
         </div>
       </div>
     </section>
