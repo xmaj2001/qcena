@@ -3,6 +3,8 @@
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useState } from "react";
 
+import Link from "next/link";
+
 export interface Product {
   id: string;
   name: string;
@@ -15,6 +17,7 @@ export interface Product {
   discount?: number;
   colors?: string[];
   whatsapp?: string;
+  lang?: string;
 }
 
 export function formatPrice(kz: number) {
@@ -34,11 +37,13 @@ export function ProductCard({ product }: ProductCardProps) {
     `Olá Qcena! Quero saber mais sobre: ${product.name}`
   )}`;
 
+  const productLink = `/${product.lang || "pt"}/marketplace/product/${product.id}`;
+
   return (
     <div className="group relative flex flex-col rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
       {/* Discount Badge */}
       {product.discount && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-extrabold text-white shadow">
+        <span className="absolute left-2 top-2 sm:left-3 sm:top-3 z-10 rounded-full bg-red-500 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-extrabold text-white shadow">
           -{product.discount}%
         </span>
       )}
@@ -51,32 +56,34 @@ export function ProductCard({ product }: ProductCardProps) {
           e.stopPropagation();
           setLiked((p) => !p);
         }}
-        className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 backdrop-blur shadow-sm transition-all hover:bg-background"
+        className="absolute right-2 top-2 sm:right-3 sm:top-3 z-10 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-background/80 backdrop-blur shadow-sm transition-all hover:bg-background"
         aria-label="Adicionar aos favoritos"
       >
         <Heart
-          className={`h-4 w-4 transition-colors ${liked ? "fill-red-500 text-red-500" : "text-muted-foreground"}`}
+          className={`h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors ${liked ? "fill-red-500 text-red-500" : "text-muted-foreground"}`}
         />
       </button>
 
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-muted/30">
+      <Link href={productLink} className="relative aspect-square overflow-hidden bg-muted/30 block">
         <img
           src={product.image}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-      </div>
+      </Link>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col gap-2 p-3">
-        <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+      <div className="flex flex-1 flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3">
+        <span className="text-[9px] sm:text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
           {product.category}
         </span>
-        <p className="line-clamp-2 text-sm font-semibold text-foreground leading-snug">
-          {product.name}
-        </p>
+        <Link href={productLink} className="hover:underline">
+          <p className="line-clamp-2 text-xs sm:text-sm font-semibold text-foreground leading-snug">
+            {product.name}
+          </p>
+        </Link>
 
         {/* Colors */}
         {product.colors && product.colors.length > 0 && (
@@ -84,7 +91,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.colors.map((color) => (
               <span
                 key={color}
-                className="h-3.5 w-3.5 rounded-full border border-border/60 cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-[var(--brand)] transition-all"
+                className="h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border border-border/60 cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-[var(--brand)] transition-all"
                 style={{ backgroundColor: color }}
               />
             ))}
@@ -93,16 +100,16 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Rating */}
         <div className="flex items-center gap-1">
-          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-          <span className="text-xs font-bold text-foreground">{product.rating || "4.9"}</span>
-          <span className="text-xs text-muted-foreground">({product.reviews || "0"})</span>
+          <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-amber-400 text-amber-400" />
+          <span className="text-[10px] sm:text-xs font-bold text-foreground">{product.rating || "4.9"}</span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground">({product.reviews || "0"})</span>
         </div>
 
         {/* Price */}
-        <div className="flex items-baseline gap-2 mt-auto">
-          <span className="text-base font-extrabold text-foreground">{formatPrice(product.price)}</span>
+        <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mt-auto">
+          <span className="text-sm sm:text-base font-extrabold text-foreground">{formatPrice(product.price)}</span>
           {product.oldPrice && (
-            <span className="text-xs text-muted-foreground line-through">{formatPrice(product.oldPrice)}</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground line-through">{formatPrice(product.oldPrice)}</span>
           )}
         </div>
 
@@ -111,10 +118,10 @@ export function ProductCard({ product }: ProductCardProps) {
           href={waLink}
           target="_blank"
           rel="noreferrer"
-          className="mt-1 flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold text-white shadow-sm transition-all hover:brightness-110 active:scale-95"
+          className="mt-1 flex items-center justify-center gap-1.5 rounded-xl py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold text-white shadow-sm transition-all hover:brightness-110 active:scale-95 z-10 relative"
           style={{ background: "var(--brand)" }}
         >
-          <ShoppingCart className="h-3.5 w-3.5" />
+          <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           Encomendar
         </a>
       </div>

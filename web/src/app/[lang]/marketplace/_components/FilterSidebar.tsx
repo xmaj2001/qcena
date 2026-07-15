@@ -1,61 +1,33 @@
-// app/marketplace/_components/FilterSidebar.tsx
 "use client";
 
 import * as React from "react";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Star, Layers, Users2, DollarSign } from "lucide-react";
-
-import {
-  Combobox,
-  ComboboxChip,
-  ComboboxChips,
-  ComboboxChipsInput,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxValue,
-  useComboboxAnchor,
-} from "@/components/ui/combobox";
-
-interface Provider {
-  name: string;
-  checked: boolean;
-}
+import { Star, Layers, DollarSign, X } from "lucide-react";
 
 const filterCategories = [
-  { title: "Todos Serviços", slug: "" },
-  { title: "Design & Branding", slug: "design" },
-  { title: "Desenvolvimento", slug: "dev" },
-  { title: "Marketing digital", slug: "marketing" },
-  { title: "Vídeo & Áudio", slug: "video" },
-  { title: "Consultoria", slug: "consultoria" },
-  { title: "Redação & Tradução", slug: "redacao" },
+  { title: "Todos Produtos", slug: "" },
+  { title: "Moda", slug: "moda" },
+  { title: "Beleza", slug: "beleza" },
+  { title: "Electrónicos", slug: "eletronicos" },
+  { title: "Casa & Vida", slug: "casa" },
+  { title: "Desporto", slug: "desporto" },
+  { title: "Acessórios", slug: "acessorios" },
 ];
 
 export function FilterSidebar({ 
-  providers: initialProviders,
   open = false,
   onClose = () => {} 
 }: { 
-  providers: Provider[];
   open?: boolean;
   onClose?: () => void;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const anchor = useComboboxAnchor();
   
   const currentCategory = searchParams.get("category") || "";
   const [range, setRange] = useState(1130);
   const [rating, setRating] = useState<number | null>(null);
-  const [delivery, setDelivery] = useState<"online" | "presencial">("online");
-
-  // Mapeia a lista de fornecedores vindos do mock data para strings simples
-  const providerNames = React.useMemo(() => {
-    return initialProviders.map((p) => p.name);
-  }, [initialProviders]);
 
   const handleCategoryChange = (slug: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -65,7 +37,6 @@ export function FilterSidebar({
       params.delete("category");
     }
     router.push(`/marketplace?${params.toString()}`);
-    // Close sidebar on mobile after selecting a category
     onClose();
   };
 
@@ -100,10 +71,11 @@ export function FilterSidebar({
             className="rounded-lg p-2 hover:bg-muted transition-colors text-foreground"
             aria-label="Fechar menu"
           >
-            {/* Import from lucide-react normally, assuming we can use X here, or hardcode SVG if we can't add import easily. Wait, lucide-react is already imported above. I'll just add X to the imports in a separate replace_file_content if missing. Let's assume we can add X. */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            <X className="h-5 w-5" />
           </button>
         </div>
+
+      {/* 1. Categorias */}
       <section>
         <div className="flex items-center gap-2 mb-3">
           <Layers className="h-4 w-4 text-neutral-400" />
@@ -127,59 +99,7 @@ export function FilterSidebar({
         </ul>
       </section>
 
-      {/* 2. Fornecedores (Filtro Inteligente via Combobox) */}
-      <section className="border-t pt-4 border-neutral-100 dark:border-neutral-800">
-        <div className="flex items-center gap-2 mb-3">
-          <Users2 className="h-4 w-4 text-neutral-400" />
-          <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Fornecedores</h4>
-        </div>
-        
-        <div className="w-full">
-          <Combobox
-            multiple
-            autoHighlight
-            items={providerNames}
-          >
-            <ComboboxChips ref={anchor} className="w-full bg-neutral-50 border-neutral-200 rounded-xl p-1.5 min-h-[42px] flex flex-wrap gap-1 transition-colors focus-within:border-neutral-400 dark:bg-neutral-800/50 dark:border-neutral-800">
-              <ComboboxValue>
-                {(values: string[]) => (
-                  <React.Fragment>
-                    {values.map((value: string) => (
-                      <ComboboxChip 
-                        key={value}
-                        className="text-[11px] bg-white border border-neutral-200 rounded-lg px-2 py-0.5 shadow-xs text-neutral-800 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200"
-                      >
-                        {value}
-                      </ComboboxChip>
-                    ))}
-                    <ComboboxChipsInput 
-                      placeholder={values.length === 0 ? "Buscar empresa..." : ""}
-                      className="text-xs bg-transparent outline-none flex-1 min-w-[60px] px-1 placeholder:text-neutral-400 text-neutral-900 dark:text-white"
-                    />
-                  </React.Fragment>
-                )}
-              </ComboboxValue>
-            </ComboboxChips>
-            
-            <ComboboxContent anchor={anchor} className="z-50 bg-white border border-neutral-200 rounded-xl shadow-xl mt-1 max-h-48 overflow-y-auto p-1 dark:bg-neutral-900 dark:border-neutral-800">
-              <ComboboxEmpty className="text-xs text-muted-foreground p-3 text-center">Nenhum fornecedor encontrado.</ComboboxEmpty>
-              <ComboboxList>
-                {(item: string) => (
-                  <ComboboxItem 
-                    key={item} 
-                    value={item}
-                    className="text-xs px-3 py-2 rounded-lg cursor-pointer hover:bg-neutral-50 transition-colors flex items-center justify-between data-[highlighted]:bg-neutral-50 dark:hover:bg-neutral-800 dark:data-[highlighted]:bg-neutral-800"
-                  >
-                    {item}
-                  </ComboboxItem>
-                )}
-              </ComboboxList>
-            </ComboboxContent>
-          </Combobox>
-        </div>
-      </section>
-
-      {/* 3. Faixa de preço (Sem o gráfico ocupando espaço) */}
+      {/* 2. Faixa de preço */}
       <section className="border-t pt-4 border-neutral-100 dark:border-neutral-800">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -188,7 +108,7 @@ export function FilterSidebar({
           </div>
           <button 
             className="text-[10px] font-semibold text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200" 
-            onClick={() => setRange(1130)}
+            onClick={() => setRange(50000)}
           >
             Reset
           </button>
@@ -197,27 +117,27 @@ export function FilterSidebar({
         <div className="space-y-3">
           <input
             type="range"
-            min={20}
-            max={5000}
+            min={500}
+            max={50000}
             value={range}
             onChange={(e) => setRange(Number(e.target.value))}
             className="w-full accent-[var(--brand)] cursor-pointer h-1 bg-neutral-100 rounded-lg dark:bg-neutral-800"
           />
           <div className="flex justify-between text-[10px] font-bold">
             <span className="rounded-lg bg-neutral-100 border border-neutral-200/60 px-2 py-1 text-neutral-600 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-              R$ 20
+              Kz 500
             </span>
             <span 
               className="rounded-lg px-2 py-1 text-white shadow-xs" 
               style={{ background: "var(--brand)" }}
             >
-              R$ {range}
+              Kz {range.toLocaleString('pt-AO')}
             </span>
           </div>
         </div>
       </section>
 
-      {/* 4. Avaliação */}
+      {/* 3. Avaliação */}
       <section className="border-t pt-4 border-neutral-100 dark:border-neutral-800">
         <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3">Avaliação mínima</h4>
         <div className="flex items-center gap-1">
@@ -235,33 +155,6 @@ export function FilterSidebar({
           <span className="ml-auto text-[10px] text-neutral-400 font-bold">
             {rating ? `${rating} estrelas` : "4 estrelas ou mais"}
           </span>
-        </div>
-      </section>
-
-      {/* 5. Modalidade de Entrega */}
-      <section className="border-t pt-4 border-neutral-100 dark:border-neutral-800">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3">Entrega do Serviço</h4>
-        <div className="grid grid-cols-2 gap-1 rounded-xl bg-neutral-100 p-1 dark:bg-neutral-800">
-          <button
-            onClick={() => setDelivery("online")}
-            className={`rounded-lg py-1.5 text-xs font-semibold transition-all ${
-              delivery === "online" 
-                ? "bg-white text-neutral-900 shadow-xs dark:bg-neutral-700 dark:text-white" 
-                : "text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
-            }`}
-          >
-            Online
-          </button>
-          <button
-            onClick={() => setDelivery("presencial")}
-            className={`rounded-lg py-1.5 text-xs font-semibold transition-all ${
-              delivery === "presencial" 
-                ? "bg-white text-neutral-900 shadow-xs dark:bg-neutral-700 dark:text-white" 
-                : "text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
-            }`}
-          >
-            Presencial
-          </button>
         </div>
       </section>
     </aside>

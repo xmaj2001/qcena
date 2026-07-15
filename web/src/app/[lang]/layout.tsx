@@ -26,6 +26,24 @@ export async function generateMetadata({
   return {
     title: dict.meta.title,
     description: dict.meta.description,
+    icons: {
+      icon: "/favicon.ico",
+    },
+    metadataBase: new URL('https://qcena.vercel.app'),
+    openGraph: {
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: [
+        {
+          url: '/banner.png', // Adjust the path if your screenshot is in a different folder
+          width: 1200,
+          height: 630,
+          alt: 'Qcena - Marketplace de Serviços em Angola',
+        },
+      ],
+      locale: lang,
+      type: 'website',
+    },
   };
 }
 
@@ -34,7 +52,7 @@ export default async function RootLayout({
   params,
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
-  
+
   return (
     <html
       lang={lang}

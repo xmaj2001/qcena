@@ -13,26 +13,24 @@ interface Provider {
 }
 
 interface MarketplaceClientProps {
-  initialServices: Product[];
-  providers: Provider[];
+  initialProducts: Product[];
 }
 
-export function MarketplaceClient({ initialServices, providers }: MarketplaceClientProps) {
+export function MarketplaceClient({ initialProducts }: MarketplaceClientProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
       <div className="flex items-start gap-6">
         <FilterSidebar 
-          providers={providers} 
           open={sidebarOpen} 
           onClose={() => setSidebarOpen(false)} 
         />
 
-        <InfiniteServiceFeed initialServices={initialServices} />
+        <InfiniteServiceFeed initialServices={initialProducts} />
       </div>
 
-      <AiSearchBar />
+      {/* <AiSearchBar /> */}
 
       {/* Floating Filter Button for Mobile */}
       <button

@@ -1,9 +1,9 @@
 import { MarketplaceClient } from "./_components/MarketplaceClient";
-import { generateMockProviders, generateMockServices } from "@/lib/mockData";
+import { generateMockServices } from "@/lib/mockData";
 
 export const metadata = {
-  title: "Marketplace de serviços — servi.",
-  description: "Encontre e contrate serviços de profissionais verificados.",
+  title: "Marketplace de produtos — Qcena.",
+  description: "Encontre e compre os melhores produtos verificados.",
 };
 
 interface PageProps {
@@ -12,8 +12,7 @@ interface PageProps {
 
 export default async function MarketplacePage({ searchParams }: PageProps) {
   const resolvedParams = await searchParams;
-  const initialServices = generateMockServices(9);
-  const providers = generateMockProviders();
+  const initialProducts = generateMockServices(9);
 
   return (
     <div className="relative min-h-screen pb-24">
@@ -21,17 +20,17 @@ export default async function MarketplacePage({ searchParams }: PageProps) {
       <div className="mb-6 mt-4">
         <h1 className="text-2xl font-black tracking-tight">
           {resolvedParams.category 
-            ? `Serviços de ${resolvedParams.category.charAt(0).toUpperCase() + resolvedParams.category.slice(1)}`
-            : "Explorar Serviços"}
+            ? `Produtos de ${resolvedParams.category.charAt(0).toUpperCase() + resolvedParams.category.slice(1)}`
+            : "Explorar Produtos"}
         </h1>
         <p className="text-xs text-muted-foreground">
           {resolvedParams.search 
             ? `Mostrando resultados para "${resolvedParams.search}"`
-            : "Profissionais verificados prontos para atender seu projeto."}
+            : "Produtos selecionados com garantia de qualidade."}
         </p>
       </div>
 
-      <MarketplaceClient initialServices={initialServices} providers={providers} />
+      <MarketplaceClient initialProducts={initialProducts} />
     </div>
   );
 }

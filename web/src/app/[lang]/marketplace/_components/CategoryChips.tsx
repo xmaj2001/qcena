@@ -3,15 +3,13 @@
 import { useState } from "react";
 
 const categories = [
-  "Todas categorias",
-  "Ofertas",
-  "Design",
-  "Dev",
-  "Marketing",
-  "Vídeo",
-  "Consultoria",
-  "Redação",
-  "Áudio",
+  "Todas",
+  "Moda",
+  "Beleza",
+  "Electrónicos",
+  "Casa & Vida",
+  "Desporto",
+  "Acessórios",
 ];
 
 export function CategoryChips() {
