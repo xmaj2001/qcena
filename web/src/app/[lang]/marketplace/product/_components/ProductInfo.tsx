@@ -70,7 +70,7 @@ export function ProductInfo({ p }: { p: any }) {
 
       <p className="text-sm leading-relaxed text-foreground/80">{p.description}</p>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {p.specs?.map((s: { label: string; value: string }) => (
           <div key={s.label} className="rounded-2xl border border-border bg-surface p-3 text-center">
             <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</div>

@@ -33,7 +33,7 @@ export function ProductGallery({ p }: { p: any }) {
           </button>
         )}
       </div>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-4 gap-2 sm:grid-cols-5">
         {p.images.map((img: string, i: number) => (
           <button
             key={i}
