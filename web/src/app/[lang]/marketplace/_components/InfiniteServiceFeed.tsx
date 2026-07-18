@@ -8,13 +8,13 @@ import { ProductCard, Product } from "@/components/products/ProductCard";
 import { useInView } from "framer-motion";
 
 interface InfiniteServiceFeedProps {
-  initialServices: Product[];
+  initial: Product[];
 }
 
 export function InfiniteServiceFeed({
-  initialServices,
+  initial,
 }: InfiniteServiceFeedProps) {
-  const [services, setServices] = useState<Product[]>(initialServices);
+  const [services, setServices] = useState<Product[]>(initial);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 

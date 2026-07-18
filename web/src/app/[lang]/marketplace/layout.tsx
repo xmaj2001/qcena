@@ -16,11 +16,11 @@ export default async function MarketplaceLayout({
 
   return (
     <div
-      className="min-h-screen pt-20"
- 
+      className="min-h-screen"
+
     >
       <Navbar />
-      <main className="mx-auto max-w-350 px-4 py-8 sm:px-8">
+      <main className="mx-auto max-w-350 sm:p-0 sm:w-full">
         {children}
       </main>
     </div>

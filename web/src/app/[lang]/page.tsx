@@ -3,7 +3,7 @@ import { Hero } from "@/components/landing/Hero";
 import { Navbar } from "@/components/Navbar";
 import { CategoryList } from "@/components/landing/CategoryList";
 import { PromoBanners } from "@/components/landing/PromoBanners";
-import { ProductGrid } from "@/components/landing/ProductGrid";
+import { ProductGrid } from "@/components/products/ProductGrid";
 import { WhatsAppButton } from "@/components/landing/WhatsAppButton";
 import { getDictionary, Locale } from "./dictionaries";
 

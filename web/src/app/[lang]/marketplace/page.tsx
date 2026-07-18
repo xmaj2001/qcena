@@ -15,16 +15,16 @@ export default async function MarketplacePage({ searchParams }: PageProps) {
   const initialProducts = generateMockServices(9);
 
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative min-h-screen pb-24 mt-24">
       {/* Título contextual da página para dar norte ao usuário */}
       <div className="mb-6 mt-4">
         <h1 className="text-2xl font-black tracking-tight">
-          {resolvedParams.category 
+          {resolvedParams.category
             ? `Produtos de ${resolvedParams.category.charAt(0).toUpperCase() + resolvedParams.category.slice(1)}`
             : "Explorar Produtos"}
         </h1>
         <p className="text-xs text-muted-foreground">
-          {resolvedParams.search 
+          {resolvedParams.search
             ? `Mostrando resultados para "${resolvedParams.search}"`
             : "Produtos selecionados com garantia de qualidade."}
         </p>

@@ -27,7 +27,7 @@ export function MarketplaceClient({ initialProducts }: MarketplaceClientProps) {
           onClose={() => setSidebarOpen(false)} 
         />
 
-        <InfiniteServiceFeed initialServices={initialProducts} />
+        <InfiniteServiceFeed initial={initialProducts} />
       </div>
 
       {/* <AiSearchBar /> */}
@@ -35,7 +35,7 @@ export function MarketplaceClient({ initialProducts }: MarketplaceClientProps) {
       {/* Floating Filter Button for Mobile */}
       <button
         onClick={() => setSidebarOpen(true)}
-        className="fixed bottom-[90px] left-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand)] text-white shadow-xl transition-transform hover:scale-110 active:scale-95 lg:hidden"
+        className="fixed bottom-22.5 left-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand)] text-white shadow-xl transition-transform hover:scale-110 active:scale-95 lg:hidden"
         aria-label="Filtros"
       >
         <Filter className="h-6 w-6" />
