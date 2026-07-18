@@ -15,7 +15,7 @@ export default async function MarketplacePage({ searchParams }: PageProps) {
   const initialProducts = generateMockServices(9);
 
   return (
-    <div className="relative min-h-screen pb-24 mt-24">
+    <div className="relative min-h-screen px-4 pb-24 mt-24 px-">
       {/* Título contextual da página para dar norte ao usuário */}
       <div className="mb-6 mt-4">
         <h1 className="text-2xl font-black tracking-tight">
