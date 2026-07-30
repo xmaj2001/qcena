@@ -22,8 +22,6 @@ export default async function Home({ params }: HomeProps) {
         <Hero />
         {/* 1. Category icons row */}
         <CategoryList dict={dict} lang={lang} />
-        {/* 2. Promo banners (Flash Sale, WhatsApp, Novidades) */}
-        <PromoBanners lang={lang} />
         {/* 3. Best Deals + Recommended grids */}
         <ProductGrid lang={lang} />
       </main>
