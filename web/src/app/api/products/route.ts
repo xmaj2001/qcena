@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { STATIC_MACBOOK_PRO, generateMockProducts } from "@/features/products/products.mock";
 import type { ApiEnvelope, ApiCursorEnvelope } from "@/features/core/api.types";
 import type { Product } from "@/features/products/types";
 import { mockProducts } from "@/lib/mockData";

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { generateMockProducts, generateMockProduct } from "@/features/products/products.mock";
 import type { ApiEnvelope } from "@/features/core/api.types";
 import type { Product, ProductsHomeResponse } from "@/features/products/types";
 import { mockProducts } from "@/lib/mockData";
