@@ -7,86 +7,111 @@ interface ProductPageProps {
   params: Promise<{ id: string; lang: string }>;
 }
 
-// 1. GERADOR DE METADADOS DINÂMICOS PARA SEO
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+// Domínio base da aplicação (configurar no .env.production)
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL("https://qcena.com");
+
+// 1. GENERATE METADATA (Conforme especificação do Next.js App Router)
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   const { id, lang } = await params;
 
+  let data;
   try {
-    const data = await productService.getProductById(id);
-    const product = data?.product;
-
-    if (!product) {
-      return {
-        title: "Produto não encontrado | Qcena",
-      };
-    }
-
-    const title = `${product.name} | Qcena`;
-    const description =
-      product.description.length > 160
-        ? `${product.description.slice(0, 157)}...`
-        : product.description;
-
-    const mainImage = product.banner || product.images[0] || "/og-image.jpg";
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://qcena.com";
-    const canonicalUrl = `${siteUrl}/${lang}/products/${id}`;
-
+    data = await productService.getProductById(id);
+  } catch {
     return {
-      title,
-      description,
-      keywords: [
-        product.name,
-        product.category,
-        ...(product.tags || []),
-        "Qcena",
-        "Marketplace",
-        "Comprar online",
-      ],
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        title,
-        description,
-        url: canonicalUrl,
-        siteName: "Qcena",
-        images: [
-          {
-            url: mainImage,
-            width: 1200,
-            height: 630,
-            alt: product.name,
-          },
-        ],
-        type: "article",
-        locale: lang === "pt" ? "pt_AO" : lang,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description,
-        images: [mainImage],
-      },
-      other: {
-        "product:price:amount": product.price.toString(),
-        "product:price:currency": "EUR", // Altera para a tua moeda padrão se necessário
-      },
-    };
-  } catch (error) {
-    return {
-      title: "Produto | Qcena",
+      title: "Produto não encontrado",
     };
   }
+
+  const product = data?.product;
+  if (!product) {
+    return {
+      title: "Produto não encontrado",
+    };
+  }
+
+  const title = product.name;
+  const description =
+    product.description.length > 160
+      ? `${product.description.slice(0, 157)}...`
+      : product.description;
+
+  const mainImage = product.banner || product.images[0] || "/og-image.jpg";
+
+  return {
+    // metadataBase garante resolução correta de URLs relativas/absolutas
+    metadataBase: baseUrl,
+    title: {
+      default: title,
+      template: `%s | Qcena`,
+    },
+    description,
+    keywords: [
+      product.name,
+      product.category,
+      ...(product.tags || []),
+      "Qcena",
+      "E-commerce",
+    ],
+    // Links Canónicos e Suporte Multi-idioma
+    alternates: {
+      canonical: `/${lang}/products/${id}`,
+      languages: {
+        "pt-AO": `/pt/products/${id}`,
+        "en-US": `/en/products/${id}`,
+      },
+    },
+    // Open Graph (Facebook, WhatsApp, LinkedIn)
+    openGraph: {
+      title: `${title} | Qcena`,
+      description,
+      url: `/${lang}/products/${id}`,
+      siteName: "Qcena",
+      images: [
+        {
+          url: mainImage,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+          type: "image/jpeg",
+        },
+      ],
+      locale: lang === "pt" ? "pt_AO" : "en_US",
+      type: "website",
+    },
+    // Twitter Card
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Qcena`,
+      description,
+      images: [mainImage],
+    },
+    // Meta tags de robôs (Garante indexação rápida do produto)
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
 }
 
-// 2. COMPONENTE DA PÁGINA COM DADOS ESTRUTURADOS (JSON-LD)
+// 2. PAGE COMPONENT (Com Structured Data JSON-LD)
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id, lang } = await params;
 
   let data;
   try {
     data = await productService.getProductById(id);
-  } catch (error) {
+  } catch {
     notFound();
   }
 
@@ -96,34 +121,33 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const { product, relatedProducts } = data;
 
-  // Schema.org Product para Rich Snippets no Google
+  // Schema.org Structured Data (JSON-LD para Google Rich Results)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    image: product.images,
+    image: product.images.length > 0 ? product.images : [product.banner],
     description: product.description,
     sku: product.id,
     category: product.category,
     offers: {
       "@type": "Offer",
-      priceCurrency: "EUR",
+      priceCurrency: "AOA", // Ajusta para a tua moeda padrão (ex: AOA, EUR, USD)
       price: product.price,
       itemCondition: "https://schema.org/NewCondition",
       availability:
         product.stock > 0
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://qcena.com"}/${lang}/products/${id}`,
+      url: `${baseUrl.origin}/${lang}/products/${id}`,
     },
-    aggregateRating:
-      product.reviews > 0
-        ? {
-          "@type": "AggregateRating",
-          ratingValue: product.rating,
-          reviewCount: product.reviews,
-        }
-        : undefined,
+    ...(product.reviews > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: product.rating,
+        reviewCount: product.reviews,
+      },
+    }),
   };
 
   return (
@@ -131,7 +155,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       className="min-h-screen text-foreground relative bg-background"
       id="place"
     >
-      {/* Script de Dados Estruturados para o Google */}
+      {/* Script JSON-LD inserido de acordo com a recomendação da Vercel */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
