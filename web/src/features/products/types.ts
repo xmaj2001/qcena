@@ -6,6 +6,7 @@ export interface ProductSpec {
 export interface Product {
   id: string;
   name: string;
+  slug: string;
   banner: string;
   video: string;
   images: string[];
@@ -26,7 +27,6 @@ export interface ProductsHomeResponse {
   bestDeals: Product[];
 }
 
-// Resposta para os detalhes do produto
 export interface ProductDetailResponse {
   product: Product;
   relatedProducts: Product[];

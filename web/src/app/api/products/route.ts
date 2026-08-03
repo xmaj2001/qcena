@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { STATIC_MACBOOK_PRO, generateMockProducts } from "@/features/products/products.mock";
 import type { ApiEnvelope, ApiCursorEnvelope } from "@/features/core/api.types";
 import type { Product } from "@/features/products/types";
+import { mockProducts } from "@/lib/mockData";
 
 // Base de dados mockada com IDs sequenciais para garantir ordenação estável
 const MOCK_DATABASE: Product[] = [
-    STATIC_MACBOOK_PRO,
-    ...generateMockProducts(49),
+    ...mockProducts
 ];
 
 export async function GET(request: NextRequest) {

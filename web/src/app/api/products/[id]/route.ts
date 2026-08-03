@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-    STATIC_MACBOOK_PRO,
-    generateMockProduct,
-    generateMockProducts,
-} from "@/features/products/products.mock";
+import { mockProducts } from "@/lib/mockData";
 import type { ApiEnvelope, ApiResponseError, ErrorResponse } from "@/features/core/api.types";
 import type { Product, ProductDetailResponse } from "@/features/products/types";
 
@@ -14,34 +10,40 @@ type RouteParams = {
 export async function GET(_request: NextRequest, { params }: RouteParams) {
     const { id } = await params;
 
-    // Lógica de busca simulada
-    let product: Product;
+    // Procura o produto por ID ou por Slug no mockData
+    const product = mockProducts.find(
+        (item) => item.id === id || item.slug === id
+    );
 
-    if (id === STATIC_MACBOOK_PRO.id) {
-        product = STATIC_MACBOOK_PRO;
-    } else if (id === "not-found") {
-        // Exemplo de resposta 404 simulada
+    // Retorna erro 404 padronizado se não encontrar
+    if (!product) {
         const errorBody: ApiResponseError<ErrorResponse> = {
             success: false,
             data: {
                 code: 404,
-                message: `Produto com o ID '${id}' não foi encontrado.`,
+                message: `Produto com o ID/Slug '${id}' não foi encontrado.`,
                 fields: [],
             },
             ts: new Date().toISOString(),
             path: `/api/products/${id}`,
         };
         return NextResponse.json(errorBody, { status: 404 });
-    } else {
-        // Gera um produto com o ID requisitado
-        product = generateMockProduct({ id });
     }
 
-    // Gera 4 produtos relacionados na mesma categoria do produto
-    const relatedProducts = generateMockProducts(4).map((item) => ({
-        ...item,
-        category: product.category,
-    }));
+    // Filtra produtos relacionados pertencentes à mesma categoria (excluindo o próprio produto)
+    let relatedProducts = mockProducts.filter(
+        (item) => item.category === product.category && item.id !== product.id
+    );
+
+    // Se houver menos de 4 produtos na mesma categoria, completa com outros produtos do mock
+    if (relatedProducts.length < 4) {
+        const remainingProducts = mockProducts.filter(
+            (item) => item.id !== product.id && !relatedProducts.includes(item)
+        );
+        relatedProducts = [...relatedProducts, ...remainingProducts].slice(0, 4);
+    } else {
+        relatedProducts = relatedProducts.slice(0, 4);
+    }
 
     const response: ApiEnvelope<ProductDetailResponse> = {
         success: true,

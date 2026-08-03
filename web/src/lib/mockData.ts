@@ -1,34 +1,242 @@
-// app/marketplace/_data/services-mock.ts
-import { fakerPT_BR as faker } from "@faker-js/faker";
-import { Product } from "@/components/products/ProductCard";
+import { Category } from "@/features/categories/types";
+import { Product } from "@/features/products";
 
-// Gera uma quantidade específica de serviços sob demanda
-export function generateMockServices(quantity: number): Product[] {
-  return Array.from({ length: quantity }, () => {
-    const hasDiscount = faker.datatype.boolean(0.3); // 30% de chance de promoção
-    const basePrice = faker.number.int({ min: 1500, max: 50000 });
-    const oldPrice = hasDiscount ? Math.round(basePrice * 1.25) : undefined;
-    const discount = hasDiscount ? 20 : undefined;
-    
-    return {
-      id: faker.string.uuid(),
-      name: faker.commerce.productName() + " Personalizado",
-      category: "Serviço",
-      provider: faker.company.name(), // optional if we extend Product to show it, or we use `category`
-      image: faker.image.urlPicsumPhotos({ width: 800, height: 600, blur: 0 }),
-      price: basePrice,
-      oldPrice: oldPrice,
-      rating: faker.number.float({ min: 4.0, max: 5.0, multipleOf: 0.1 }),
-      reviews: faker.number.int({ min: 5, max: 300 }),
-      discount: discount,
-      whatsapp: "244900000000"
-    };
-  });
-}
+export const mockCategories: Category[] = [
+  {
+    id: "cat-1",
+    name: "Moda",
+    slug: "moda",
+    description: "Roupas, calçados e acessórios de tendência.",
+    icon: "shirt",
+    productCount: 198,
+  },
+  {
+    id: "cat-2",
+    name: "Beleza",
+    slug: "beleza",
+    description: "Cosméticos, perfumes e cuidados pessoais.",
+    icon: "sparkles",
+    productCount: 94,
+  },
+  {
+    id: "cat-3",
+    name: "Electrónicos",
+    slug: "eletronicos",
+    description: "Gadgets, periféricos de informática e áudio.",
+    icon: "laptop",
+    productCount: 405,
+  },
+  {
+    id: "cat-4",
+    name: "Acessórios",
+    slug: "acessorios",
+    description: "Relógios, joias e bijuterias.",
+    icon: "watch",
+    productCount: 207,
+  },
+];
 
-export function generateMockProviders() {
-  return Array.from({ length: 6 }, () => ({
-    name: faker.company.name(),
-    checked: faker.datatype.boolean(0.4),
-  }));
-}
+export const mockProducts: Product[] = [
+  // --- MODA ---
+  {
+    id: "prod-1",
+    name: "Tênis Nike Air Force 1 '07",
+    slug: "nike-air-force-1-07",
+    banner: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 1200.00,
+    oldPrice: 1500.00,
+    stock: 25,
+    badge: "Mais Vendido",
+    category: "moda",
+    rating: 4.8,
+    reviews: 128,
+    tags: ["tenis", "nike", "casual", "moda"],
+    description: "O clássico do basquetebol em couro genuíno, sola com amortecimento Nike Air e acabamento premium em branco minimalista.",
+    specs: [
+      { label: "Material", value: "Couro Legítimo" },
+      { label: "Solado", value: "Borracha com amortecimento Air" },
+      { label: "Cor", value: "Branco" },
+    ],
+  },
+  {
+    id: "prod-2",
+    name: "Jaqueta Jeans Oversized Classic",
+    slug: "jaqueta-jeans-oversized-classic",
+    banner: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 6000.50,
+    oldPrice: 8000.00,
+    stock: 12,
+    badge: "Tendência",
+    category: "moda",
+    rating: 4.5,
+    reviews: 42,
+    tags: ["jaqueta", "jeans", "casual"],
+    description: "Jaqueta jeans com lavagem média, corte oversized moderno, botões metálicos reforçados e bolsos frontais.",
+    specs: [
+      { label: "Tecido", value: "100% Algodão" },
+      { label: "Estilo", value: "Oversized" },
+      { label: "Lavagem", value: "Média" },
+    ],
+  },
+
+  // --- BELEZA ---
+  {
+    id: "prod-3",
+    name: "Perfume Chanel N°5 Eau de Parfum 100ml",
+    slug: "perfume-chanel-n5-100ml",
+    banner: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 1705.00,
+    oldPrice: 1905.00,
+    stock: 8,
+    badge: "Premium",
+    category: "beleza",
+    rating: 4.9,
+    reviews: 210,
+    tags: ["perfume", "chanel", "beleza", "luxo"],
+    description: "A essência da feminilidade num frasco icónico. Um buquê floral aldeídico atemporal e sofisticado.",
+    specs: [
+      { label: "Volume", value: "100ml" },
+      { label: "Concentração", value: "Eau de Parfum" },
+      { label: "Família Olfativa", value: "Floral Aldeídico" },
+    ],
+  },
+  {
+    id: "prod-4",
+    name: "Sérum Facial Hidratante de Ácido Hialurónico",
+    slug: "serum-facial-acido-hialuronico",
+    banner: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 3400.90,
+    oldPrice: 4200.00,
+    stock: 50,
+    badge: "Promoção",
+    category: "beleza",
+    rating: 4.6,
+    reviews: 75,
+    tags: ["skincare", "serum", "facial", "hidratante"],
+    description: "Fórmula concentrada para hidratação profunda da pele, redução de linhas finas e brilho natural.",
+    specs: [
+      { label: "Volume", value: "30ml" },
+      { label: "Tipo de Pele", value: "Todos os tipos" },
+      { label: "Ingrediente Chave", value: "Ácido Hialurónico 2%" },
+    ],
+  },
+
+  // --- ELECTRÓNICOS ---
+  {
+    id: "prod-5",
+    name: "Apple MacBook Pro 14\" M3 (512GB SSD)",
+    slug: "macbook-pro-14-m3",
+    banner: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 7799.00,
+    oldPrice: 9999.00,
+    stock: 5,
+    badge: "Destaque",
+    category: "eletronicos",
+    rating: 4.9,
+    reviews: 312,
+    tags: ["apple", "macbook", "laptop", "pc"],
+    description: "Desempenho extraordinário com o chip M3 da Apple. Ecrã Liquid Retina XDR de 14 polegadas e autonomia até 22 horas.",
+    specs: [
+      { label: "Processador", value: "Apple M3" },
+      { label: "Memória RAM", value: "8GB Unificada" },
+      { label: "Armazenamento", value: "512GB SSD" },
+      { label: "Ecrã", value: '14.2" Liquid Retina XDR' },
+    ],
+  },
+  {
+    id: "prod-6",
+    name: "Auscultadores Sony WH-1000XM5 ANC",
+    slug: "sony-wh-1000xm5-canceling",
+    banner: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 3800.00,
+    oldPrice: 4200.00,
+    stock: 18,
+    badge: "Oportunidade",
+    category: "eletronicos",
+    rating: 4.8,
+    reviews: 154,
+    tags: ["sony", "audio", "fone", "bluetooth", "anc"],
+    description: "O melhor cancelamento de ruído ativo do mercado, som de alta resolução e autonomia de bateria para 30 horas.",
+    specs: [
+      { label: "Conectividade", value: "Bluetooth 5.2 / P2" },
+      { label: "Bateria", value: "Até 30 horas" },
+      { label: "Cancelamento de Ruído", value: "Ativo (ANC HD QN1)" },
+    ],
+  },
+
+  // --- ACESSÓRIOS ---
+  {
+    id: "prod-7",
+    name: "Apple Watch Series 9 GPS 45mm",
+    slug: "apple-watch-series-9-45mm",
+    banner: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 4290.00,
+    oldPrice: 4790.00,
+    stock: 14,
+    badge: "Novo",
+    category: "acessorios",
+    rating: 4.9,
+    reviews: 184,
+    tags: ["apple", "watch", "smartwatch", "relogio"],
+    description: "Smartwatch com ecossistema completo de saúde, sensor de oxigénio no sangue, ecrã Always-On mais brilhante e gesto de duplo toque.",
+    specs: [
+      { label: "Tamanho", value: "45mm" },
+      { label: "Caixa", value: "Alumínio Prateado" },
+      { label: "Conectividade", value: "GPS, Wi-Fi, Bluetooth" },
+    ],
+  },
+  {
+    id: "prod-8",
+    name: "Óculos de Sol Ray-Ban Wayfarer Classic",
+    slug: "ray-ban-wayfarer-classic",
+    banner: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=1200&auto=format&fit=crop",
+    video: "",
+    images: [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=800&auto=format&fit=crop",
+    ],
+    price: 1450.00,
+    oldPrice: 1600.00,
+    stock: 20,
+    badge: "Clássico",
+    category: "acessorios",
+    rating: 4.8,
+    reviews: 112,
+    tags: ["oculos", "rayban", "moda", "acessorios"],
+    description: "Armação em acetato preto com lentes verdes G-15 com proteção 100% UV. O estilo intemporal da Ray-Ban.",
+    specs: [
+      { label: "Armação", value: "Acetato Preto" },
+      { label: "Lentes", value: "Verde G-15" },
+      { label: "Proteção", value: "100% UV400" },
+    ],
+  },
+];
