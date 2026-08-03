@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ProductCard, Product } from "@/components/products/ProductCard";
-import { generateMockServices } from "@/lib/mockData";
 import {
   Carousel,
   CarouselContent,
@@ -13,11 +12,11 @@ import {
 
 interface ProductGridProps {
   lang: string;
+  bestDeals: Product[],
+  recommended: Product[]
 }
 
-export function ProductGrid({ lang }: ProductGridProps) {
-  const recommended = generateMockServices(9);
-  const bestDeals = generateMockServices(9);
+export function ProductGrid({ lang, bestDeals, recommended }: ProductGridProps) {
   return (
     <>
       {/* Best Deals */}

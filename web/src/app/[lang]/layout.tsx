@@ -5,6 +5,10 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { BottomBar } from "@/components/layout/BottomBar";
 
 import { getDictionary, Locale } from "./dictionaries";
+import { QueryProvider } from "@/components/providers/query-provider";
+import { MobileSidebar } from "@/components/layout/MobileSidebar";
+import { Suspense } from "react";
+import { MobileMenuProvider } from "@/components/contexts/MobileMenuContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,20 +33,20 @@ export async function generateMetadata({
     icons: {
       icon: "/favicon.ico",
     },
-    metadataBase: new URL('https://qcena.vercel.app'),
+    metadataBase: new URL("https://qcena.vercel.app"),
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
       images: [
         {
-          url: '/banner.png', // Adjust the path if your screenshot is in a different folder
+          url: "/banner.png",
           width: 1200,
           height: 630,
-          alt: 'Qcena - Marketplace de Serviços em Angola',
+          alt: "Qcena - Marketplace de Serviços em Angola",
         },
       ],
       locale: lang,
-      type: 'website',
+      type: "website",
     },
   };
 }
@@ -60,15 +64,24 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <BottomBar lang={lang} />
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <MobileMenuProvider>
+              {children}
+
+              <Suspense fallback={null}>
+                <MobileSidebar lang={lang} />
+              </Suspense>
+
+              <BottomBar lang={lang} />
+            </MobileMenuProvider>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -4,24 +4,12 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useState } from "react";
 
 import Link from "next/link";
+import { Product } from "@/features/products";
 
-export interface Product {
-  id: string;
-  name: string;
-  category: string;
-  image: string;
-  price: number;
-  oldPrice?: number;
-  rating: number;
-  reviews: number;
-  discount?: number;
-  colors?: string[];
-  whatsapp?: string;
-  lang?: string;
-}
+
 
 export function formatPrice(kz: number) {
-  return `Kz ${kz.toLocaleString("pt-AO")}`;
+  return `${kz.toLocaleString("pt-AO")} Kz`;
 }
 
 interface ProductCardProps {
@@ -31,25 +19,20 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [liked, setLiked] = useState(false);
 
-  // default to something if whatsapp is undefined, e.g. a general number
-  const whatsappNumber = product.whatsapp || "244900000000";
-  const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    `Olá Qcena! Quero saber mais sobre: ${product.name}`
-  )}`;
 
-  const productLink = `/${product.lang || "pt"}/marketplace/product/${product.id}`;
+  const productLink = `/marketplace/product/${product.id}`;
 
   return (
     <div className="group relative flex flex-col rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
       {/* Discount Badge */}
-      {product.discount && (
+      {/* {product.discount && (
         <span className="absolute left-2 top-2 sm:left-3 sm:top-3 z-10 rounded-full bg-red-500 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-extrabold text-white shadow">
           -{product.discount}%
         </span>
-      )}
+      )} */}
 
       {/* Wishlist button */}
-      <button
+      {/* <button
         type="button"
         onClick={(e) => {
           e.preventDefault();
@@ -62,12 +45,12 @@ export function ProductCard({ product }: ProductCardProps) {
         <Heart
           className={`h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors ${liked ? "fill-red-500 text-red-500" : "text-muted-foreground"}`}
         />
-      </button>
+      </button> */}
 
       {/* Image */}
       <Link href={productLink} className="relative aspect-square overflow-hidden bg-muted/30 block">
         <img
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
@@ -86,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </Link>
 
         {/* Colors */}
-        {product.colors && product.colors.length > 0 && (
+        {/* {product.colors && product.colors.length > 0 && (
           <div className="flex items-center gap-1">
             {product.colors.map((color) => (
               <span
@@ -96,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps) {
               />
             ))}
           </div>
-        )}
+        )} */}
 
         {/* Rating */}
         <div className="flex items-center gap-1">
@@ -114,8 +97,8 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* WhatsApp CTA */}
-        <a
-          href={waLink}
+        <Link
+          href={productLink}
           target="_blank"
           rel="noreferrer"
           className="mt-1 flex items-center justify-center gap-1.5 rounded-xl py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold text-white shadow-sm transition-all hover:brightness-110 active:scale-95 z-10 relative"
@@ -123,7 +106,7 @@ export function ProductCard({ product }: ProductCardProps) {
         >
           <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           Encomendar
-        </a>
+        </Link>
       </div>
     </div>
   );

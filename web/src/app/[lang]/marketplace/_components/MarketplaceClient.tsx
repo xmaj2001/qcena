@@ -2,40 +2,49 @@
 
 import { useState } from "react";
 import { FilterSidebar } from "./FilterSidebar";
-import { InfiniteServiceFeed } from "./InfiniteServiceFeed";
-import { AiSearchBar } from "./AiSearchBar";
-import { Filter, X } from "lucide-react";
-import { Product } from "@/components/products/ProductCard";
-
-interface Provider {
-  name: string;
-  checked: boolean;
-}
+import { InfiniteFeed } from "./InfiniteFeed";
+import { Filter } from "lucide-react";
+import type { ApiCursorEnvelope } from "@/features/core/api.types";
+import type { Product, GetProductsQueryParams } from "@/features/products";
 
 interface MarketplaceClientProps {
-  initialProducts: Product[];
+  searchParams: { category?: string; search?: string; sortBy?: string };
+  initialData: ApiCursorEnvelope<Product>;
 }
 
-export function MarketplaceClient({ initialProducts }: MarketplaceClientProps) {
+export function MarketplaceClient({ searchParams, initialData }: MarketplaceClientProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Cast seguro do parâmetro sortBy
+  const validSortBy = ["price_asc", "price_desc", "rating", "latest"].includes(
+    searchParams.sortBy || ""
+  )
+    ? (searchParams.sortBy as GetProductsQueryParams["sortBy"])
+    : undefined;
+
+  const filters = {
+    category: searchParams.category,
+    search: searchParams.search,
+    sortBy: validSortBy,
+  };
 
   return (
     <>
       <div className="flex items-start gap-6">
-        <FilterSidebar 
-          open={sidebarOpen} 
-          onClose={() => setSidebarOpen(false)} 
+        <FilterSidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
         />
 
-        <InfiniteServiceFeed initial={initialProducts} />
+        <InfiniteFeed
+          filters={filters}
+          initialData={initialData}
+        />
       </div>
 
-      {/* <AiSearchBar /> */}
-
-      {/* Floating Filter Button for Mobile */}
       <button
         onClick={() => setSidebarOpen(true)}
-        className="fixed bottom-22.5 left-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand)] text-white shadow-xl transition-transform hover:scale-110 active:scale-95 lg:hidden"
+        className="fixed bottom-24 left-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand)] text-white shadow-xl transition-transform hover:scale-110 active:scale-95 lg:hidden"
         aria-label="Filtros"
       >
         <Filter className="h-6 w-6" />

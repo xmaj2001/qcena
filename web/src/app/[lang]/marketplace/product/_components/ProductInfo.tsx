@@ -83,7 +83,7 @@ export function ProductInfo({ p }: { p: any }) {
         {[
           { i: Truck, t: "Entrega em ponto seguro" },
           { i: ShieldCheck, t: "Produto testado" },
-          { i: Package, t: "Devolução simples" },
+          // { i: Package, t: "Devolução simples" },
         ].map(({ i: Icon, t }) => (
           <div key={t} className="flex items-center gap-2 rounded-xl bg-muted/40 px-3 py-2 text-xs font-semibold">
             <Icon className="h-4 w-4 text-primary" /> {t}

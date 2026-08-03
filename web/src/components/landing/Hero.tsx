@@ -21,20 +21,20 @@ const heroSlides = [
     description: "Trazemos-te bons produtos a bons preços. Escolhemos, testamos e divulgamos — tu escolhes no WhatsApp e combinas a entrega num ponto seguro perto de ti.",
     image: "./logo-transparent.png",
   },
-  {
-    badge: "Ofertas Especiais",
-    title1: "Descontos de até",
-    title2: "50% em Eletrônicos.",
-    description: "Aproveita a nossa semana de tecnologia com os melhores gadgets aos preços mais baixos de Angola.",
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    badge: "Estilo & Moda",
-    title1: "Renova o teu",
-    title2: "Guarda-roupa.",
-    description: "As últimas tendências de moda para te destacares. Pede já o teu outfit preferido com entrega garantida.",
-    image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80",
-  }
+  // {
+  //   badge: "Ofertas Especiais",
+  //   title1: "Descontos de até",
+  //   title2: "50% em Eletrônicos.",
+  //   description: "Aproveita a nossa semana de tecnologia com os melhores gadgets aos preços mais baixos de Angola.",
+  //   image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=600&q=80",
+  // },
+  // {
+  //   badge: "Estilo & Moda",
+  //   title1: "Renova o teu",
+  //   title2: "Guarda-roupa.",
+  //   description: "As últimas tendências de moda para te destacares. Pede já o teu outfit preferido com entrega garantida.",
+  //   image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80",
+  // }
 ];
 
 export function Hero() {
@@ -64,7 +64,7 @@ export function Hero() {
                   </p>
                   <div className="flex flex-wrap gap-3 pt-2">
                     <Link
-                      href={'https://wa.me/244900000000'}
+                      href={'https://wa.me/244944083160'}
                       target="_blank" rel="noreferrer"
                       className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-bold text-primary-foreground shadow-glow transition hover:brightness-110"
                     >

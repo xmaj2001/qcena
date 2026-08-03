@@ -1,5 +1,5 @@
+import { GetProductsQueryParams, productService } from "@/features/products";
 import { MarketplaceClient } from "./_components/MarketplaceClient";
-import { generateMockServices } from "@/lib/mockData";
 
 export const metadata = {
   title: "Marketplace de produtos — Qcena.",
@@ -7,16 +7,26 @@ export const metadata = {
 };
 
 interface PageProps {
-  searchParams: Promise<{ category?: string; search?: string }>;
+  searchParams: Promise<{
+    category?: string;
+    search?: string;
+    sortBy?: GetProductsQueryParams["sortBy"];
+  }>;
 }
-
 export default async function MarketplacePage({ searchParams }: PageProps) {
   const resolvedParams = await searchParams;
-  const initialProducts = generateMockServices(9);
+
+  // Busca inicial no servidor com os filtros de URL
+  const initialData = await productService.getProducts({
+    category: resolvedParams.category,
+    search: resolvedParams.search,
+    sortBy: resolvedParams.sortBy as any,
+    limit: 9,
+  });
 
   return (
-    <div className="relative min-h-screen px-4 pb-24 mt-24 px-">
-      {/* Título contextual da página para dar norte ao usuário */}
+    <div className="relative min-h-screen px-4 pb-24 mt-24">
+      {/* Título contextual */}
       <div className="mb-6 mt-4">
         <h1 className="text-2xl font-black tracking-tight">
           {resolvedParams.category
@@ -30,7 +40,10 @@ export default async function MarketplacePage({ searchParams }: PageProps) {
         </p>
       </div>
 
-      <MarketplaceClient initialProducts={initialProducts} />
+      <MarketplaceClient
+        searchParams={resolvedParams}
+        initialData={initialData}
+      />
     </div>
   );
 }

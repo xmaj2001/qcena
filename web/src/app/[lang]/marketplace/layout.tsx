@@ -1,6 +1,4 @@
-// app/marketplace/layout.tsx
-
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/navbar";
 
 interface LayoutProps {
   children: React.ReactNode;
