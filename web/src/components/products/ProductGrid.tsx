@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ProductCard, Product } from "@/components/products/ProductCard";
+import { ProductCard } from "@/components/products/ProductCard";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Product } from "@/features/products";
 
 interface ProductGridProps {
   lang: string;
