@@ -7,12 +7,7 @@ interface ProductPageProps {
   params: Promise<{ slug: string; lang: string }>;
 }
 
-// Domínio base da aplicação (configurar no .env.production)
-const baseUrl = process.env.NEXT_PUBLIC_URL
-  ? new URL(process.env.NEXT_PUBLIC_URL)
-  : new URL("https://qcena.com");
-
-// 1. GENERATE METADATA (Conforme especificação do Next.js App Router)
+// 1. GENERATE METADATA (Corrigido para Open Graph / WhatsApp)
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
@@ -40,15 +35,11 @@ export async function generateMetadata({
       ? `${product.description.slice(0, 157)}...`
       : product.description;
 
-  const mainImage = product.banner || product.images[0] || "/og-image.jpg";
+  // Garante a URL da imagem (sem forçar o atributo type rígido)
+  const imageUrl = product.banner || product.images?.[0];
 
   return {
-    // metadataBase garante resolução correta de URLs relativas/absolutas
-    metadataBase: baseUrl,
-    title: {
-      default: title,
-      template: `%s | Qcena`,
-    },
+    title,
     description,
     keywords: [
       product.name,
@@ -57,40 +48,32 @@ export async function generateMetadata({
       "Qcena",
       "E-commerce",
     ],
-    // Links Canónicos e Suporte Multi-idioma
-    alternates: {
-      canonical: `/${lang}/products/${slug}`,
-      languages: {
-        "pt-AO": `/pt/products/${slug}`,
-        "en-US": `/en/products/${slug}`,
-      },
-    },
-    // Open Graph (Facebook, WhatsApp, LinkedIn)
+    // Open Graph otimizado para WhatsApp, Facebook e LinkedIn
     openGraph: {
       title: `${title} | Qcena`,
       description,
-      url: `/${lang}/products/${slug}`,
-      siteName: "Qcena",
-      images: [
-        {
-          url: mainImage,
-          width: 1200,
-          height: 630,
-          alt: product.name,
-          type: "image/jpeg",
-        },
-      ],
-      locale: lang === "pt" ? "pt_AO" : "en_US",
       type: "website",
+      locale: lang === "pt" ? "pt_AO" : "en_US",
+      siteName: "Qcena",
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ]
+        : [],
     },
     // Twitter Card
     twitter: {
       card: "summary_large_image",
       title: `${title} | Qcena`,
       description,
-      images: [mainImage],
+      images: imageUrl ? [imageUrl] : [],
     },
-    // Meta tags de robôs (Garante indexação rápida do produto)
+    // Meta tags para robôs de busca
     robots: {
       index: true,
       follow: true,
@@ -121,7 +104,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const { product, relatedProducts } = data;
 
-  // Schema.org Structured Data (JSON-LD para Google Rich Results)
+  // Schema.org Structured Data (JSON-LD)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -132,14 +115,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     category: product.category,
     offers: {
       "@type": "Offer",
-      priceCurrency: "AOA", // Ajusta para a tua moeda padrão (ex: AOA, EUR, USD)
+      priceCurrency: "AOA",
       price: product.price,
       itemCondition: "https://schema.org/NewCondition",
       availability:
         product.stock > 0
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
-      url: `${baseUrl.origin}/${lang}/products/${slug}`,
     },
     ...(product.reviews > 0 && {
       aggregateRating: {
@@ -152,13 +134,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      {/* Script JSON-LD inserido de acordo com a recomendação da Vercel */}
+      {/* Script JSON-LD para SEO e Rich Snippets do Google */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* DETALHES DO PRODUTO */}
+      {/* COMPONENTE DE DETALHES DO PRODUTO */}
       <ProductDetails p={product} related={relatedProducts} />
     </>
   );
