@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { Star, BadgeCheck, MessageCircle, Heart, Truck, ShieldCheck, Package } from "lucide-react";
+import { waLink } from "@/lib/utils";
 
 function fmt(price: number) {
   return new Intl.NumberFormat("pt-AO", { style: "currency", currency: "AOA" }).format(price);
 }
 
-function waLink(text: string) {
-  return `https://wa.me/244900000000?text=${encodeURIComponent(text)}`;
-}
+
 
 export function ProductInfo({ p }: { p: any }) {
   const [qty, setQty] = useState(1);

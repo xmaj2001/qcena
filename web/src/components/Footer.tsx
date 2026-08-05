@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
+import { waLink } from "@/lib/utils";
 
 /* Inline brand SVGs (lucide-react dropped brand icons) */
 function IconInstagram({ className }: { className?: string }) {
@@ -68,8 +69,8 @@ export function Footer({ dict }: FooterProps) {
 
 
   return (
-    <footer className="px-2 pb-2 sm:px-3" >
-      <div className="rounded-3xl bg-neutral-900 px-8 py-16 sm:px-12">
+    <footer className="mx-auto px-2 pb-2 sm:px-3" >
+      <div className="rounded-3xl bg-muted px-8 py-16 sm:px-12">
         <div className="px-6 pt-14 pb-8 sm:px-12">
           <div className="mx-auto max-w-7xl">
             {/* Top: Logo + Bio + Social */}
@@ -85,10 +86,10 @@ export function Footer({ dict }: FooterProps) {
                 </p>
                 {/* WhatsApp CTA */}
                 <a
-                  href="https://wa.me/244900000000"
+                  href={waLink("")}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-xs font-bold text-white shadow-lg transition hover:brightness-110 active:scale-95"
+                  className="mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-white shadow-lg transition hover:brightness-110 active:scale-95"
                 >
                   <MessageCircle className="h-4 w-4" />
                   Falar no WhatsApp

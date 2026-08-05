@@ -81,7 +81,7 @@
 
   /* Floresta ultra escuro para texto */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.01 150);
+  --card-foreground: oklch(21.97% 0.01073 151.364);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.01 150);
 
@@ -137,7 +137,7 @@
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(25.457% 0.03357 81.023);
   --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
+  --popover: oklab(14.077% 0.0012 -0.00424);
   --popover-foreground: oklch(0.984 0.003 247.858);
 
   /* Inversão inteligente para o modo dark se mantendo fiel ao tom original */
@@ -146,7 +146,7 @@
 
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
+  --muted: rgb(14, 14, 14);
   --muted-foreground: oklch(0.704 0.04 256.788);
   --accent: oklch(0.279 0.041 260.031);
   --accent-foreground: oklch(0.984 0.003 247.858);
