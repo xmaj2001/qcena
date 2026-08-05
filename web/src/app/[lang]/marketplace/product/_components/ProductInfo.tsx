@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Star, BadgeCheck, MessageCircle, Heart, Truck, ShieldCheck, Package } from "lucide-react";
 import { waLink } from "@/lib/utils";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 function fmt(price: number) {
   return new Intl.NumberFormat("pt-AO", { style: "currency", currency: "AOA" }).format(price);
@@ -50,13 +51,14 @@ export function ProductInfo({ p }: { p: any }) {
         </div>
 
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
-          <a
+          {/* <a
             href={waLink(`Olá Qcena! Quero ${qty}x ${p.name} (${fmt(p.price * qty)}).`)}
             target="_blank" rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-soft transition hover:brightness-110"
           >
             <MessageCircle className="h-4 w-4" /> Encomendar no WhatsApp
-          </a>
+          </a> */}
+          <WhatsAppButton product={p} label="Encomendar no WhatsApp"/>
           <button
             onClick={() => setFav(!fav)}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-bold hover:border-primary hover:text-primary"

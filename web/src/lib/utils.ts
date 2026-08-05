@@ -8,3 +8,20 @@ export function cn(...inputs: ClassValue[]) {
 export function waLink(text: string) {
   return `https://wa.me/244950821178?text=${encodeURIComponent(text)}`;
 }
+
+export const formatPrice = (value: number) =>
+  new Intl.NumberFormat("pt-AO", { style: "currency", currency: "AOA" }).format(
+    value,
+  );
+export const formatNumber = (value: number) =>
+  new Intl.NumberFormat("pt-AO").format(value);
+
+// Formatar data de criação
+export const formatDate = (date: string) => {
+  const d = new Date(date);
+  return d.toLocaleDateString("pt-AO", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};

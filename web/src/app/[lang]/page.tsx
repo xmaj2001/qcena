@@ -1,12 +1,11 @@
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/landing/Hero";
 import { CategoryList } from "@/components/landing/CategoryList";
-import { PromoBanners } from "@/components/landing/PromoBanners";
 import { ProductGrid } from "@/components/products/ProductGrid";
-import { WhatsAppButton } from "@/components/landing/WhatsAppButton";
 import { getDictionary, Locale } from "./dictionaries";
 import { productService } from "@/features/products";
 import { Navbar } from "@/components/navbar";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 interface HomeProps {
   params: Promise<{ lang: string }>;
@@ -28,7 +27,7 @@ export default async function Home({ params }: HomeProps) {
         <ProductGrid bestDeals={data.bestDeals} recommended={data.recommended} lang={lang} />
       </main>
       <Footer dict={dict} />
-      <WhatsAppButton />
+      <FloatingWhatsApp />
     </div>
   );
 }
