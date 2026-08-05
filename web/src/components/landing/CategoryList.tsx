@@ -14,7 +14,7 @@ export function CategoryList({ lang }: CategoryListProps) {
 
   if (isLoading) {
     return (
-      <section className="px-4 pt-6 pb-2 md:px-8 max-w-7xl mx-auto">
+      <section className="px-4 pt-6 pb-2 md:px-8">
         <div className="flex items-center gap-3 overflow-x-auto py-2 sm:justify-center">
           {Array.from({ length: 4 }).map((_, i) => (
             <div
@@ -28,7 +28,7 @@ export function CategoryList({ lang }: CategoryListProps) {
   }
 
   return (
-    <section className="px-4 pt-6 pb-2 md:px-8 max-w-7xl mx-auto">
+    <section className="px-4 pt-6 pb-2 md:px-8">
       <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-2 sm:justify-center sm:flex-wrap">
         {categories.map((category) => {
           const Icon = getCategoryIcon(category.icon);

@@ -15,7 +15,7 @@ export function ProductInfo({ p }: { p: any }) {
   const [fav, setFav] = useState(false);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 mt-4">
       <div>
         <div className="text-xs font-bold uppercase tracking-wider text-primary">{p.category}</div>
         <h1 className="mt-1 text-3xl font-extrabold leading-tight md:text-4xl">{p.name}</h1>

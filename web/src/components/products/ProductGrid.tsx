@@ -21,7 +21,7 @@ export function ProductGrid({ lang, bestDeals, recommended }: ProductGridProps) 
   return (
     <>
       {/* Best Deals */}
-      <section className="px-4 py-8 md:px-8 max-w-7xl mx-auto">
+      <section className="px-4 py-8 md:px-8">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-extrabold text-foreground tracking-tight">
             Melhores Ofertas para Si
@@ -54,7 +54,7 @@ export function ProductGrid({ lang, bestDeals, recommended }: ProductGridProps) 
       </section>
 
       {/* Recommended */}
-      <section className="px-4 py-8 md:px-8 max-w-7xl mx-auto">
+      <section className="px-4 py-8 md:px-8">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-extrabold text-foreground tracking-tight">
             Recomendados para Si

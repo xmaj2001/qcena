@@ -70,7 +70,7 @@ export function Footer({ dict }: FooterProps) {
 
   return (
     <footer className="mx-auto px-2 pb-2 sm:px-3" >
-      <div className="rounded-3xl bg-muted px-8 py-16 sm:px-12">
+      <div className="rounded-3xl bg-black px-8 py-16 sm:px-12">
         <div className="px-6 pt-14 pb-8 sm:px-12">
           <div className="mx-auto max-w-7xl">
             {/* Top: Logo + Bio + Social */}

@@ -151,10 +151,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   };
 
   return (
-    <div
-      className="min-h-screen text-foreground relative bg-background"
-      id="place"
-    >
+    <>
       {/* Script JSON-LD inserido de acordo com a recomendação da Vercel */}
       <script
         type="application/ld+json"
@@ -163,6 +160,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {/* DETALHES DO PRODUTO */}
       <ProductDetails p={product} related={relatedProducts} />
-    </div>
+    </>
   );
 }

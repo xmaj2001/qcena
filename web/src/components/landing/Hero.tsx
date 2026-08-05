@@ -40,7 +40,7 @@ const heroSlides = [
 export function Hero() {
   const plugin = useRef(Autoplay({ delay: 3800, stopOnInteraction: false }));
   return (
-    <section className="px-4 pb-8 md:px-8 mt-20 max-w-7xl mx-auto">
+    <section className="px-4 pb-8 md:px-8">
       <Carousel
         plugins={[plugin.current as any]}
         className="w-full"

@@ -20,7 +20,7 @@ export default async function Home({ params }: HomeProps) {
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <Navbar />
-      <main>
+      <main className="max-w-7xl mx-auto mt-20 mb-20 md:mb-0">
         <Hero />
         {/* 1. Category icons row */}
         <CategoryList dict={dict} lang={lang} />
