@@ -55,13 +55,13 @@ export const productService = {
     return res.data;
   },
 
-  async getProductByIdServer(id: string): Promise<ProductDetailResponse> {
-    const res = await apiFetchServer<ApiEnvelope<ProductDetailResponse>>(`products/${id}`);
+  async getProductBySlugServer(slug: string): Promise<ProductDetailResponse> {
+    const res = await apiFetchServer<ApiEnvelope<ProductDetailResponse>>(`products/${slug}`);
     return res.data;
   },
 
-  async getProductById(id: string): Promise<ProductDetailResponse> {
-    const res = await apiFetch<ApiEnvelope<ProductDetailResponse>>(`products/${id}`);
+  async getProductBySlug(slug: string): Promise<ProductDetailResponse> {
+    const res = await apiFetch<ApiEnvelope<ProductDetailResponse>>(`products/${slug}`);
     return res.data;
   },
 };

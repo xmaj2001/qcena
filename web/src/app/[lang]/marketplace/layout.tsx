@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { getDictionary, Locale } from "../dictionaries";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/landing/WhatsAppButton";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export default async function MarketplaceLayout({
       <Navbar />
       <main className="max-w-7xl mx-auto mt-20 mb-20 md:mb-0">{children}</main>
       <Footer dict={dict} />
-      <WhatsAppButton />
+      <FloatingWhatsApp />
     </div>
   );
 }

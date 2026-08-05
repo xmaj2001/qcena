@@ -4,7 +4,7 @@ import { productService } from "@/features/products";
 import { ProductDetails } from "../_components/ProductDetails";
 
 interface ProductPageProps {
-  params: Promise<{ id: string; lang: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }
 
 // Domínio base da aplicação (configurar no .env.production)
@@ -16,11 +16,11 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
-  const { id, lang } = await params;
+  const { slug, lang } = await params;
 
   let data;
   try {
-    data = await productService.getProductById(id);
+    data = await productService.getProductBySlug(slug);
   } catch {
     return {
       title: "Produto não encontrado",
@@ -59,17 +59,17 @@ export async function generateMetadata({
     ],
     // Links Canónicos e Suporte Multi-idioma
     alternates: {
-      canonical: `/${lang}/products/${id}`,
+      canonical: `/${lang}/products/${slug}`,
       languages: {
-        "pt-AO": `/pt/products/${id}`,
-        "en-US": `/en/products/${id}`,
+        "pt-AO": `/pt/products/${slug}`,
+        "en-US": `/en/products/${slug}`,
       },
     },
     // Open Graph (Facebook, WhatsApp, LinkedIn)
     openGraph: {
       title: `${title} | Qcena`,
       description,
-      url: `/${lang}/products/${id}`,
+      url: `/${lang}/products/${slug}`,
       siteName: "Qcena",
       images: [
         {
@@ -106,11 +106,11 @@ export async function generateMetadata({
 
 // 2. PAGE COMPONENT (Com Structured Data JSON-LD)
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id, lang } = await params;
+  const { slug, lang } = await params;
 
   let data;
   try {
-    data = await productService.getProductById(id);
+    data = await productService.getProductBySlug(slug);
   } catch {
     notFound();
   }
@@ -139,7 +139,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         product.stock > 0
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
-      url: `${baseUrl.origin}/${lang}/products/${id}`,
+      url: `${baseUrl.origin}/${lang}/products/${slug}`,
     },
     ...(product.reviews > 0 && {
       aggregateRating: {

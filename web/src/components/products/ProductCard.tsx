@@ -20,7 +20,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const [liked, setLiked] = useState(false);
 
 
-  const productLink = `/marketplace/product/${product.id}`;
+  const productLink = `/marketplace/product/${product.slug}`;
 
   return (
     <div className="group relative flex flex-col rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
