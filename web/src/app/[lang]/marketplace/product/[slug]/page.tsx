@@ -141,7 +141,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
 
       {/* COMPONENTE DE DETALHES DO PRODUTO */}
-      <ProductDetails p={product} related={relatedProducts} />
+      <ProductDetails p={product} lang={lang} related={relatedProducts} />
     </>
   );
 }

@@ -11,6 +11,7 @@ interface WhatsAppButtonProps {
   product: Product;
   whatsappNumber?: string;
   className?: string;
+  lang: string;
   label?: string;
 }
 
@@ -26,6 +27,7 @@ export function WhatsAppButton({
   whatsappNumber,
   className = "",
   label = "Tenho interesse",
+  lang,
 }: WhatsAppButtonProps) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
@@ -34,7 +36,7 @@ export function WhatsAppButton({
     setMobile(isMobile());
   }, []);
 
-  const link = buildWhatsAppUrl(product, whatsappNumber);
+  const link = buildWhatsAppUrl(product, lang, whatsappNumber);
 
   const handleClick = (e: React.MouseEvent) => {
     if (mobile) return;
@@ -74,11 +76,9 @@ export function WhatsAppButton({
               Fale connosco no WhatsApp
             </h3>
             <p className="mt-1 text-sm text-gray-500">
-              Escaneie o QR Code com o seu telemóvel para encomendar ou consultar sobre{" "}
-              <span className="font-medium text-gray-900">
-                {product.name}
-              </span>
-              .
+              Escaneie o QR Code com o seu telemóvel para encomendar ou
+              consultar sobre{" "}
+              <span className="font-medium text-gray-900">{product.name}</span>.
             </p>
             <div className="mt-6 flex justify-center rounded-2xl bg-gray-50 p-6">
               <QRCodeSVG value={link} size={220} level="M" />

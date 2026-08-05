@@ -9,9 +9,13 @@ function fmt(price: number) {
   return new Intl.NumberFormat("pt-AO", { style: "currency", currency: "AOA" }).format(price);
 }
 
+interface ProductInfoProps {
+  p: any;
+  lang: string;
+}
 
 
-export function ProductInfo({ p }: { p: any }) {
+export function ProductInfo({ p, lang }: ProductInfoProps) {
   const [qty, setQty] = useState(1);
   const [fav, setFav] = useState(false);
 
@@ -58,7 +62,7 @@ export function ProductInfo({ p }: { p: any }) {
           >
             <MessageCircle className="h-4 w-4" /> Encomendar no WhatsApp
           </a> */}
-          <WhatsAppButton product={p} label="Encomendar no WhatsApp"/>
+          <WhatsAppButton product={p} lang={lang} label="Encomendar no WhatsApp"/>
           <button
             onClick={() => setFav(!fav)}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-bold hover:border-primary hover:text-primary"
