@@ -8,8 +8,8 @@ interface ProductPageProps {
 }
 
 // Domínio base da aplicação (configurar no .env.production)
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+const baseUrl = process.env.NEXT_PUBLIC_URL
+  ? new URL(process.env.NEXT_PUBLIC_URL)
   : new URL("https://qcena.com");
 
 // 1. GENERATE METADATA (Conforme especificação do Next.js App Router)
