@@ -37,6 +37,8 @@ export async function generateMetadata({
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
+      url: `https://qcena.vercel.app/${lang}`,
+      siteName: "Qcena",
       images: [
         {
           url: "/banner.png",
@@ -47,6 +49,12 @@ export async function generateMetadata({
       ],
       locale: lang,
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: ["/banner.png"],
     },
   };
 }
