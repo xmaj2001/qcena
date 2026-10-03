@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductCard } from "@/components/products/ProductCard";
+import { ProductCard } from "@/features/products/components/ProductCard";
 
 export function ProductRelated({ related, category }: { related: any[]; category?: string }) {
   if (!related || related.length === 0) return null;

@@ -24,13 +24,16 @@ export interface Product {
 
 export interface ProductsHomeResponse {
   recommended: Product[];
-  bestDeals: Product[];
+  newProducts: Product[];
+  comingSoon: Product[];
 }
 
 export interface ProductDetailResponse {
   product: Product;
   relatedProducts: Product[];
 }
+
+export type ProductSectionKind = "recommended" | "new" | "coming-soon";
 
 export interface GetProductsQueryParams {
   search?: string;

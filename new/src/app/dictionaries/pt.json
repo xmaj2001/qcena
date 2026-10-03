@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Para começar, edite o arquivo page.tsx.",
+    "description": "Procurando um ponto de partida ou mais instruções? Acesse os Templates ou o centro de aprendizagem.",
+    "deploy": "Publicar agora",
+    "documentation": "Documentação"
+  },
+  "hero": {
+    "nav": {
+      "highlights": "DESTAQUES",
+      "products": "PRODUTOS",
+      "about": "SOBRE NÓS",
+      "contacts": "CONTACTOS"
+    },
+    "title": "Meu PC quando vou ter muito dinheiro",
+    "description": "Não é apenas sobre ter um PC potente. É sobre entrar no teu setup e sentir confiança, conforto e personalidade. Um equipamento pensado para elevar cada sessão.",
+    "price": "400.000 Kz",
+    "oldPrice": "600.000 Kz",
+    "more": "VEJA MAIS",
+    "order": "Encomendar Agora"
+  }
+}

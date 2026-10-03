@@ -1,4 +1,4 @@
-import { Product } from "@/features/products";
+import type { Product } from "@/features/products/types";
 import { formatPrice } from "./utils";
 
 export const WHATSAPP_NUMBER = "244950821178"; // Número sem o sinal de +

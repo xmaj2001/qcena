@@ -5,7 +5,7 @@ import { FilterSidebar } from "./FilterSidebar";
 import { InfiniteFeed } from "./InfiniteFeed";
 import { Filter } from "lucide-react";
 import type { ApiCursorEnvelope } from "@/features/core/api.types";
-import type { Product, GetProductsQueryParams } from "@/features/products";
+import type { Product, GetProductsQueryParams } from "@/features/products/types";
 
 interface MarketplaceClientProps {
   searchParams: { category?: string; search?: string; sortBy?: string };

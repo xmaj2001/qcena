@@ -20,15 +20,13 @@ import {
 } from "lucide-react";
 import { useMobileMenu } from "../contexts/MobileMenuContext";
 import { ModeToggle } from "../ModeToggle";
-import { useCategories } from "@/features/categories/hooks/useCategories";
-import { getCategoryIcon } from "@/features/categories/category-icons";
+import { mockCategories } from "@/lib/categories";
+import { getCategoryIcon } from "@/lib/category-icons";
 
 export function MobileSidebar({ lang }: { lang: string }) {
     const { isOpen, closeMenu } = useMobileMenu();
     const router = useRouter();
     const searchParams = useSearchParams();
-
-    const { categories, isLoading } = useCategories();
 
     const [searchVal, setSearchVal] = useState(searchParams.get("search") ?? "");
     const [isLoggedIn] = useState(false);
@@ -140,18 +138,8 @@ export function MobileSidebar({ lang }: { lang: string }) {
                             </span>
                         </div>
 
-                        {isLoading ? (
-                            <div className="space-y-2 py-1">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className="h-9 w-full animate-pulse rounded-xl bg-muted/50"
-                                    />
-                                ))}
-                            </div>
-                        ) : (
-                            <ul className="space-y-1">
-                                {categories.map((c) => {
+                        <ul className="space-y-1">
+                            {mockCategories.map((c) => {
                                     const Icon = getCategoryIcon(c.icon);
                                     const params = new URLSearchParams();
                                     params.set("category", c.slug);
@@ -171,9 +159,8 @@ export function MobileSidebar({ lang }: { lang: string }) {
                                             </Link>
                                         </li>
                                     );
-                                })}
-                            </ul>
-                        )}
+                            })}
+                        </ul>
                     </div>
 
                     {/* Links Principais */}

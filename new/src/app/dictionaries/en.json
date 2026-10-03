@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "To get started, edit the page.tsx file.",
+    "description": "Looking for a starting point or more instructions? Head over to Templates or the Learning center.",
+    "deploy": "Deploy Now",
+    "documentation": "Documentation"
+  },
+  "hero": {
+    "nav": {
+      "highlights": "HIGHLIGHTS",
+      "products": "PRODUCTS",
+      "about": "ABOUT US",
+      "contacts": "CONTACTS"
+    },
+    "title": "My PC when I have a lot of money",
+    "description": "It's not just about having a powerful machine. It's about stepping into your setup and instantly feeling confident, comfortable, and completely yourself. Designed to elevate every session.",
+    "price": "400.000 Kz",
+    "oldPrice": "600.000 Kz",
+    "more": "SEE MORE",
+    "order": "Order Now"
+  }
+}

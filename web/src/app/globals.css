@@ -76,7 +76,7 @@
   --radius: 0.625rem;
 
   /* Qcena palette - warm cream + vivid orange */
-  --background: oklch(0.98 0.012 75);
+  --background: #FAF5EC;
   --foreground: oklch(0.18 0.02 40);
 
   /* Floresta ultra escuro para texto */
@@ -86,9 +86,9 @@
   --popover-foreground: oklch(0.22 0.01 150);
 
   /* Elemento pedido: lab(63.9463% 50.7215 68.6033) -> oklch(0.686 0.198 47.36) */
-  --primary: oklch(0.686 0.198 47.36);
-  --primary-foreground: oklch(0.985 0.004 106);
-  --primary-glow: oklch(0.75 0.19 55);
+  --primary: #F97015;
+  --primary-foreground: #FFFFFF;
+  --primary-glow: #FF8A45;
 
   --brand: lab(62.1872% 53.0147 77.9983);
   --brand-soft: lab(92% 15 30);
@@ -104,7 +104,7 @@
 
   --border: oklch(0.9 0.008 120);
   --input: oklch(0.9 0.008 120);
-  --ring: oklch(0.686 0.198 47.36);
+  --ring: #F97015;
 
   /* Paleta Auxiliar Deco */
   --forest: oklch(75.862% 0.17676 60.629);
@@ -141,8 +141,8 @@
   --popover-foreground: oklch(0.984 0.003 247.858);
 
   /* Inversão inteligente para o modo dark se mantendo fiel ao tom original */
-  --primary: oklch(0.686 0.198 47.36);
-  --primary-foreground: oklch(0.129 0.042 264.695);
+  --primary: #F97015;
+  --primary-foreground: #FFFFFF;
 
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);

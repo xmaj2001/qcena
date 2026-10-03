@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { MessageCircle, X } from "lucide-react";
 import Image from "next/image";
-import { Product } from "@/features/products";
+import type { Product } from "@/features/products/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 interface WhatsAppButtonProps {

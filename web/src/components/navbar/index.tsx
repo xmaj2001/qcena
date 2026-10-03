@@ -27,7 +27,7 @@ import {
 
 import { ModeToggle } from "../ModeToggle";
 import { useMobileMenu } from "../contexts/MobileMenuContext";
-import { useCategories } from "@/features/categories/hooks/useCategories";
+import { mockCategories } from "@/lib/categories";
 
 import { SearchAutocomplete } from "./SearchAutocomplete";
 import { LanguageToggle } from "./LanguageToggle";
@@ -38,7 +38,7 @@ function NavbarContent() {
     const lang = (params?.lang as string) || "pt";
 
     const { toggleMenu } = useMobileMenu();
-    const { categories, isLoading } = useCategories();
+
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLoggedIn] = useState(false);
@@ -143,12 +143,7 @@ function NavbarContent() {
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid w-[520px] gap-3 p-4 md:grid-cols-2 lg:w-[620px]">
-                                        {isLoading ? (
-                                            <li className="col-span-2 p-4 text-center text-xs text-muted-foreground">
-                                                A carregar categorias...
-                                            </li>
-                                        ) : (
-                                            categories.map((c) => {
+                                        {mockCategories.map((c) => {
                                                 const params = new URLSearchParams();
                                                 params.set("category", c.slug);
                                                 return (
@@ -160,8 +155,7 @@ function NavbarContent() {
                                                         {c.description}
                                                     </ListItem>
                                                 );
-                                            })
-                                        )}
+                                            })}
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>

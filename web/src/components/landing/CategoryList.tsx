@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { getCategoryIcon } from "@/features/categories/category-icons";
-import { useCategories } from "@/features/categories/hooks/useCategories";
+import { getCategoryIcon } from "@/lib/category-icons";
+import { mockCategories } from "@/lib/categories";
 
 interface CategoryListProps {
   dict: any;
@@ -10,27 +10,11 @@ interface CategoryListProps {
 }
 
 export function CategoryList({ lang }: CategoryListProps) {
-  const { categories, isLoading } = useCategories();
-
-  if (isLoading) {
-    return (
-      <section className="px-4 pt-6 pb-2 md:px-8">
-        <div className="flex items-center gap-3 overflow-x-auto py-2 sm:justify-center">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-20 w-20 animate-pulse rounded-2xl bg-muted/50 shrink-0"
-            />
-          ))}
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="px-4 pt-6 pb-2 md:px-8">
       <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-2 sm:justify-center sm:flex-wrap">
-        {categories.map((category) => {
+        {mockCategories.map((category) => {
           const Icon = getCategoryIcon(category.icon);
 
           return (

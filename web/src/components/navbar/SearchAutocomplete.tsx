@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2 } from "lucide-react";
-import { useProducts } from "@/features/products/hooks/use-products";
+import type { Product } from "@/features/products/types";
 
 interface SearchAutocompleteProps {
     lang: string;
@@ -25,14 +25,29 @@ export function SearchAutocomplete({ lang }: SearchAutocompleteProps) {
         return () => clearTimeout(timer);
     }, [query]);
 
-    // Usamos o teu hook existente! Se debouncedQuery tiver valor, ele faz a busca.
-    const { data, isLoading } = useProducts(
-        debouncedQuery
-            ? { search: debouncedQuery, limit: 5 }
-            : undefined
-    );
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const products = data?.items || [];
+    useEffect(() => {
+        let cancelled = false;
+        if (!debouncedQuery) {
+            setProducts([]);
+            return;
+        }
+        setIsLoading(true);
+        fetch(`/api/products?search=${encodeURIComponent(debouncedQuery)}&limit=5`)
+            .then((response) => response.json())
+            .then((body: { success: boolean; data?: { items: Product[] } }) => {
+                if (!cancelled) setProducts(body.success ? body.data?.items ?? [] : []);
+            })
+            .catch(() => {
+                if (!cancelled) setProducts([]);
+            })
+            .finally(() => {
+                if (!cancelled) setIsLoading(false);
+            });
+        return () => { cancelled = true; };
+    }, [debouncedQuery]);
 
     // Fecha o dropdown ao clicar fora
     useEffect(() => {

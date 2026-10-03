@@ -1,5 +1,6 @@
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/navbar";
-import { getDictionary, Locale } from "../dictionaries";
+import { getDictionary, hasLocale } from "../../lib/dictionaries";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
@@ -14,7 +15,12 @@ export default async function MarketplaceLayout({
 }: LayoutProps) {
   // Acessível se precisar de internacionalização futuramente
   const { lang } = await params;
-  const dict = await getDictionary(lang as Locale);
+
+  if (!hasLocale(lang)) {
+    notFound();
+  }
+
+  const dict = await getDictionary(lang);
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <Navbar />
