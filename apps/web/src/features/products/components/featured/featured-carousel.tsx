@@ -117,12 +117,12 @@ function FeaturedProductSlide({
             {dictionary.specifications}
           </h2>
           <dl className="mt-3 space-y-2">
-            {feature.specifications.map((spec) => (
+            {feature.product.specs.map((spec) => (
               <div
                 className="flex items-start justify-between gap-3 border-b border-current/15 pb-2 text-xs"
-                key={`${spec.key}-${spec.value}`}
+                key={`${spec.label}-${spec.value}`}
               >
-                <dt className={mutedTextColor}>{spec.key}</dt>
+                <dt className={mutedTextColor}>{spec.label}</dt>
                 <dd className="text-right font-medium">{spec.value}</dd>
               </div>
             ))}

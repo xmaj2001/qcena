@@ -1,3 +1,5 @@
+import "server-only";
+
 import { cache } from "react";
 import { env } from "@/env";
 import { apiFetch } from "@/lib/api/api-fetch";
