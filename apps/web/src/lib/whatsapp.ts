@@ -1,5 +1,6 @@
 import { APIProductDetails } from "@/features/products";
 import { formatKz } from "./utils";
+import { env } from "@/env";
 
 export const WHATSAPP_NUMBER = "244950821178"; // Número sem o sinal de +
 
@@ -9,7 +10,7 @@ export function buildWhatsAppUrl(
   dynamicNumber?: string,
 ) {
   const number = dynamicNumber || WHATSAPP_NUMBER;
-  const baseUrl = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
+  const baseUrl = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const productLink = `${baseUrl}/${lang}/marketplace/product/${product.slug || product.id}`;
 
   const text = `Olá, tenho interesse no produto *${product.name}* por ${formatKz(product.price)}.\n\nVeja aqui: ${productLink}`;
