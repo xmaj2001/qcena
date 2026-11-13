@@ -1,0 +1,187 @@
+{
+  "seo": {
+    "siteName": "Qcena",
+    "homeTitle": "Products across every category in Angola",
+    "homeDescription": "Qcena is the Angolan platform to discover, share and shop products across categories. Find anything you need and arrange your purchase and delivery directly with our team."
+  },
+  "navbar": {
+    "pages": {
+      "home": "Home",
+      "products": "Produtos",
+      "about": "Sobre",
+      "contact": "Contactos",
+      "community": "Comunidade",
+      "partners": "Parceiros"
+    },
+    "more": "Mais",
+    "mainNavigation": "Navegação principal",
+    "socials": "Redes sociais",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "whatsapp": "WhatsApp",
+    "language": "Language",
+    "close": "Close",
+    "search": "Search",
+    "searchPlaceholder": "Search products...",
+    "searchAction": "Execute search",
+    "menuDescription": "Quick search in the product catalog",
+    "popularSearches": "Popular searches",
+    "popularSearchItems": ["Jackets", "Tops", "Pants", "New Arrivals"],
+    "searchMinChars": "Type at least 2 characters to search.",
+    "searchLoading": "Searching products...",
+    "searchNoResults": "No products found for this search."
+  },
+  "home": {
+    "eyebrow": "An Angolan product platform",
+    "title": "Discover, share and shop in Angola.",
+    "description": "An Angolan platform to discover, share and shop products across categories. Find what you need and arrange your purchase and delivery directly with our team.",
+    "categories": {
+      "title": "Product categories",
+      "subtitle": "Explore by category",
+      "items": [
+        { "name": "Outerwear", "itemCount": "24 products" },
+        { "name": "New arrivals", "itemCount": "12 products" },
+        { "name": "Tops and tees", "itemCount": "35 products" },
+        { "name": "Bottoms", "itemCount": "18 products" }
+      ]
+    },
+    "newProducts": {
+      "title": "New arrivals",
+      "description": "Just arrived. Discover what's new.",
+      "viewMore": "View all products"
+    },
+    "recommendedProducts": {
+      "title": "Recommended for you",
+      "description": "A selection of products for your next discovery.",
+      "viewMore": "View all products"
+    }
+  },
+  "footer": {
+    "categories": "Categories",
+    "newProducts": "New arrivals",
+    "allProducts": "All products",
+    "description": "Angolan platform for product discovery and sales. Developed by X-MAJ."
+  },
+  "hero": {
+    "slides": [
+      {
+        "eyebrow": "An Angolan product platform",
+        "title": "Anything, across every category.",
+        "description": "Discover products, share what you like and find new opportunities in one place.",
+        "imageAlt": "A selection of coats in a fashion store"
+      },
+      {
+        "eyebrow": "New discoveries start here",
+        "title": "What you need may be closer than you think.",
+        "description": "Explore new arrivals and choose products that make sense for you.",
+        "imageAlt": "Clothing displayed in a bright room"
+      },
+      {
+        "eyebrow": "Discover. Share. Choose.",
+        "title": "A platform beyond a single category.",
+        "description": "Qcena brings products and people together, turning every discovery into a possibility.",
+        "imageAlt": "Models wearing a range of clothing styles"
+      }
+    ],
+    "cta": "Explore products",
+    "previous": "Previous slide",
+    "next": "Next slide",
+    "slide": "Slide",
+    "pause": "Pause carousel",
+    "play": "Play carousel"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "network": {
+    "offline": "No internet connection. Some actions are disabled.",
+    "backOnline": "Connection restored!"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "retry": "Try again"
+  },
+  "error": {
+    "title": "Oops! Something went wrong",
+    "description": "We encountered an unexpected error while processing your request. You can try again or return to the home page.",
+    "retry": "Try again",
+    "backHome": "Back to home page",
+    "digest": "Diagnostic code:"
+  },
+  "loading": {
+    "title": "Preparing the page...",
+    "subtitle": "Loading the latest resources and components."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "Sorry, the page you are looking for does not exist, has been moved, or the URL is incorrect.",
+    "backHome": "Back to home page",
+    "button": "Back to home page",
+    "goBack": "Go back"
+  },
+  "products": {
+    "title": "Products to discover",
+    "description": "Find products across categories and discover what's available on Qcena.",
+    "featuredCarousel": "Featured products",
+    "featuredLabel": "Featured",
+    "specifications": "Specifications",
+    "variants": "Variants",
+    "priceLabel": "Price",
+    "viewDetails": "View details",
+    "imageUnavailable": "Product image unavailable",
+    "previous": "Previous product",
+    "next": "Next product",
+    "addToCart": "Add to cart",
+    "addingToCart": "Adding...",
+    "addedToCart": "Added to cart!",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "price": "Price",
+    "item": {
+      "like": "Add to favorites",
+      "unlike": "Remove from favorites",
+      "addToCart": "Add to cart",
+      "imageUnavailable": "Image unavailable"
+    },
+    "details": {
+      "priceLabel": "Price",
+      "reviewsCount": "{count} Reviews",
+      "inStock": "{count} em stock",
+      "outOfStock": "Esgotado",
+      "orderOnWhatsApp": "Encomendar no WhatsApp",
+      "whatsappHint": "A compra e a entrega são combinadas pelo WhatsApp.",
+      "unavailableHint": "Este produto está esgotado de momento.",
+      "about": "Sobre o produto",
+      "specifications": "Especificações",
+      "noImage": "Sem imagem disponível",
+      "thumbnail": "Miniatura"
+    },
+    "filters": { "all": "All", "ariaLabel": "Categories" }
+  },
+  "productsPage": {
+    "title": "All Products",
+    "description": "Browse products from different categories on Qcena, the Angolan platform for product discovery and sales.",
+    "subtitle": "Find products you like and contact our team to arrange your purchase."
+  },
+  "search": {
+    "placeholder": "Search products by name...",
+    "clear": "Clear",
+    "category": "Category",
+    "allCategories": "All categories",
+    "store": "Store",
+    "allStores": "All stores",
+    "showingResults": "Showing results for",
+    "noResults": "No products found.",
+    "tryAdjusting": "Try adjusting your search or filters to find what you are looking for."
+  },
+  "meta": {
+    "title": "Qcena — Any Scene, Any Need",
+    "description": "We are an Angolan platform for showcasing and selling products, focused on bringing you good products at good prices, with direct and simple contact via WhatsApp."
+  }
+}

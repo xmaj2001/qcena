@@ -1,0 +1,187 @@
+{
+  "seo": {
+    "siteName": "Qcena",
+    "homeTitle": "Produtos de várias categorias em Angola",
+    "homeDescription": "A Qcena é a plataforma angolana para descobrir, divulgar e comprar produtos de várias categorias. Encontra qualquer cena e combina a compra e a entrega directamente com a nossa equipa."
+  },
+  "navbar": {
+    "pages": {
+      "home": "Início",
+      "products": "Produtos",
+      "about": "Sobre",
+      "contact": "Contactos",
+      "community": "Comunidade",
+      "partners": "Parceiros"
+    },
+    "more": "Mais",
+    "mainNavigation": "Navegação principal",
+    "socials": "Redes sociais",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "whatsapp": "WhatsApp",
+    "language": "Idioma",
+    "close": "Fechar",
+    "search": "Pesquisar",
+    "searchPlaceholder": "Pesquisar produtos...",
+    "searchAction": "Executar pesquisa",
+    "menuDescription": "Pesquisa rápida no catálogo de produtos",
+    "popularSearches": "Pesquisas populares",
+    "popularSearchItems": ["Casacos", "Tops", "Calças", "Novidades"],
+    "searchMinChars": "Digita pelo menos 2 caracteres para pesquisar.",
+    "searchLoading": "A pesquisar produtos...",
+    "searchNoResults": "Nenhum produto encontrado para esta pesquisa."
+  },
+  "home": {
+    "eyebrow": "Uma plataforma angolana de produtos",
+    "title": "Descobre, divulga e compra em Angola.",
+    "description": "Uma plataforma angolana para descobrir, divulgar e comprar produtos de várias categorias. Encontra o que procuras e combina a compra e a entrega directamente com a nossa equipa.",
+    "categories": {
+      "title": "Categorias de produtos",
+      "subtitle": "Explora por categoria",
+      "items": [
+        { "name": "Casacos", "itemCount": "24 produtos" },
+        { "name": "Novidades", "itemCount": "12 produtos" },
+        { "name": "Tops e camisolas", "itemCount": "35 produtos" },
+        { "name": "Calças e saias", "itemCount": "18 produtos" }
+      ]
+    },
+    "newProducts": {
+      "title": "Novos produtos",
+      "description": "Acabaram de chegar. Descobre o que há de novo.",
+      "viewMore": "Ver todos os produtos"
+    },
+    "recommendedProducts": {
+      "title": "Recomendados para ti",
+      "description": "Uma selecção de produtos para as tuas próximas descobertas.",
+      "viewMore": "Ver todos os produtos"
+    }
+  },
+  "footer": {
+    "categories": "Categorias",
+    "newProducts": "Novidades",
+    "allProducts": "Todos os produtos",
+    "description": "Plataforma angolana de divulgação e venda de produtos. Desenvolvido por X-MAJ."
+  },
+  "hero": {
+    "slides": [
+      {
+        "eyebrow": "Uma plataforma angolana de produtos",
+        "title": "Qualquer cena, de qualquer categoria.",
+        "description": "Descobre produtos, divulga o que gostas e encontra novas oportunidades num só lugar.",
+        "imageAlt": "Selecção de casacos numa loja de moda"
+      },
+      {
+        "eyebrow": "Novas descobertas começam aqui",
+        "title": "O que procuras pode estar mais perto.",
+        "description": "Explora novidades e escolhe produtos que fazem sentido para ti.",
+        "imageAlt": "Peças de roupa expostas num espaço iluminado"
+      },
+      {
+        "eyebrow": "Descobre. Partilha. Escolhe.",
+        "title": "Uma plataforma sem categoria única.",
+        "description": "A Qcena reúne produtos e pessoas para tornar cada descoberta numa possibilidade.",
+        "imageAlt": "Modelos com diferentes estilos de roupa"
+      }
+    ],
+    "cta": "Explorar produtos",
+    "previous": "Slide anterior",
+    "next": "Próximo slide",
+    "slide": "Slide",
+    "pause": "Pausar carrossel",
+    "play": "Reproduzir carrossel"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
+  },
+  "network": {
+    "offline": "Sem ligação à internet. Algumas ações foram desativadas.",
+    "backOnline": "Ligação restabelecida!"
+  },
+  "common": {
+    "loading": "A carregar...",
+    "error": "Ocorreu um erro.",
+    "retry": "Tentar novamente"
+  },
+  "error": {
+    "title": "Ups! Algo correu mal",
+    "description": "Encontrámos um erro inesperado ao processar o teu pedido. Podes tentar novamente ou regressar à página inicial.",
+    "retry": "Tentar novamente",
+    "backHome": "Voltar à página inicial",
+    "digest": "Código de diagnóstico:"
+  },
+  "loading": {
+    "title": "A preparar a página...",
+    "subtitle": "A carregar os recursos e componentes mais recentes."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Página não encontrada",
+    "description": "Lamentamos, mas a página que estás à procura não existe, foi movida ou o endereço está incorreto.",
+    "backHome": "Voltar à página inicial",
+    "button": "Voltar à página inicial",
+    "goBack": "Voltar atrás"
+  },
+  "products": {
+    "title": "Produtos para descobrir",
+    "description": "Encontra produtos de várias categorias e descobre o que a Qcena tem para ti.",
+    "featuredCarousel": "Produtos em destaque",
+    "featuredLabel": "Em destaque",
+    "specifications": "Especificações",
+    "variants": "Variações",
+    "priceLabel": "Preço",
+    "viewDetails": "Ver detalhes",
+    "imageUnavailable": "Imagem do produto indisponível",
+    "previous": "Produto anterior",
+    "next": "Próximo produto",
+    "addToCart": "Adicionar ao carrinho",
+    "addingToCart": "A adicionar...",
+    "addedToCart": "Adicionado ao carrinho!",
+    "inStock": "Em stock",
+    "outOfStock": "Esgotado",
+    "price": "Preço",
+    "item": {
+      "like": "Favoritar produto",
+      "unlike": "Remover dos favoritos",
+      "addToCart": "Adicionar ao carrinho",
+      "imageUnavailable": "Imagem indisponível"
+    },
+    "details": {
+      "priceLabel": "Preço",
+      "reviewsCount": "{count} avaliações",
+      "inStock": "{count} em stock",
+      "outOfStock": "Esgotado",
+      "orderOnWhatsApp": "Encomendar no WhatsApp",
+      "whatsappHint": "A compra e a entrega são combinadas pelo WhatsApp.",
+      "unavailableHint": "Este produto está esgotado de momento.",
+      "about": "Sobre o produto",
+      "specifications": "Especificações",
+      "noImage": "Sem imagem disponível",
+      "thumbnail": "Miniatura"
+    },
+    "filters": { "all": "Todos", "ariaLabel": "Categorias" }
+  },
+  "productsPage": {
+    "title": "Todos os Produtos",
+    "description": "Explora produtos de várias categorias na Qcena, a plataforma angolana de divulgação e venda de produtos.",
+    "subtitle": "Encontra produtos de que gostas e fala com a nossa equipa para combinar a compra."
+  },
+  "search": {
+    "placeholder": "Pesquisar produtos pelo nome...",
+    "clear": "Limpar",
+    "category": "Categoria",
+    "allCategories": "Todas as categorias",
+    "store": "Loja",
+    "allStores": "Todas as lojas",
+    "showingResults": "A mostrar resultados para",
+    "noResults": "Nenhum produto encontrado.",
+    "tryAdjusting": "Tenta ajustar a tua pesquisa ou filtros para encontrar o que procuras."
+  },
+  "meta": {
+    "title": "Qcena — Qualquer Cena, Qualquer Necessidade",
+    "description": "Somos uma plataforma angolana de divulgação e venda de produtos, focada em trazer-te bons produtos a bons preços, com contacto directo e simples via WhatsApp."
+  }
+}
