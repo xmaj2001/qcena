@@ -45,14 +45,7 @@ export const ProductItem = ({
   const href = currentLang ? `/${currentLang}/products/${p.slug}` : `/products/${p.slug}`;
 
   return (
-    <article
-      className="group relative flex h-full w-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card
-        shadow-[0_0_0_0_rgb(0_0_0/0)] will-change-transform
-        transition-[transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-        hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgb(0_0_0/0.35)]
-        focus-within:border-primary/40
-        motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-    >
+    <article className="group relative flex h-full w-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[0_0_0_0_rgb(0_0_0/0)] will-change-transform transition-[transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgb(0_0_0/0.35)] focus-within:border-primary/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       {/* Imagem */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
         {p.image ? (
@@ -61,10 +54,7 @@ export const ProductItem = ({
             alt={p.name}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-            className="transform-gpu object-cover object-center
-              transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-              group-hover:scale-[1.04]
-              motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="transform-gpu object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         ) : (
           <div
@@ -82,11 +72,7 @@ export const ProductItem = ({
           aria-label={isLiked ? l.unlike : l.like}
           aria-pressed={isLiked}
           onClick={() => onToggleLike?.(p.slug)}
-          className="absolute right-2.5 top-2.5 z-10 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground shadow-sm backdrop-blur-md
-            transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-            hover:scale-110 active:scale-95
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-            motion-reduce:transition-none motion-reduce:hover:scale-100"
+          className="absolute right-2.5 top-2.5 z-10 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground shadow-sm backdrop-blur-md transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary motion-reduce:transition-none motion-reduce:hover:scale-100"
         >
           <Heart
             className={`h-4 w-4 transition-colors duration-300 ${
@@ -122,10 +108,7 @@ export const ProductItem = ({
             type="button"
             aria-label={l.addToCart}
             onClick={() => onAddToCart?.(p)}
-            className="relative z-10 grid h-9 w-9 place-items-center rounded-full bg-muted text-foreground
-              transition-[background-color,color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-              hover:bg-primary hover:text-primary-foreground active:scale-95
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="relative z-10 grid h-9 w-9 place-items-center rounded-full bg-muted text-foreground transition-[background-color,color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-primary hover:text-primary-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <ShoppingBag className="h-4 w-4" />
           </button>

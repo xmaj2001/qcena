@@ -20,18 +20,6 @@ export type ProductBanner = {
   mobile: string; // ~800x2000
 };
 
-export type FeaturedProductSpec = {
-  key: string;
-  value: string;
-};
-
-export type FeaturedProductVariant = {
-  id: string;
-  label: string;
-  image?: string;
-  color?: string;
-  backgroundColor?: string;
-};
 
 export type FeaturedProduct = {
   id: string; // chave única para mapeamento
@@ -40,10 +28,8 @@ export type FeaturedProduct = {
   description: string;
   banner: ProductBanner;
   textColor: "dark" | "light";
-  variants?: FeaturedProductVariant[];
   aspectRatio?: number;
-  specifications: FeaturedProductSpec[];
-  product: Product;
+  product: APIProductDetails;
 };
 
 export type ProductSpec = {

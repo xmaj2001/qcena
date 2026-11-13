@@ -141,11 +141,7 @@ export function getMockFeaturedProducts(): FeaturedProductsResponse {
     },
     textColor: "light",
     aspectRatio: BANNER_DESKTOP_SIZE.width / BANNER_DESKTOP_SIZE.height,
-    specifications: [
-      { key: "Preço Base", value: p.price },
-      { key: "Garantia", value: "Oficial da Marca" },
-    ],
-    product: p,
+    product: getMockProductBySlug(p.slug).data,
   }));
 
   return {

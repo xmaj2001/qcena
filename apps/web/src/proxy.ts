@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { i18n } from "./i18n/config";
-import { createClient as updateSupabaseSession } from "@/utils/supabase/middleware";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -10,7 +9,7 @@ export function proxy(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
-    return updateSupabaseSession(request);
+    return NextResponse.next();
   }
 
   // Detect preferred language from Accept-Language header
