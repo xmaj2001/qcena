@@ -7,7 +7,7 @@ const envSchema = z.object({
   USE_MOCKS: z
     .string()
     .optional()
-    .default("true")
+    .default("false")
     .transform((val) => val === "true" || val === "1"),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
   DATABASE_URL: z.string().optional(),
