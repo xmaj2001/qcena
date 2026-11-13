@@ -193,7 +193,7 @@ export const getProductBySlug = cache(
       return getMockProductBySlug(slug);
     }
 
-    const product = await prisma.product.findUnique({
+    const product = await prisma.product.findFirst({
       where: { slug },
       include: {
         category: true,

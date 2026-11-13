@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/carousel";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import type { FeaturedProduct } from "../../types";
+import { formatKz } from "@/lib/utils";
 
 interface FeaturedCarouselProps {
   items: FeaturedProduct[];
@@ -99,7 +100,9 @@ function FeaturedProductSlide({
             <p className={`text-xs ${mutedTextColor}`}>
               {dictionary.priceLabel}
             </p>
-            <p className="text-xl font-semibold">{feature.product.price}</p>
+            <p className="text-xl font-semibold">
+              {formatKz(feature.product.price)}
+            </p>
           </div>
           <Button asChild className="mt-2 rounded-full" size="lg">
             <Link href={`/${lang}/products/${feature.product.slug}`}>
