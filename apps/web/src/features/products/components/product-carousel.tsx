@@ -33,7 +33,7 @@ export const ProductCarousel = ({
   isLoading,
 }: ProductCarouselProps) => {
   return (
-    <div className="relative mt-8 px-4 sm:px-0">
+    <div className="relative mt-8 ">
       <Carousel
         opts={{
           align: "start",
@@ -45,7 +45,7 @@ export const ProductCarousel = ({
           {items.map((product) => (
             <CarouselItem
               key={product.id}
-              className="basis-1/2 pl-3 sm:basis-1/3 lg:basis-1/4"
+              className="basis-1/2 sm:basis-1/3 lg:basis-1/4"
             >
               <div className="h-full pl-0">
                 <ProductItem product={product} lang={lang} labels={labels} />
