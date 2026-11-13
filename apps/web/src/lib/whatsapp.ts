@@ -11,7 +11,7 @@ export function buildWhatsAppUrl(
 ) {
   const number = dynamicNumber || WHATSAPP_NUMBER;
   const baseUrl = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const productLink = `${baseUrl}/${lang}/marketplace/product/${product.slug || product.id}`;
+  const productLink = `${baseUrl}/${lang}/products/${product.slug || product.id}`;
 
   const text = `Olá, tenho interesse no produto *${product.name}* por ${formatKz(product.price)}.\n\nVeja aqui: ${productLink}`;
 
