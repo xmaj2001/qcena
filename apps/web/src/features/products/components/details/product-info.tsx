@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import { cn } from "@/lib/utils";
+import { cn, formatKz } from "@/lib/utils";
 import type { APIProductDetails } from "../../types";
 
 interface ProductInfoProps {
@@ -47,7 +47,7 @@ export function ProductInfo({ p, lang, dictionary }: ProductInfoProps) {
               {dictionary.priceLabel}
             </p>
             <p className="text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-              {p.price}
+              {formatKz(p.price)}
             </p>
           </div>
 

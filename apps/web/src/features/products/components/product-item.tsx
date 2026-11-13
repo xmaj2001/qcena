@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Product } from "../types";
+import { formatKz } from "@/lib/utils";
 
 export interface ProductItemLabels {
   like: string;
@@ -101,7 +102,7 @@ export const ProductItem = ({
 
         <div className="mt-4 flex items-center justify-between border-t border-border/40 pt-2">
           <span className="rounded-md border border-primary bg-primary px-2.5 py-1 text-xs font-bold text-primary-foreground shadow-sm">
-            {p.price}
+            {formatKz(p.price)}
           </span>
 
           <button
