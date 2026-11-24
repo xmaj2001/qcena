@@ -10,6 +10,6 @@ export default defineConfig({
   datasource: {
     // Use DIRECT_URL for migrations/db push (session-mode pooler, no pgBouncer)
     // Fall back to DATABASE_URL if DIRECT_URL is not set
-    url: process.env.DIRECT_URL ?? process.env.DATABASE_URL,
+    url: process.env.DIRECT_URL,
   },
 });

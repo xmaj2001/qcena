@@ -66,7 +66,7 @@ function FeaturedProductSlide({
 
   return (
     <article
-      className={`relative isolate aspect-[2/4] w-full overflow-hidden rounded-2xl md:aspect-[2000/940] ${textColor}`}
+      className={`relative isolate aspect-2/4 w-full overflow-hidden rounded-2xl md:aspect-2000/940 ${textColor}`}
     >
       <picture>
         <source
@@ -94,7 +94,7 @@ function FeaturedProductSlide({
             </h2>
           )}
           <p className={`text-sm leading-relaxed ${mutedTextColor}`}>
-            {feature.description || feature.product.description}
+            {feature.description.substring(0, 79) || feature.product.description}
           </p>
           <div className="space-y-1">
             <p className={`text-xs ${mutedTextColor}`}>
@@ -148,7 +148,7 @@ export function FeaturedCarousel({
   return (
     <section
       aria-label={dictionary.featuredLabel}
-      className="mx-auto w-full max-w-7xl pt-6"
+      className="mx-auto w-full pt-6"
     >
       <Carousel
         className="relative w-full"
@@ -157,7 +157,7 @@ export function FeaturedCarousel({
       >
         <CarouselContent className="ml-0">
           {items.map((feature, index) => (
-            <CarouselItem className="basis-full pl-0 sm:pl-3" key={feature.id}>
+            <CarouselItem className=" pl-0 sm:pl-3" key={feature.id}>
               <FeaturedProductSlide
                 dictionary={dictionary}
                 feature={feature}
@@ -172,13 +172,13 @@ export function FeaturedCarousel({
           <div className="absolute right-5 top-4 z-20 flex gap-2 md:right-8 md:top-6">
             <CarouselPrevious
               aria-label={dictionary.previous}
-              className="static size-9 translate-y-0 rounded-full border-current/20 bg-background/70 text-foreground hover:bg-background"
-              variant="outline"
+              className="static"
+              variant="hero"
             />
             <CarouselNext
               aria-label={dictionary.next}
-              className="static size-9 translate-y-0 rounded-full border-current/20 bg-background/70 text-foreground hover:bg-background"
-              variant="outline"
+              className="static"
+              variant="hero"
             />
           </div>
         )}

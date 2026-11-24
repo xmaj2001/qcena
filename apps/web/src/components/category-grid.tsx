@@ -51,7 +51,7 @@ export function CategoryGrid({
       </div>
 
       {/* Grid simétrico de 4 ou 6 elementos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {categories.map((cat, index) => {
           const item = dictionary.items[index];
 
@@ -59,10 +59,10 @@ export function CategoryGrid({
           <Link
             key={cat.slug}
             href={`/category/${cat.slug}`}
-            className="group relative overflow-hidden rounded-2xl bg-surface p-3 border border-border/50 transition-all hover:shadow-lg hover:border-primary/40 flex flex-col justify-between"
+            className="group relative overflow-hidden rounded-md bg-surface p-1 md:p-3 border border-border/50 transition-all hover:shadow-lg hover:border-primary/40 flex flex-col justify-between"
           >
             {/* Imagem da Categoria */}
-            <div className="relative overflow-hidden rounded-xl aspect-4/3 bg-muted">
+            <div className="relative overflow-hidden rounded-sm aspect-4/3 bg-muted">
               <Image
                 src={cat.image}
                 alt={item.name}
@@ -73,7 +73,7 @@ export function CategoryGrid({
             </div>
 
             {/* Informações da Categoria */}
-            <div className="mt-4 flex items-center justify-between">
+            <div className="hidden mt-4 md:flex items-center justify-between">
               <div>
                   <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
                     {item.name}

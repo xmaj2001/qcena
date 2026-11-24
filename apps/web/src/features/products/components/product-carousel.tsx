@@ -33,13 +33,13 @@ export const ProductCarousel = ({
   isLoading,
 }: ProductCarouselProps) => {
   return (
-    <div className="relative mt-8 ">
+    <div className="relative">
       <Carousel
         opts={{
           align: "start",
           loop: false,
         }}
-        className="w-full"
+        className="w-full py-8"
       >
         <CarouselContent className="-ml-3">
           {items.map((product) => (
@@ -68,8 +68,14 @@ export const ProductCarousel = ({
         </CarouselContent>
 
         {/* Botões de navegação (aparecem nas laterais em ecrãs maiores) */}
-        <CarouselPrevious variant="hero" className="-left-6" />
-        <CarouselNext variant="hero" className="-right-6" />
+        <CarouselPrevious
+          variant="hero"
+          className="hidden md:inline-flex -left-6"
+        />
+        <CarouselNext
+          variant="hero"
+          className="hidden md:inline-flex -right-6"
+        />
       </Carousel>
     </div>
   );

@@ -5,10 +5,9 @@ const envSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
   USE_MOCKS: z
-    .string()
+    .boolean()
     .optional()
-    .default("false")
-    .transform((val) => val === "true" || val === "1"),
+    .default(false),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
   DATABASE_URL: z.string().optional(),
 
@@ -27,7 +26,6 @@ export type Env = z.infer<typeof envSchema>;
 
 export const env = envSchema.parse({
   NODE_ENV: process.env.NODE_ENV,
-  USE_MOCKS: process.env.USE_MOCKS,
   NEXT_PUBLIC_APP_URL:
     process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   DATABASE_URL: process.env.DATABASE_URL,

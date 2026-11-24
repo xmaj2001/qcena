@@ -32,7 +32,7 @@ export const ProductSection = ({
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className="mx-auto max-w-7xl scroll-mt-20 px-4 pt-24"
+      className="mx-auto max-w-7xl scroll-mt-20 my-4"
     >
       {/* Cabeçalho com Título e Botão "Ver mais" */}
       <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

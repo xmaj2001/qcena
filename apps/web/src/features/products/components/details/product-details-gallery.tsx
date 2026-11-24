@@ -40,7 +40,7 @@ export const ProductDetailsGallery = ({
           fill
           priority
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
 
@@ -55,7 +55,7 @@ export const ProductDetailsGallery = ({
               aria-label={`${labels.thumbnail} ${index + 1}`}
               aria-current={index === selectedImg}
               className={cn(
-                "relative size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-[opacity,border-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                "relative z-50 size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-[opacity,border-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                 index === selectedImg
                   ? "border-primary opacity-100 ring-2 ring-primary/20"
                   : "border-transparent opacity-60 hover:opacity-100",

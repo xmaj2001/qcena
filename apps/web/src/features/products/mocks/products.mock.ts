@@ -34,7 +34,7 @@ function mockImage(options: {
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">` +
     `<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">` +
-    `<stop offset="0" stop-color="hsl(${hue},55%,38%)"/>` +
+    `<stop offset="0" stop-color="hsl(${hue},75%,38%)"/>` +
     `<stop offset="1" stop-color="hsl(${(hue + 50) % 360},60%,22%)"/>` +
     `</linearGradient></defs>` +
     `<rect width="100%" height="100%" fill="url(#g)"/>` +
